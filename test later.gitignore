@@ -1,0 +1,34 @@
+
+//save for later
+//    private static String getTitle() {
+//        String fileName = "GameTitle.txt";
+//        String title = readFileToString(fileName);
+//        return title;
+//    }
+//    private static String readFileToString(String fileName) {
+//        String line = null;
+//        String content = null;
+//        try {
+//            FileReader reader = new FileReader(fileName);
+//            
+//            BufferedReader buffReader = new BufferedReader(reader);
+//            
+//            while((line = buffReader.readLine()) != null) {
+//                content = content + line;
+//            }   
+//
+//            // Always close files.
+//            buffReader.close(); 
+//        } catch(FileNotFoundException ex) {
+//            System.out.println(
+//                "Unable to open file '" + 
+//                fileName + "'");                
+//        } catch(IOException ex) {
+//            System.out.println(
+//                "Error reading file '" 
+//                + fileName + "'");                  
+//            // Or we could just do this: 
+//            // ex.printStackTrace();
+//        }
+//        return content;
+//    }
