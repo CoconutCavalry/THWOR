@@ -6,18 +6,16 @@
 package housewithoneroom;
 
 import java.awt.Font;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import characters.Player;
 import items.Item;
-import rooms.IRoom;
 import shared.CommandsObject;
 import shared.GoArgs;
 import shared.TakeArgs;
 
 /**
- *
+ * Finally connected to git
  * @author esose
  */
 public class HouseWithOneRoom {
