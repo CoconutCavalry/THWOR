@@ -5,6 +5,7 @@
  */
 package rooms;
 
+import characters.Player;
 import shared.Shared;
 import items.Item;
 import java.util.ArrayList;
@@ -86,7 +87,7 @@ public class Library implements IRoom {
         return stringOfItems;
     }
 
-    public String search(String[] inputs) {
+    public String search() {
         if (this.items.isEmpty()) {
             return "There are no items to be found here.";
         }
@@ -110,21 +111,22 @@ public class Library implements IRoom {
     }
     
     @Override
-    public CommandsObject performCustomMethods(CommandsObject commands) {
+    public CommandsObject performCustomMethods(
+            String[] inputs, Player player) {
         CommandsObject commandsToReturn = new CommandsObject();
-        switch (commands.inputs[0]) {
+        commandsToReturn.items = player.getInventory();
+        switch (inputs[0]) {
             case "b":
             case "browse":
                 commandsToReturn.message = showBookTitles();
                 return commandsToReturn;
             case "r":
             case "read":
-                commandsToReturn.message = readBook(commands.inputs);
+                commandsToReturn.message = readBook(inputs);
                 return commandsToReturn;
             case "s":
             case "search":
-                commandsToReturn.message = 
-                        this.search(commands.inputs);
+                commandsToReturn.message = this.search();
                 return commandsToReturn;
             default:
                 return null;

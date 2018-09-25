@@ -5,6 +5,7 @@
  */
 package rooms;
 
+import characters.Player;
 import items.Item;
 import java.util.ArrayList;
 import shared.CommandsObject;
@@ -35,7 +36,8 @@ public interface IRoom {
     //public String searchRoom();
     public void removeItemFromItems(Item item);
     public void addItemToItems(Item item);
-    public CommandsObject performCustomMethods(CommandsObject commands);
+    public CommandsObject performCustomMethods(
+            String[] inputs, Player player);
     public GoArgs go(String direction);
     
 }

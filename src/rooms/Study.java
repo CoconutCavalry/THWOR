@@ -5,13 +5,12 @@
  */
 package rooms;
 
+import characters.Player;
 import shared.Shared;
 import items.Item;
 import java.util.ArrayList;
-import java.util.Arrays;
 import shared.CommandsObject;
 import shared.GoArgs;
-import titles.Excerpts;
 
 /**
  *
@@ -101,18 +100,18 @@ public class Study implements IRoom {
     }
     
     @Override
-    public CommandsObject performCustomMethods(CommandsObject commands) {
+    public CommandsObject performCustomMethods(
+            String[] inputs, Player player) {
         CommandsObject commandsToReturn = new CommandsObject();
-        switch (commands.inputs[0]) {
-            
+        commandsToReturn.items = player.getInventory();
+        switch (inputs[0]) {
             case "s":
             case "search":
-                commandsToReturn.message = this.search(commands.inputs);
-                commandsToReturn.items = commands.items;
+                commandsToReturn.message = this.search(inputs);
                 return commandsToReturn;
             case "u":
             case "unlock":
-                return tryUnlockingDoor(commands);
+                return tryUnlockingDoor(commandsToReturn);
             default:
                 return null;
         }

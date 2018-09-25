@@ -15,17 +15,17 @@ import shared.TakeArgs;
  * @author esose
  */
 public class Player {
-    String _name;
-    String _gender;
-    int _health = 100;
-    ArrayList<Item> _inventory;
-    int _numberOfEmptyHands = 2;
-    int _numberOfPockets = 4;
-    double[] _pockets = {1.0, 1.0, 1.0, 1.0};
-    int _backpackSpaceAvailable = 0;
+    private String _name;
+    private String _gender;
+    private int _health = 100;
+    private ArrayList<Item> _inventory;
+    private int _numberOfEmptyHands = 2;
+    private int _numberOfPockets = 4;
+    private double[] _pockets = {1.0, 1.0, 1.0, 1.0};
+    private int _backpackSpaceAvailable = 0;
     //this size is relative, not universal.
-    double _inventorySize;
-    double _remainingInventorySpace;
+    private double _inventorySize;
+    private double _remainingInventorySpace;
     
     public Player(){}
     
@@ -78,6 +78,9 @@ public class Player {
     }
 
     public String showInventory() {
+        if (this._inventory == null) {
+            return "Null inventory??";
+        }
         if (this._inventory.isEmpty()) {
             return "You have no items in your inventory.";
         }
@@ -87,6 +90,9 @@ public class Player {
     }
 
     public Item dropItem(String itemName) {
+        if (this._inventory.isEmpty() || this._inventory == null) {
+            return null;
+        }
         for(Item item : this._inventory) {
             if (item.getName().equals(itemName)){
                 this._inventory.remove(item);

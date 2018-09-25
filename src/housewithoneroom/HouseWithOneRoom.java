@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 import characters.Player;
 import items.Item;
+import java.util.ArrayList;
 import shared.CommandsObject;
 import shared.GoArgs;
 import shared.TakeArgs;
@@ -132,6 +133,7 @@ public class HouseWithOneRoom {
 //                output(game.currentRoom.search());
 //                break;
             case "t":
+            case "get":
             case "take":
                 if (commands.length <= 1 ) {
                     output("Try including an item after 'take'.");
@@ -145,10 +147,8 @@ public class HouseWithOneRoom {
     }
 
     private static void passCommandsToCurrentRoom(String[] inputs) {
-        CommandsObject commandsToPass = 
-                new CommandsObject("", inputs, game.player.getInventory());
         CommandsObject resultCommands = 
-                game.currentRoom.performCustomMethods(commandsToPass);
+                game.currentRoom.performCustomMethods(inputs, game.player);
         if (resultCommands == null) {
             output("bad input; try again or use 'help' for help");
         } else {
@@ -159,12 +159,14 @@ public class HouseWithOneRoom {
 
     private static boolean tryTakingItem(String itemName) {
         //if (currentRoom.getItemsList().find)
-        if (game.currentRoom.getItemsList() == null) {
+        String name = itemName;
+        ArrayList<Item> itemsInRoom = game.currentRoom.getItemsList();
+        if (itemsInRoom == null) {
             output("You don't see any items.");
             return false;
         }
-        for(Item item : game.currentRoom.getItemsList()) {
-            if (item.getName().equals(itemName)){
+        for(Item item : itemsInRoom) {
+            if (item.getName().equals(name)){
                 
                 // give the item to the player
                 TakeArgs returnedArgs = game.player.takeItem(item);
@@ -173,8 +175,9 @@ public class HouseWithOneRoom {
                 // remove the item from the room
                 if (returnedArgs.success) {
                     game.currentRoom.removeItemFromItems(item);
+                    return true;
                 }
-                return true;
+                return false;
             }
         }
         output("No item of that name is available.");
@@ -183,12 +186,13 @@ public class HouseWithOneRoom {
 
     private static void tryDroppingItem(String itemName) {
         // try to drop from inventory
-        Item droppedItem = game.player.dropItem(itemName);
+        String name = itemName;
+        Item droppedItem = game.player.dropItem(name);
         if (droppedItem != null) {
             // print result of action
-            output("You dropped the " + itemName + ".");
+            output("You dropped the " + name + ".");
             
-            // then add to current room
+            // then add back to current room
             game.currentRoom.addItemToItems(droppedItem);
         } else {
             output("No items of that name are currently in your inventory.");
