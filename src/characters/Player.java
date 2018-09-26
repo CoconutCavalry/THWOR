@@ -85,7 +85,7 @@ public class Player {
             return "You have no items in your inventory.";
         }
         return "Player inventory:\n" 
-                + Shared.getItemsInListToString(this._inventory) + "\n"
+                + Shared.convertItemsInListToString(this._inventory) + "\n"
                 + "Remaining space: " + Double.toString(this._remainingInventorySpace);
     }
 

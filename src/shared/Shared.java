@@ -13,7 +13,10 @@ import java.util.ArrayList;
  * @author esose
  */
 public class Shared {
-    public static String getItemsInListToString(ArrayList<Item> items) {
+    public static String convertItemsInListToString(ArrayList<Item> items) {
+        if (items == null) {
+            return "";
+        }
         String stringOfItems = "";
         int len = items.size();
         int count = 1;
@@ -29,5 +32,12 @@ public class Shared {
             count++;
         }
         return stringOfItems;
+    }
+    
+    public static String appendDescriptionToItemsString(String description,
+            ArrayList<Item> items) {
+        String stringOfItems = convertItemsInListToString(items);
+        String returnValue = description + stringOfItems;
+        return returnValue;
     }
 }

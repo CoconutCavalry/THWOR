@@ -18,87 +18,143 @@ import shared.GoArgs;
  */
 public class Study implements IRoom {
     
-    private boolean _hasBeenSearched = false;
-    private boolean _hallDoorIsLocked = true;
-    private final int[] _neighbors = {0,2};
-    public ArrayList<Item> items;
-    private final String _description = RoomDescriptions.study;
-    private final String _firstSearchDescription = 
-            RoomDescriptions.studyFirstSearch;
+    private boolean hasBeenSearched = false;
+    private boolean deskHasBeenSearched = false;
+    private boolean fireplaceHasBeenSearched = false;
+    private boolean hallDoorIsLocked = true;
+    private final int[] neighbors = {0,2};
+    private ArrayList<Item> items;
     
+    private final String description = RoomDescriptions.study;
+    private final String firstSearchDescription = 
+            RoomDescriptions.studyFirstSearch;
+    private final String deskFirstSearchDescription = 
+            RoomDescriptions.studyDeskFirstSearch;
+    private final String deskOtherSearchDescription = 
+            RoomDescriptions.studyDeskOtherSearch;
+    private final String fireplaceFirstSearchDescription = 
+            RoomDescriptions.studyFireplaceFirstSearch;
+    private final String fireplaceOtherSearchDescription = 
+            RoomDescriptions.studyFireplaceOtherSearch;
+    
+    /**
+     * Constructor for the Study
+     */
     public Study() {
         this.items = new ArrayList<>();
-        this.items.add(Item.KEY);
     }
     
-    @Override
+    /***********************
+     * Getters and setters *
+     ***********************/
     public int getId() {
         return 1;
     }
-
     @Override
     public String getName() {
         return "Study";
     }
-
     @Override
     public String getDescription() {
-        return _description;
+        return description;
     }
-
-    @Override
-    public boolean hasBeenSearched() {
-        return this._hasBeenSearched;
+    public boolean getHasBeenSearched() {
+        return this.hasBeenSearched;
     }
-
-    @Override
-    public boolean areItemsAlwaysVisble() {
-        return false;
+    public void setHasBeenSearched(boolean tf) {
+        if (tf == true) {
+            this.hasBeenSearched = tf; 
+            //starts as false but can never go back
+        }
     }
-
-    @Override
-    public int[] getNeighbors() {
-        return this._neighbors;
+    public boolean getDeskHasBeenSearched() {
+        return this.deskHasBeenSearched;
     }
-
+    public void setDeskHasBeenSearched(boolean tf) {
+        if (tf == true) {
+            this.deskHasBeenSearched = tf;
+            this.addItemToItems(Item.BLACK_KEY_TO_HALL_FROM_STUDY);
+        }
+    }
+    private boolean getFireplaceHasBeenSearched() {
+        return this.fireplaceHasBeenSearched;
+    }
+    private void setFireplaceHasBeenSearched(boolean tf) {
+        if (tf == true) {
+            this.fireplaceHasBeenSearched = tf;
+            this.addItemToItems(Item.MESSAGE_FROM_FIREPLACE_IN_STUDY);
+        }
+    }
+    
     @Override
-    public ArrayList<Item> getItemsList() {
-        if (!this._hasBeenSearched) {
-            return null;
+    public ArrayList<Item> getItems() {
+        if (this.items ==  null) {
+            this.items = new ArrayList<>();
+            return this.items;
         }
         return this.items;
     }
 
-    @Override
-    public String getItemsInRoom() {
-        String stringOfItems = "";
-        stringOfItems = Shared.getItemsInListToString(this.items);
-        return stringOfItems;
-    }
-
-    private String search(String[] inputs) {
-        if (this.items.isEmpty()) {
+    /******************
+     * Search methods *
+     ******************/
+    private String search() {
+        ArrayList<Item> itemsInRoom = this.getItems();
+        if (itemsInRoom.isEmpty()) {
             return "There are no items to be found here.";
         }
-        
-        if (!this._hasBeenSearched) {
-            this._hasBeenSearched = true;
-            return this._firstSearchDescription + this.getItemsInRoom();
+        if (!this.getHasBeenSearched()) {
+            this.setHasBeenSearched(true);
+            return Shared.appendDescriptionToItemsString(
+                    this.firstSearchDescription, itemsInRoom);
         }
-        
-        return this.defaultSearchDescription + this.getItemsInRoom();
+        return Shared.appendDescriptionToItemsString(
+                    IRoom.defaultSearchDescription, itemsInRoom);
+    }
+    private String search(String[] inputs) {
+        if (inputs[1] == null) {
+            return "Bad input; try again.";
+        }
+        switch (inputs[1]) {
+            case "desk":
+                return this.searchDesk();
+            case "fireplace":
+            case "fp":
+                return this.searchFireplace();
+            default:
+                return "Bad input; try again.";
+        }
+    }
+    private String searchDesk() {
+        if (!this.getDeskHasBeenSearched()) {
+            this.setDeskHasBeenSearched(true);
+            return this.deskFirstSearchDescription;
+        }
+        return this.deskOtherSearchDescription;
+    }
+    private String searchFireplace() {
+        if (!this.getFireplaceHasBeenSearched()) {
+            this.setFireplaceHasBeenSearched(true);
+            return this.fireplaceFirstSearchDescription;
+        }
+        return this.fireplaceOtherSearchDescription;
     }
     
+    /*************************
+     * RoomInventory Methods *
+     *************************/
     @Override
     public void removeItemFromItems(Item item) {
         this.items.remove(item);
     }
-    
     @Override
     public void addItemToItems(Item item) {
         this.items.add(item);
     }
     
+    /******************
+     * Custom methods *
+     ******************/
     @Override
     public CommandsObject performCustomMethods(
             String[] inputs, Player player) {
@@ -107,7 +163,11 @@ public class Study implements IRoom {
         switch (inputs[0]) {
             case "s":
             case "search":
-                commandsToReturn.message = this.search(inputs);
+                if (inputs.length > 1) {
+                    commandsToReturn.message = this.search(inputs);
+                } else {
+                    commandsToReturn.message = this.search();
+                }
                 return commandsToReturn;
             case "u":
             case "unlock":
@@ -121,13 +181,11 @@ public class Study implements IRoom {
     public GoArgs go(String direction) {
         if (direction != null) {
             switch (direction) {
-                case "ahead":
-                case "forward":
-                case "straight":
+                case "left":
                     return tryMovingIntoHall();
                 case "back":
                 case "backwards":
-                    return new GoArgs(this._neighbors[0]);
+                    return new GoArgs(this.neighbors[0]);
                 default:
                     return new GoArgs();
             }
@@ -136,8 +194,8 @@ public class Study implements IRoom {
     }
 
     private GoArgs tryMovingIntoHall() {
-        if (!this._hallDoorIsLocked) {
-            return new GoArgs(this._neighbors[1]);
+        if (!this.hallDoorIsLocked) {
+            return new GoArgs(this.neighbors[1]);
         } else {
             return new GoArgs("The door is locked.");
         }
@@ -147,8 +205,9 @@ public class Study implements IRoom {
         //check inventory for black key
         for (Item item : commands.items) {
             // if the key is in the player's inventory
-            if (item.getName().equals(Item.KEY.getName())) {
+            if (item.getName().equals(Item.BLACK_KEY_TO_HALL_FROM_STUDY.getName())) {
                 // use the key and drop it
+                this.hallDoorIsLocked = false;
                 commands.items.remove(item);
                 // add an action message
                 commands.message = "You unlock the door.";

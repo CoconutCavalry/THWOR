@@ -11,9 +11,7 @@ import java.util.Scanner;
 import characters.Player;
 import items.Item;
 import java.util.ArrayList;
-import shared.CommandsObject;
-import shared.GoArgs;
-import shared.TakeArgs;
+import shared.*;
 
 /**
  * Finally connected to git
@@ -103,6 +101,11 @@ public class HouseWithOneRoom {
             case "character":
                 output(game.player.showCharacterReport());
                 break;
+            case "desc":
+            case "describe":
+            case "description":
+                output(game.currentRoom.getDescription());
+                break;
             case "d":
             case "drop":
                 tryDroppingItem(commands[1]);
@@ -128,10 +131,6 @@ public class HouseWithOneRoom {
             case "inventory":
                 output(game.player.showInventory());
                 break;
-//            case "s":
-//            case "search":
-//                output(game.currentRoom.search());
-//                break;
             case "t":
             case "get":
             case "take":
@@ -140,6 +139,10 @@ public class HouseWithOneRoom {
                 } else {
                     boolean success = tryTakingItem(commands[1]);
                 }
+                break;
+            case "view":
+            case "v":
+                tryViewingItem(commands);
                 break;
             default: 
                 passCommandsToCurrentRoom(commands);
@@ -158,9 +161,9 @@ public class HouseWithOneRoom {
     }
 
     private static boolean tryTakingItem(String itemName) {
-        //if (currentRoom.getItemsList().find)
+        //if (currentRoom.getItems().find)
         String name = itemName;
-        ArrayList<Item> itemsInRoom = game.currentRoom.getItemsList();
+        ArrayList<Item> itemsInRoom = game.currentRoom.getItems();
         if (itemsInRoom == null) {
             output("You don't see any items.");
             return false;
@@ -196,8 +199,7 @@ public class HouseWithOneRoom {
             game.currentRoom.addItemToItems(droppedItem);
         } else {
             output("No items of that name are currently in your inventory.");
-        }
-                
+        } 
     }
 
     private static void showHelpDialogue() {
@@ -231,6 +233,26 @@ public class HouseWithOneRoom {
         } else {
             output(newRoomArgs.message);
         }
+    }
+
+    private static void tryViewingItem(String[] commands) {
+        // try to drop from inventory
+        if (commands.length > 1) {
+            if (commands[1] != null) {
+                String name = commands[1];
+                for (Item item : game.player.getInventory()) {
+                    if (item.getName().equals(name)) {
+                        output(item.getDescription());
+                        return;
+                    }
+                }
+                output("No items of that name are currently in your inventory.");
+                return;
+            }
+        }
+        output("Try adding an item name from your inventory \n"
+                + "after 'view'.");
+        
     }
 
     

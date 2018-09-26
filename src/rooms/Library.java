@@ -20,13 +20,13 @@ import titles.Excerpts;
  */
 public class Library implements IRoom {
 
-    private boolean _hasBeenSearched = false;
-    private final int[] _neighbors = {1};
+    private boolean hasBeenSearched = false;
+    private final int[] neighbors = {1};
     public ArrayList<Item> items;
-    private final String _description = RoomDescriptions.library;
-    private final String _firstSearchDescription = 
+    private final String description = RoomDescriptions.library;
+    private final String firstSearchDescription = 
             RoomDescriptions.libraryFirstSearch;
-    private final String[] _bookTitlesInLibrary = {""
+    private final String[] bookTitlesInLibrary = {""
             + "The Tragic Youth of Ambrose Fogarty: \n"
             + "\tYoung Master Fogarty, by KM",
             "\nThe Tragic Youth of Ambrose Fogarty: \n"
@@ -38,6 +38,9 @@ public class Library implements IRoom {
             "\nThe Complete Clocktower Books, by KM and FM"
             };
     
+    /**
+     * Constructor for the Library
+     */
     public Library() {
         this.items = new ArrayList<>();
         this.items.add(Item.FLASHLIGHT);
@@ -45,71 +48,60 @@ public class Library implements IRoom {
         this.items.add(Item.MATCHES);
     }
     
-    @Override
+    /***********************
+     * Getters and setters *
+     ***********************/
     public int getId() {
         return 0;
     }
-
     @Override
     public String getName() {
         return "Library";
     }
-
     @Override
     public String getDescription() {
-        return _description;
+        return description;
     }
-
     @Override
-    public boolean hasBeenSearched() {
-        return this._hasBeenSearched;
-    }
-
-    @Override
-    public boolean areItemsAlwaysVisble() {
-        return true;
-    }
-
-    @Override
-    public int[] getNeighbors() {
-        return this._neighbors;
-    }
-
-    @Override
-    public ArrayList<Item> getItemsList() {
+    public ArrayList<Item> getItems() {
         return this.items;
     }
-
-    @Override
-    public String getItemsInRoom() {
-        String stringOfItems = "";
-        stringOfItems = Shared.getItemsInListToString(this.items);
-        return stringOfItems;
-    }
-
+    
+    /******************
+     * Search methods *
+     ******************/
     public String search() {
-        if (this.items.isEmpty()) {
+        ArrayList<Item> itemsInRoom = this.getItems();
+        if (itemsInRoom.isEmpty()) {
             return "There are no items to be found here.";
         }
-        
-        if (!this._hasBeenSearched) {
-            this._hasBeenSearched = true;
-            return this._firstSearchDescription + this.getItemsInRoom();
+        if (!this.hasBeenSearched) {
+            this.hasBeenSearched = true;
+            return Shared.appendDescriptionToItemsString(
+                    this.firstSearchDescription, itemsInRoom);
         }
         
-        return this.defaultSearchDescription + this.getItemsInRoom();
+        return Shared.appendDescriptionToItemsString(
+                    IRoom.defaultSearchDescription, itemsInRoom);
     }
     
+    
+    /*************************
+     * RoomInventory Methods *
+     *************************/
     @Override
     public void removeItemFromItems(Item item) {
         this.items.remove(item);
     }
-    
     @Override
     public void addItemToItems(Item item) {
         this.items.add(item);
     }
     
+    
+    /******************
+     * Custom methods *
+     ******************/
     @Override
     public CommandsObject performCustomMethods(
             String[] inputs, Player player) {
@@ -134,7 +126,7 @@ public class Library implements IRoom {
     }
 
     private String showBookTitles() {
-        return Arrays.toString(this._bookTitlesInLibrary);
+        return Arrays.toString(this.bookTitlesInLibrary);
     }
 
     private String readBook(String[] commands) {
@@ -162,7 +154,7 @@ public class Library implements IRoom {
                 case "ahead":
                 case "forward":
                 case "straight":
-                    return new GoArgs(this._neighbors[0]);
+                    return new GoArgs(this.neighbors[0]);
                 default:
                     return new GoArgs();
             }

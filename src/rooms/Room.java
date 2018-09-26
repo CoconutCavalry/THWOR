@@ -77,7 +77,7 @@ public abstract class Room {
 
     public String getItemsInRoom() {
         String stringOfItems = "";
-        stringOfItems = Shared.getItemsInListToString(items);
+        stringOfItems = Shared.convertItemsInListToString(items);
         return stringOfItems;
     }
 

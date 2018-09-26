@@ -12,14 +12,20 @@ package items;
 public enum Item {
     
     KNIFE(0, "a", "knife", 
-            "A small, sharp, folding pocketknife with a wooden handle.",
+            "A small, sharp, folding pocketknife \n"
+                    + "with a wooden handle.",
             1.0),
     FLASHLIGHT(1, "a", "flashlight",
-            "A large flashlight with a cracked and faded blue plastic casing.",
+            "A large flashlight with a cracked and \n"
+                    + "faded blue plastic casing.",
             2.5),
     MATCHES(2, "a box of", "matches",
             "A small box of matches.", 1.0), 
-    KEY(3, "a black", "key", "A small, black, iron key.", 0.5);
+    BLACK_KEY_TO_HALL_FROM_STUDY(3, "a black", "key", 
+            "A small, black, iron key.", 0.5),
+    MESSAGE_FROM_FIREPLACE_IN_STUDY(4, "a small, torn", "message", 
+            "The scrap of paper has a single word \n"
+                    + "scrawled into it: CoconutCavalry", 0.1);
     
     private int _id;
     private String _name;
