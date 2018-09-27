@@ -25,6 +25,7 @@ public class Study implements IRoom {
     private final int[] neighbors = {0,2};
     private ArrayList<Item> items;
     
+    private final String name = "Study";
     private final String description = RoomDescriptions.study;
     private final String firstSearchDescription = 
             RoomDescriptions.studyFirstSearch;
@@ -52,7 +53,7 @@ public class Study implements IRoom {
     }
     @Override
     public String getName() {
-        return "Study";
+        return this.name;
     }
     @Override
     public String getDescription() {
@@ -205,12 +206,13 @@ public class Study implements IRoom {
         //check inventory for black key
         for (Item item : commands.items) {
             // if the key is in the player's inventory
-            if (item.getName().equals(Item.BLACK_KEY_TO_HALL_FROM_STUDY.getName())) {
+            if (item.getName().equals(
+                    Item.BLACK_KEY_TO_HALL_FROM_STUDY.getName())) {
                 // use the key and drop it
                 this.hallDoorIsLocked = false;
                 commands.items.remove(item);
                 // add an action message
-                commands.message = "You unlock the door.";
+                commands.message = "You use the black key to unlock the door.";
                 return commands;
             }
         }
