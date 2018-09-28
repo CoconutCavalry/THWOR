@@ -10,6 +10,7 @@ import items.Item;
 import java.util.ArrayList;
 import shared.CommandsObject;
 import shared.GoArgs;
+import shared.Shared;
 
 /**
  *
@@ -56,11 +57,29 @@ public class Hall implements IRoom {
         }
         return this.items;
     }
+    public boolean getHasBeenSearched() {
+        return this.hasBeenSearched;
+    }
+    public void setHasBeenSearched(boolean tf) {
+        if (tf == true) {
+            this.hasBeenSearched = true;
+        }
+    }
     
     /******************
      * Search methods *
      ******************/
-    
+    public String search() {
+        ArrayList<Item> itemsInRoom = this.getItems();
+        if (itemsInRoom.isEmpty()) {
+            return "There are no items to be found here.";
+        }
+        if (!this.getHasBeenSearched()) {
+            this.setHasBeenSearched(true);
+            //return this.firstSearchDescription;
+        }
+        return this.firstSearchDescription;
+    }
 
     /*************************
      * RoomInventory Methods *
@@ -78,8 +97,26 @@ public class Hall implements IRoom {
      * Custom methods *
      ******************/
     @Override
-    public CommandsObject performCustomMethods(String[] inputs, Player player) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public CommandsObject performCustomMethods(
+            String[] inputs, Player player) {
+        CommandsObject commandsToReturn = new CommandsObject();
+        commandsToReturn.items = player.getInventory();
+        switch (inputs[0]) {
+            case "s":
+            case "search":
+//                if (inputs.length > 1) {
+//                    commandsToReturn.message = this.search(inputs);
+//                } else {
+//                    commandsToReturn.message = this.search();
+//                }
+                commandsToReturn.message = this.search();
+                return commandsToReturn;
+//            case "u":
+//            case "unlock":
+//                return tryUnlockingDoor(commandsToReturn);
+            default:
+                return null;
+        }
     }
 
     

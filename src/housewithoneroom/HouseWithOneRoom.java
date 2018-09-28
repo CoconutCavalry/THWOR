@@ -12,6 +12,7 @@ import characters.Player;
 import items.Item;
 import java.util.ArrayList;
 import shared.*;
+import titles.GameStrings;
 
 /**
  * Finally connected to git
@@ -117,7 +118,7 @@ public class HouseWithOneRoom {
             case "g":
             case "go":
             case "move":
-                if (commands.length <= 1 ) {
+                if (!validateNoun(commands)) {
                     output("Try including a direction after 'go'.");
                 } else {
                     tryGoing(commands[1]);
@@ -131,10 +132,18 @@ public class HouseWithOneRoom {
             case "inventory":
                 output(game.player.showInventory());
                 break;
+            case "stats":
+                if (!validateNoun(commands)) {
+                    output("Try including an item from your inventory \n"
+                            + "after 'stats'.");
+                } else {
+                    showItemStats(commands[1]);
+                }
+                break;
             case "t":
             case "get":
             case "take":
-                if (commands.length <= 1 ) {
+                if (!validateNoun(commands)) {
                     output("Try including an item after 'take'.");
                 } else {
                     boolean success = tryTakingItem(commands[1]);
@@ -142,7 +151,12 @@ public class HouseWithOneRoom {
                 break;
             case "view":
             case "v":
-                tryViewingItem(commands);
+                if (!validateNoun(commands)) {
+                    output("Try adding an item name from your inventory \n"
+                            + "after 'view'.");
+                } else {
+                    tryViewingItem(commands[1]);
+                }
                 break;
             default: 
                 passCommandsToCurrentRoom(commands);
@@ -158,6 +172,21 @@ public class HouseWithOneRoom {
             output(resultCommands.message);
             game.player.setInventory(resultCommands.items);
         }
+    }
+
+    private static void showHelpDialogue() {
+        output(""
+                + "Commands: \n"
+                + "drop [item] - put down an item from your\n"
+                + "\tinventory\n"
+                + "exit - exits the game\n"
+                + "inventory - view the items that you have\n"
+                + "\tin your inventory\n"
+                + "search - look around in your current\n"
+                + "\troom for items that \n"
+                + "\tyou can pick up\n"
+                + "take [item] - pick up an item that\n"
+                + "\tyou find in your room\n");
     }
 
     private static boolean tryTakingItem(String itemName) {
@@ -201,24 +230,8 @@ public class HouseWithOneRoom {
             output("No items of that name are currently in your inventory.");
         } 
     }
-
-    private static void showHelpDialogue() {
-        output(""
-                + "Commands: \n"
-                + "drop [item] - put down an item from your\n"
-                + "\tinventory\n"
-                + "exit - exits the game\n"
-                + "inventory - view the items that you have\n"
-                + "\tin your inventory\n"
-                + "search - look around in your current\n"
-                + "\troom for items that \n"
-                + "\tyou can pick up\n"
-                + "take [item] - pick up an item that\n"
-                + "\tyou find in your room\n");
-    }
-
+    
     private static void tryGoing(String direction) {
-        //CommandsObject commandsToSend = new CommandsObject(direction);
         GoArgs newRoomArgs = game.currentRoom.go(direction);
         if (newRoomArgs.roomId > -1) {
             game.currentRoom = 
@@ -235,24 +248,35 @@ public class HouseWithOneRoom {
         }
     }
 
-    private static void tryViewingItem(String[] commands) {
-        // try to drop from inventory
-        if (commands.length > 1) {
-            if (commands[1] != null) {
-                String name = commands[1];
-                for (Item item : game.player.getInventory()) {
-                    if (item.getName().equals(name)) {
-                        output(item.getDescription());
-                        return;
-                    }
-                }
-                output("No items of that name are currently in your inventory.");
-                return;
-            }
+    private static void tryViewingItem(String itemName) {
+        Item item = Shared.searchForItemInListByName(
+                itemName, game.player.getInventory());
+        if (item != null) {
+            output(item.getDescription());
+        } else {
+            output(GameStrings.NotInInventory);
         }
-        output("Try adding an item name from your inventory \n"
-                + "after 'view'.");
-        
+    }
+
+    private static boolean validateNoun(String[] inputs) {
+        if (inputs.length > 1) {
+            if (inputs[1] != null) {
+                return true;
+            }
+            output(GameStrings.InvalidNoun);
+            return false;
+        }
+        return false;
+    }
+
+    private static void showItemStats(String command) {
+        Item item = Shared.searchForItemInListByName(
+                command, game.player.getInventory());
+        if (item != null) {
+            output(item.getStats());
+        } else {
+            output(GameStrings.NotInInventory);
+        }
     }
 
     

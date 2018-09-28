@@ -40,4 +40,14 @@ public class Shared {
         String returnValue = description + stringOfItems;
         return returnValue;
     }
+    
+    public static Item searchForItemInListByName(String itemName, 
+            ArrayList<Item> listOfItems) {
+        for (Item item : listOfItems) {
+            if (item.getName().equals(itemName)) {
+                return item;
+            }
+        }
+        return null;
+    }
 }
