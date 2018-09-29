@@ -11,6 +11,9 @@ package rooms;
  */
 public class RoomDescriptions {
     
+    /*******************
+     *     LIBRARY     *
+     *******************/
     public static final String library = ""
             + "You are in a large room, surrounded by a \n"
             + "labyrinth of tall bookshelves made of a \n"
@@ -25,6 +28,9 @@ public class RoomDescriptions {
             + "Lying about on the shelves and between the novels, \n"
             + "you see ";
     
+    /*******************
+     *      STUDY      *
+     *******************/
     public static final String study = ""
             + "You are in a small, dimly lit room. A \n"
             + "high-backed armchar sits behind a large oak \n"
@@ -54,4 +60,17 @@ public class RoomDescriptions {
     public static final String studyFireplaceOtherSearch = ""
             + "It is an old stone fireplace, with some coals \n"
             + "burning on the grate.";
+    
+    /******************
+     *      HALL      *
+     ******************/
+    public static final String hall = ""
+            + "You are in a long hall lit by flickering torches \n"
+            + "placed along the walls. There are stairs going \n"
+            + "upward to the railing of a second floor above you.\n"
+            + "On your left is a door. On your right is a door. \n"
+            + "In front of you is a door. The door to the Study \n"
+            + "is behing you.";
+    public static final String hallFirstSearch = ""
+            + "Several torches are placed along the walls.";
 }

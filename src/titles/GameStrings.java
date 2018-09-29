@@ -43,4 +43,12 @@ public class GameStrings {
         return house;
     }
     
+    
+    /**********************
+     * Hard-coded strings *
+     **********************/
+    public static String NotInInventory = ""
+            + "No item of that name is currently in your inventory.";
+    public static String InvalidNoun = "Invalid noun.";
+    
 }
