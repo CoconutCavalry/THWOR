@@ -50,5 +50,11 @@ public class GameStrings {
     public static String NotInInventory = ""
             + "No item of that name is currently in your inventory.";
     public static String InvalidNoun = "Invalid noun.";
+
+    public String getEOGUser() {
+        return "You have ended the game.\n"
+                + "Come back soon! \n"
+                + "The House is waiting.";
+    }
     
 }

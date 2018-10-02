@@ -19,9 +19,8 @@ public class Player {
     private String _gender;
     private int _health = 100;
     private ArrayList<Item> _inventory;
-    private int _numberOfEmptyHands = 2;
-    private int _numberOfPockets = 4;
-    private double[] _pockets = {1.0, 1.0, 1.0, 1.0};
+    private Item[] _hands = new Item[2];
+    private Item[] _pockets = new Item[4];
     private int _backpackSpaceAvailable = 0;
     //this size is relative, not universal.
     private double _inventorySize;
@@ -33,16 +32,62 @@ public class Player {
         this._name = name;
         this._gender = gender;
         this._inventory = new ArrayList<>();
-        this._inventorySize = this._numberOfPockets 
+        this._inventorySize = this.getPocketSpaceRemaining()
                        + this._backpackSpaceAvailable;
         this._remainingInventorySpace = this._inventorySize;
     }
     
-    public String getName() {
-        return this._name;
+    public void setPlayer(Player player) {
+        this._backpackSpaceAvailable = player._backpackSpaceAvailable;
+        this.setGender(player.getGender());
+        this.setHealth(player.getHealth());
+        this.setInventory(player.getInventory());
+        
     }
-    public String getGender() {
-        return this._gender;
+    
+    public String getName() { return this._name; }
+    public void setName(String name) { this._name = name; }
+    public String getGender() { return this._gender; }
+    public void setGender(String gender) { this._gender = gender; }
+    public int getHealth() { return this._health; }
+    public void setHealth(int newHealth) { this._health = newHealth; }
+    public Item[] getItemsInHand() { return this._hands; }
+    
+    public void setItemsInHand(Item[] items) {
+        if (items != null) {
+            if (items.length <= 2) {
+                int count = 0;
+                for (Item item : items) {
+                    if (item != null) {
+                        this._hands[count] = item;
+                    } else { 
+                        this._hands[count] = null;
+                    }
+                    count++;
+                }
+            }
+        } else {
+            this._hands = null;
+        }
+    }
+    
+    public int getNumberOfEmptyHands() {
+        int count = 2;
+        for (Item item : this._hands) {
+            if (item != null) {
+                count--;
+            }
+        }
+        return count;
+    }
+    public double getPocketSpaceRemaining() {
+        double space = 4.0;
+        for (Item item : this._pockets) {
+            if (item != null) {
+                space = space - item.getSize();
+            }
+        }
+        return space;
     }
     
     public String showStats() {
@@ -70,10 +115,15 @@ public class Player {
     }
     
     public ArrayList<Item> getInventory() {
+        if (this._inventory == null || this._inventory.isEmpty()) {
+            this._inventory = new ArrayList<>();
+        }
         return this._inventory;
     }
-    
     public void setInventory(ArrayList<Item> items) {
+        if (items == null) {
+            this._inventory = new ArrayList<>();
+        }
         this._inventory = items;
     }
 
@@ -107,8 +157,8 @@ public class Player {
         return "Character report for " + this._name + ":\n" 
                 + "Gender: " + this._gender + "\n"
                 + "Health: " + this._health + "\n"
-                + "Empty hands: " + this._numberOfEmptyHands + "\n"
-                + "Pockets: " + this._numberOfPockets + "\n"
+                + "Empty hands: " + this.getNumberOfEmptyHands() + "\n"
+                + "Pocket space: " + this.getPocketSpaceRemaining() + "\n"
                 + "Inventory size: " + this._inventorySize + "\n"
                 + this.showInventory();
     }

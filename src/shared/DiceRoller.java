@@ -3,14 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package services;
+package shared;
+
+import java.util.Random;
 
 /**
  *
  * @author esose
  */
-public class ConsoleLogger {
-    public static void log(String content) {
-        System.out.print(content);
+public class DiceRoller {
+    Random rand = new Random();
+    
+    public int getValue1to10() {
+        return rand.nextInt(10);
     }
 }

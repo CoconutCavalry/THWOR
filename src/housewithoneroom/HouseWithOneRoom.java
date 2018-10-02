@@ -11,6 +11,7 @@ import java.util.Scanner;
 import characters.Player;
 import items.Item;
 import java.util.ArrayList;
+import services.ConsoleLogger;
 import shared.*;
 import titles.GameStrings;
 
@@ -22,6 +23,7 @@ public class HouseWithOneRoom {
     
     static Game game;
     static Scanner input = new Scanner(System.in);
+    static boolean tryingToEndGame = false;
     //try to use this later on
     static Font outputFont = new Font("Courier", Font.BOLD | Font.ITALIC ,20);
     
@@ -59,7 +61,7 @@ public class HouseWithOneRoom {
             
             // Collect and filter user commands
             String info = input.nextLine();
-            String[] commands = splitInput(info);
+            String[] commands = splitAndSanitizeInput(info);
             output("\n");
 
             // Process user commands
@@ -74,7 +76,7 @@ public class HouseWithOneRoom {
      * @param content the content to be outputted
      */
     private static void output(String content) {
-        System.out.print(content);
+        ConsoleLogger.log(content);
     }
     
     /**
@@ -90,22 +92,52 @@ public class HouseWithOneRoom {
         return newPlayer;
     }
     
-    private static String[] splitInput(String info) {
-        String[] infoArray = info.split("\\s+");
+    /**
+     * Sanitizes input (toLowerCase) and splits it into separate words
+     * @param input
+     * @return an array of words
+     */
+    private static String[] splitAndSanitizeInput(String input) {
+        String sanitizedInput = input.toLowerCase();
+        String[] infoArray = sanitizedInput.split("\\s+");
         return infoArray;
     }
 
+    /**
+     * Takes the user input and applies the appropriate method
+     * @param commands - array of inputs from the user
+     */
     private static void parseInput(String[] commands) {
         String verb = commands[0];
-        switch (verb) {
+        Game gameObj = game;
+        if (tryingToEndGame) {
+            switch (verb) {
+                case "n":
+                case "no":
+                    tryingToEndGame = false;
+                    output("Good.");
+                    break;
+                case "y":
+                case "yes":
+                    output(game.exitGame());
+                    break;
+                default:
+                    output("Enter y/n to end game.");
+            }
+        } else {
+            switch (verb) {
+            case "a":
+            case "attack":
+                tryToAttack(gameObj.player);
+                break;
             case "c":
             case "character":
-                output(game.player.showCharacterReport());
+                output(gameObj.player.showCharacterReport());
                 break;
             case "desc":
             case "describe":
             case "description":
-                output(game.currentRoom.getDescription());
+                output(gameObj.currentRoom.getDescription());
                 break;
             case "d":
             case "drop":
@@ -113,7 +145,8 @@ public class HouseWithOneRoom {
                 break;
             case "exit":
             case "x":
-                output(game.exitGame());
+                tryingToEndGame = true;
+                output("Are you sure you want to exit? [y/n]");
                 break;
             case "g":
             case "go":
@@ -130,7 +163,7 @@ public class HouseWithOneRoom {
                 break;
             case "i":
             case "inventory":
-                output(game.player.showInventory());
+                output(gameObj.player.showInventory());
                 break;
             case "stats":
                 if (!validateNoun(commands)) {
@@ -160,9 +193,15 @@ public class HouseWithOneRoom {
                 break;
             default: 
                 passCommandsToCurrentRoom(commands);
+            }
         }
     }
 
+    /**
+     * Passes the user input array and the current player into the room
+     * to perform room-specific actions
+     * @param inputs 
+     */
     private static void passCommandsToCurrentRoom(String[] inputs) {
         CommandsObject resultCommands = 
                 game.currentRoom.performCustomMethods(inputs, game.player);
@@ -174,6 +213,9 @@ public class HouseWithOneRoom {
         }
     }
 
+    /**
+     * Displays an informative dialogue about possible actions
+     */
     private static void showHelpDialogue() {
         output(""
                 + "Commands: \n"
@@ -256,6 +298,14 @@ public class HouseWithOneRoom {
         } else {
             output(GameStrings.NotInInventory);
         }
+    }
+    
+    public static void tryToAttack(Player player) {
+        AttackArgs results = game.currentRoom.attack(player.getHealth(), 
+                player.getItemsInHand());
+        game.player.setHealth(results.getHealth());
+        game.player.setItemsInHand(results.getInHand());
+        output(results.getMessage());
     }
 
     private static boolean validateNoun(String[] inputs) {

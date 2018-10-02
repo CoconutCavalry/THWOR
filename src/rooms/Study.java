@@ -9,6 +9,8 @@ import characters.Player;
 import shared.Shared;
 import items.Item;
 import java.util.ArrayList;
+import services.ConsoleLogger;
+import shared.AttackArgs;
 import shared.CommandsObject;
 import shared.GoArgs;
 
@@ -204,20 +206,31 @@ public class Study implements IRoom {
 
     private CommandsObject tryUnlockingDoor(CommandsObject commands) {
         //check inventory for black key
-        for (Item item : commands.items) {
-            // if the key is in the player's inventory
-            if (item.getName().equals(
-                    Item.BLACK_KEY_TO_HALL_FROM_STUDY.getName())) {
-                // use the key and drop it
-                this.hallDoorIsLocked = false;
-                commands.items.remove(item);
-                // add an action message
-                commands.message = "You use the black key to unlock the door.";
-                return commands;
-            }
+        Item key = Shared.searchForItemInListByName(
+                Item.BLACK_KEY_TO_HALL_FROM_STUDY.getName(), 
+                commands.items);
+        if (key != null) {
+            ArrayList<Item> itemsWOKey = commands.items;
+            itemsWOKey.remove(key);
+            // use the key and drop it
+            this.hallDoorIsLocked = false;
+            commands.items = itemsWOKey;
+            // add an action message
+            commands.message = "You use the black key to unlock the door.";
+            // try using output service
+            //ConsoleLogger.log("USED THE BLACK KEY YAYYYY");
+            return commands;
         }
         commands.message = "You do not have the right key.";
         return commands;
+    }
+    
+    /******************
+     *    Attacking   *
+     ******************/
+    @Override
+    public AttackArgs attack(int health, Item[] inHand) {
+        return new AttackArgs();
     }
 
     

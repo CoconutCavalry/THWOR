@@ -68,9 +68,16 @@ public class RoomDescriptions {
             + "You are in a long hall lit by flickering torches \n"
             + "placed along the walls. There are stairs going \n"
             + "upward to the railing of a second floor above you.\n"
-            + "On your left is a door. On your right is a door. \n"
-            + "In front of you is a door. The door to the Study \n"
-            + "is behing you.";
+            + "On your left is a door. \n"
+            + "On your right is a metallic door with a keypad set \n"
+            + "into the wall beside it. \n"
+            + "In front of you is a high, ornately carved arched \n"
+            + "doorway. \n"
+            + "The door to the Study is behing you.";
     public static final String hallFirstSearch = ""
+            + "A shadowy figure steps towards you out of the dark \n"
+            + "corner. The face is obscured by a dark cowl and bony \n"
+            + "hands reach up as if to grab you.";
+    public static final String hallOtherSearch = ""
             + "Several torches are placed along the walls.";
 }

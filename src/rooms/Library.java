@@ -10,6 +10,7 @@ import shared.Shared;
 import items.Item;
 import java.util.ArrayList;
 import java.util.Arrays;
+import shared.AttackArgs;
 import shared.CommandsObject;
 import shared.GoArgs;
 import titles.Excerpts;
@@ -160,6 +161,14 @@ public class Library implements IRoom {
             }
         }
         return new GoArgs();
+    }
+    
+    /******************
+     *    Attacking   *
+     ******************/
+    @Override
+    public AttackArgs attack(int health, Item[] inHand) {
+        return new AttackArgs();
     }
     
 }

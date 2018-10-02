@@ -8,6 +8,7 @@ package rooms;
 import characters.Player;
 import items.Item;
 import java.util.ArrayList;
+import shared.AttackArgs;
 import shared.CommandsObject;
 import shared.GoArgs;
 import shared.Shared;
@@ -20,6 +21,7 @@ public class Hall implements IRoom {
     
     private boolean hasBeenSearched = false;
     private boolean hallDoorIsLocked = true;
+    private boolean guardianIsAngry = false;
     private final int[] neighbors = {2};
     private ArrayList<Item> items;
     
@@ -65,6 +67,12 @@ public class Hall implements IRoom {
             this.hasBeenSearched = true;
         }
     }
+    private boolean getGuardianIsAngry() {
+        return this.guardianIsAngry;
+    }
+    private void setGuardianIsAngry(boolean tf) {
+        this.guardianIsAngry = tf;
+    }
     
     /******************
      * Search methods *
@@ -104,11 +112,6 @@ public class Hall implements IRoom {
         switch (inputs[0]) {
             case "s":
             case "search":
-//                if (inputs.length > 1) {
-//                    commandsToReturn.message = this.search(inputs);
-//                } else {
-//                    commandsToReturn.message = this.search();
-//                }
                 commandsToReturn.message = this.search();
                 return commandsToReturn;
 //            case "u":
@@ -122,6 +125,12 @@ public class Hall implements IRoom {
     
     @Override
     public GoArgs go(String direction) {
+        if (this.getGuardianIsAngry()) {
+            return new GoArgs("The shadowy form laughs an eerie, haunting \n"
+                    + "laugh that sends chills down your spine. \n"
+                    + "'You have angered the Guardian,' it says.\n"
+                    + "'You cannot leave.'");
+        }
         if (direction != null) {
             switch (direction) {
                 case "back":
@@ -132,6 +141,19 @@ public class Hall implements IRoom {
             }
         }
         return new GoArgs();
+    }
+
+    /******************
+     *    Attacking   *
+     ******************/
+    @Override
+    public AttackArgs attack(int health, Item[] inHand) {
+        return new AttackArgs();
+    }
+    private String tryToAttack(Player player) {
+        this.setGuardianIsAngry(true);
+        return "Yaas die fool";
+        // DO NOT DIE
     }
     
 }
