@@ -5,8 +5,6 @@
  */
 package rooms;
 
-import items.Item;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -17,9 +15,10 @@ public final class Corridor {
     public LinkedList<IRoom>_corridor = new LinkedList<>();
     
     public Corridor() {
-        this._corridor.add(new Library());
-        this._corridor.add(new Study());
-        this._corridor.add(new Hall());
+        this._corridor.add(new Library());      //0 
+        this._corridor.add(new Study());        //1
+        this._corridor.add(new Hall());         //2
+        this._corridor.add(new DiningRoom());   //3
     }
     
 }

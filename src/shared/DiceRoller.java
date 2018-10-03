@@ -12,9 +12,13 @@ import java.util.Random;
  * @author esose
  */
 public class DiceRoller {
-    Random rand = new Random();
+    static Random rand = new Random();
     
-    public int getValue1to10() {
+    public static int getValue1to10() {
         return rand.nextInt(10);
+    }
+    
+    public static int getDamage() {
+        return getValue1to10();
     }
 }

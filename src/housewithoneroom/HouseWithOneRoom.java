@@ -31,8 +31,8 @@ public class HouseWithOneRoom {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // Initialize a new game
-        game = new Game();
+        // Initialize a new game in a certain room
+        game = new Game(2);
 
         // Print welcome dialogues.
         output(game.gameStrings.getWelcome());
@@ -49,8 +49,6 @@ public class HouseWithOneRoom {
         output(game.player.showCharacterReport() + "\n");
         output("\n");
         
-        // Today, we begin in the library.
-        game.currentRoom = game.corridor._corridor.getFirst();
         game.visitedRooms.add(game.currentRoom);
         output(game.currentRoom.getDescription() + "\n");
         
@@ -143,6 +141,14 @@ public class HouseWithOneRoom {
             case "drop":
                 tryDroppingItem(commands[1]);
                 break;
+            case "e":
+            case "equip":
+                if (!validateNoun(commands)) {
+                    output("Try including an item after 'equip'.");
+                } else {
+                    tryEquippingItem(commands[1]);
+                }
+                break;
             case "exit":
             case "x":
                 tryingToEndGame = true;
@@ -213,24 +219,6 @@ public class HouseWithOneRoom {
         }
     }
 
-    /**
-     * Displays an informative dialogue about possible actions
-     */
-    private static void showHelpDialogue() {
-        output(""
-                + "Commands: \n"
-                + "drop [item] - put down an item from your\n"
-                + "\tinventory\n"
-                + "exit - exits the game\n"
-                + "inventory - view the items that you have\n"
-                + "\tin your inventory\n"
-                + "search - look around in your current\n"
-                + "\troom for items that \n"
-                + "\tyou can pick up\n"
-                + "take [item] - pick up an item that\n"
-                + "\tyou find in your room\n");
-    }
-
     private static boolean tryTakingItem(String itemName) {
         //if (currentRoom.getItems().find)
         String name = itemName;
@@ -269,7 +257,7 @@ public class HouseWithOneRoom {
             // then add back to current room
             game.currentRoom.addItemToItems(droppedItem);
         } else {
-            output("No items of that name are currently in your inventory.");
+            output(GameStrings.NotInInventory);
         } 
     }
     
@@ -303,11 +291,33 @@ public class HouseWithOneRoom {
     public static void tryToAttack(Player player) {
         AttackArgs results = game.currentRoom.attack(player.getHealth(), 
                 player.getItemsInHand());
-        game.player.setHealth(results.getHealth());
-        game.player.setItemsInHand(results.getInHand());
+        if (results.getHealth() == -999) {
+            game.state = false;
+        } else if (results.getHealth() != -1) {
+            game.player.setHealth(results.getHealth());
+            game.player.setItemsInHand(results.getInHand());
+        }
         output(results.getMessage());
     }
+    
+    private static void tryEquippingItem(String itemName) {
+        Item item = Shared.searchForItemInListByName(
+                itemName, game.player.getInventory());
+        if (item != null) {
+            if (game.player.getNumberOfEmptyHands() > 0) {
+                game.player.equip(item);
+                output(item.getName() + " equipped.");
+                return;
+            }
+        } else {
+            output(GameStrings.NotInInventory);
+        }
+    }
 
+
+    
+    
+    
     private static boolean validateNoun(String[] inputs) {
         if (inputs.length > 1) {
             if (inputs[1] != null) {
@@ -329,6 +339,26 @@ public class HouseWithOneRoom {
         }
     }
 
+    /**
+     * Displays an informative dialogue about possible actions
+     */
+    private static void showHelpDialogue() {
+        output(""
+                + "Commands: \n"
+                + "drop [item] - put down an item from your\n"
+                + "\tinventory\n"
+                + "exit - exits the game\n"
+                + "inventory - view the items that you have\n"
+                + "\tin your inventory\n"
+                + "search - look around in your current\n"
+                + "\troom for items that \n"
+                + "\tyou can pick up\n"
+                + "take [item] - pick up an item that\n"
+                + "\tyou find in your room\n"
+                + "attack, unlock, go, etc.\n");
+    }
+
+    
     
     
 }

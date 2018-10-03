@@ -18,13 +18,13 @@ import shared.GoArgs;
  */
 public interface IRoom {
     /* initialized properties */
-    String defaultSearchDescription = "You see ";
     
     /* Constructor - save for later???*/
 //    public Room Room(int id, String name, String description, 
 //            Room[] neighbors);
     
     /* methods shared by all Rooms */
+    public int getId();
     public String getName();
     public String getDescription();
     public ArrayList<Item> getItems();

@@ -11,6 +11,8 @@ package rooms;
  */
 public class RoomDescriptions {
     
+    public static final String defaultSearchDescription = "You see ";
+    
     /*******************
      *     LIBRARY     *
      *******************/
@@ -80,4 +82,16 @@ public class RoomDescriptions {
             + "hands reach up as if to grab you.";
     public static final String hallOtherSearch = ""
             + "Several torches are placed along the walls.";
+    
+    /******************
+     *  DINING ROOM   *
+     ******************/
+    public static final String dining = ""
+            + "You are in a dim, candle-lit dining room. A table in \n"
+            + "front of you is set for seven, but the seventh set of \n"
+            + "dishes and utensils, at the far end of the table, \n"
+            + "is old, cracked, and covered in a thick layer of dust.\n"
+            + "'Who could live here?' you ask yourself.";
+    public static final String diningFirstSearch = ""
+            + "There is nothing here.";
 }

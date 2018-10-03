@@ -17,7 +17,7 @@ import shared.TakeArgs;
 public class Player {
     private String _name;
     private String _gender;
-    private int _health = 100;
+    private int _health = 5;
     private ArrayList<Item> _inventory;
     private Item[] _hands = new Item[2];
     private Item[] _pockets = new Item[4];
@@ -151,6 +151,15 @@ public class Player {
             }
         }
         return null;
+    }
+    
+    public void equip(Item item) {
+        for (int i = 0; i < 2; i++) {
+            if (this._hands[i] == null) {
+                this._hands[i] = item;
+                return;
+            }
+        }
     }
 
     public String showCharacterReport() {

@@ -9,7 +9,6 @@ import characters.Player;
 import shared.Shared;
 import items.Item;
 import java.util.ArrayList;
-import services.ConsoleLogger;
 import shared.AttackArgs;
 import shared.CommandsObject;
 import shared.GoArgs;
@@ -50,6 +49,7 @@ public class Study implements IRoom {
     /***********************
      * Getters and setters *
      ***********************/
+    @Override
     public int getId() {
         return 1;
     }
@@ -112,7 +112,7 @@ public class Study implements IRoom {
                     this.firstSearchDescription, itemsInRoom);
         }
         return Shared.appendDescriptionToItemsString(
-                    IRoom.defaultSearchDescription, itemsInRoom);
+                    RoomDescriptions.defaultSearchDescription, itemsInRoom);
     }
     private String search(String[] inputs) {
         if (inputs[1] == null) {

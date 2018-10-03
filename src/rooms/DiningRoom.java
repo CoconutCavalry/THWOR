@@ -6,47 +6,31 @@
 package rooms;
 
 import characters.Player;
-import shared.Shared;
 import items.Item;
 import java.util.ArrayList;
-import java.util.Arrays;
 import shared.AttackArgs;
 import shared.CommandsObject;
 import shared.GoArgs;
-import titles.Excerpts;
+import shared.Shared;
 
 /**
  *
  * @author esose
  */
-public class Library implements IRoom {
+public class DiningRoom implements IRoom {
 
     private boolean hasBeenSearched = false;
-    private final int[] neighbors = {1};
+    private final int[] neighbors = {2};
     public ArrayList<Item> items;
-    private final String description = RoomDescriptions.library;
+    private final String description = RoomDescriptions.dining;
     private final String firstSearchDescription = 
-            RoomDescriptions.libraryFirstSearch;
-    private final String[] bookTitlesInLibrary = {""
-            + "The Tragic Youth of Ambrose Fogarty: \n"
-            + "\tYoung Master Fogarty, by KM",
-            "\nThe Tragic Youth of Ambrose Fogarty: \n"
-            + "\tFogarty, Esquire, by KM",
-            "\nThe Tragic Youth of Ambrose Fogarty: \n"
-            + "\tIn Her Majesty's Service, by KM",
-            "\nThe Perilous Adventures of Jon Legenn, by KM",
-            "\nMcEver, by KM",
-            "\nThe Complete Clocktower Books, by KM and FM"
-            };
+            RoomDescriptions.diningFirstSearch;
     
     /**
      * Constructor for the Library
      */
-    public Library() {
+    public DiningRoom() {
         this.items = new ArrayList<>();
-        this.items.add(Item.FLASHLIGHT);
-        this.items.add(Item.KNIFE);
-        this.items.add(Item.MATCHES);
     }
     
     /***********************
@@ -54,18 +38,22 @@ public class Library implements IRoom {
      ***********************/
     @Override
     public int getId() {
-        return 0;
+        return 3;
     }
     @Override
     public String getName() {
-        return "Library";
+        return "Dining Room";
     }
     @Override
     public String getDescription() {
-        return description;
+        return this.description;
     }
     @Override
     public ArrayList<Item> getItems() {
+        if (this.items ==  null) {
+            this.items = new ArrayList<>();
+            return this.items;
+        }
         return this.items;
     }
     
@@ -98,8 +86,7 @@ public class Library implements IRoom {
     public void addItemToItems(Item item) {
         this.items.add(item);
     }
-    
-    
+
     /******************
      * Custom methods *
      ******************/
@@ -109,14 +96,6 @@ public class Library implements IRoom {
         CommandsObject commandsToReturn = new CommandsObject();
         commandsToReturn.items = player.getInventory();
         switch (inputs[0]) {
-            case "b":
-            case "browse":
-                commandsToReturn.message = showBookTitles();
-                return commandsToReturn;
-            case "r":
-            case "read":
-                commandsToReturn.message = readBook(inputs);
-                return commandsToReturn;
             case "s":
             case "search":
                 commandsToReturn.message = this.search();
@@ -126,35 +105,11 @@ public class Library implements IRoom {
         }
     }
 
-    private String showBookTitles() {
-        return Arrays.toString(this.bookTitlesInLibrary);
-    }
-
-    private String readBook(String[] commands) {
-        if (commands.length > 1) {
-            switch (commands[1]) {
-                case "m":
-                    return Excerpts.mcEver; 
-                case "l":
-                    return Excerpts.legenn;
-                case "f":
-                    return Excerpts.fogarty;
-                case "c":
-                    return Excerpts.clocktower;
-                default:
-                    return "Try 'm', 'l', 'f', or 'c'.";
-            }
-        }
-        return "Try including a title after 'read'.";
-    }
-
     @Override
     public GoArgs go(String direction) {
         if (direction != null) {
             switch (direction) {
-                case "ahead":
-                case "forward":
-                case "straight":
+                case "back":
                     return new GoArgs(this.neighbors[0]);
                 default:
                     return new GoArgs();
@@ -162,10 +117,7 @@ public class Library implements IRoom {
         }
         return new GoArgs();
     }
-    
-    /******************
-     *    Attacking   *
-     ******************/
+
     @Override
     public AttackArgs attack(int health, Item[] inHand) {
         return new AttackArgs();

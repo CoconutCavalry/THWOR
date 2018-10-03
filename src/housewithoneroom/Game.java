@@ -28,6 +28,13 @@ public class Game {
     public Game() {
         this.gameStrings = new GameStrings();
         this.corridor = new Corridor();
+        this.currentRoom = this.corridor._corridor.getFirst();
+    }
+    
+    public Game(int roomId) {
+        this.gameStrings = new GameStrings();
+        this.corridor = new Corridor();
+        this.currentRoom = this.corridor._corridor.get(roomId);
     }
     
     public String exitGame() {
