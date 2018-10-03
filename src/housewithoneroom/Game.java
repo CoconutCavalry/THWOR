@@ -28,26 +28,19 @@ public class Game {
     public Game() {
         this.gameStrings = new GameStrings();
         this.corridor = new Corridor();
+        this.currentRoom = this.corridor._corridor.getFirst();
+    }
+    
+    public Game(int roomId) {
+        this.gameStrings = new GameStrings();
+        this.corridor = new Corridor();
+        this.currentRoom = this.corridor._corridor.get(roomId);
     }
     
     public String exitGame() {
         this.state = false;
-        return "You have ended the game.\n"
-                + "Come back soon! \n"
-                + "The House is waiting.";
+        return gameStrings.getEOGUser();
     }
     
     //public save(){}
-    
-    /**
-     * Upon leaving a room, add it to the list of visited rooms.
-     * This will help to save the state of the room once it has been left
-     * and it will be loaded from this list if the user returns.
-     * @param room 
-     */
-    public void leave(IRoom room) {
-        visitedRooms.add(room);
-    }
-    
-    
 }

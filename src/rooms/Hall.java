@@ -8,7 +8,9 @@ package rooms;
 import characters.Player;
 import items.Item;
 import java.util.ArrayList;
+import shared.AttackArgs;
 import shared.CommandsObject;
+import shared.DiceRoller;
 import shared.GoArgs;
 import shared.Shared;
 
@@ -20,7 +22,10 @@ public class Hall implements IRoom {
     
     private boolean hasBeenSearched = false;
     private boolean hallDoorIsLocked = true;
-    private final int[] neighbors = {2};
+    private boolean guardianIsAngry = false;
+    private boolean guardianIsDead = false;
+    private int guardianHealth = 20;
+    private final int[] neighbors = {1,3};
     private ArrayList<Item> items;
     
     private final String name = "Hall";
@@ -41,6 +46,10 @@ public class Hall implements IRoom {
     /***********************
      * Getters and setters *
      ***********************/
+    @Override
+    public int getId() {
+        return 2;
+    }
     @Override
     public String getName() {
         return this.name;
@@ -64,6 +73,12 @@ public class Hall implements IRoom {
         if (tf == true) {
             this.hasBeenSearched = true;
         }
+    }
+    private boolean getGuardianIsAngry() {
+        return this.guardianIsAngry;
+    }
+    private void setGuardianIsAngry(boolean tf) {
+        this.guardianIsAngry = tf;
     }
     
     /******************
@@ -104,11 +119,6 @@ public class Hall implements IRoom {
         switch (inputs[0]) {
             case "s":
             case "search":
-//                if (inputs.length > 1) {
-//                    commandsToReturn.message = this.search(inputs);
-//                } else {
-//                    commandsToReturn.message = this.search();
-//                }
                 commandsToReturn.message = this.search();
                 return commandsToReturn;
 //            case "u":
@@ -122,16 +132,67 @@ public class Hall implements IRoom {
     
     @Override
     public GoArgs go(String direction) {
+        if (this.getGuardianIsAngry()) {
+            return new GoArgs("The shadowy form laughs an eerie, haunting laugh \n"
+                    + "that sends chills down your spine. \n"
+                    + "'You have angered the Guardian,' it says.\n"
+                    + "'You shall not leave.'");
+        }
         if (direction != null) {
             switch (direction) {
                 case "back":
                 case "backwards":
                     return new GoArgs(this.neighbors[0]);
+                case "left":
+                    return new GoArgs(this.neighbors[1]);
                 default:
                     return new GoArgs();
             }
         }
         return new GoArgs();
     }
-    
+
+    /******************
+     *    Attacking   *
+     ******************/
+    @Override
+    public AttackArgs attack(int health, Item[] inHand) {
+        AttackArgs results = new AttackArgs();
+        if (!this.guardianIsDead) {
+            this.guardianIsAngry = true;
+            String battle = "Yaas die fool";
+            int newHealth = health;
+            this.setGuardianIsAngry(true);
+            battle = battle + attackGuardian();
+            if (!this.guardianIsDead) {
+                int damageTaken = DiceRoller.getDamage();
+                newHealth = newHealth - damageTaken;
+                battle = battle + "\nThe Guardian hits you for " 
+                    + damageTaken + " damage.";
+                if (newHealth < 1) {
+                    newHealth = -999;
+                    battle = battle + "\nYou are dead.";
+                }
+            } 
+            results.setHealth(newHealth);
+            results.setMessage(battle);
+            results.setInHand(inHand);
+            return results;
+        }
+        return results;
+    }
+
+    private String attackGuardian() {
+        int damage = DiceRoller.getDamage();
+        this.guardianHealth = this.guardianHealth - damage;
+        String results = "\nYou hit the Guardian for " + damage + " damage.";
+        if (this.guardianHealth < 1) {
+            this.guardianIsDead = true;
+            this.guardianIsAngry = false;
+            this.guardianHealth = 0;
+            results = results 
+                    + "\nThe dark form dissolves in a cloud of mist.";
+        }
+        return results;
+    }
 }

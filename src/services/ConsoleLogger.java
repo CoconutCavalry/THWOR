@@ -10,7 +10,7 @@ package services;
  * @author esose
  */
 public class ConsoleLogger {
-    public void log(String content) {
-        System.out.println(content);
+    public static void log(String content) {
+        System.out.print(content);
     }
 }

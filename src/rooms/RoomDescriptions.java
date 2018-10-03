@@ -11,6 +11,8 @@ package rooms;
  */
 public class RoomDescriptions {
     
+    public static final String defaultSearchDescription = "You see ";
+    
     /*******************
      *     LIBRARY     *
      *******************/
@@ -68,9 +70,28 @@ public class RoomDescriptions {
             + "You are in a long hall lit by flickering torches \n"
             + "placed along the walls. There are stairs going \n"
             + "upward to the railing of a second floor above you.\n"
-            + "On your left is a door. On your right is a door. \n"
-            + "In front of you is a door. The door to the Study \n"
-            + "is behing you.";
+            + "On your left is a door. \n"
+            + "On your right is a metallic door with a keypad set \n"
+            + "into the wall beside it. \n"
+            + "In front of you is a high, ornately carved arched \n"
+            + "doorway. \n"
+            + "The door to the Study is behing you.";
     public static final String hallFirstSearch = ""
+            + "A shadowy figure steps towards you out of the dark \n"
+            + "corner. The face is obscured by a dark cowl and bony \n"
+            + "hands reach up as if to grab you.";
+    public static final String hallOtherSearch = ""
             + "Several torches are placed along the walls.";
+    
+    /******************
+     *  DINING ROOM   *
+     ******************/
+    public static final String dining = ""
+            + "You are in a dim, candle-lit dining room. A table in \n"
+            + "front of you is set for seven, but the seventh set of \n"
+            + "dishes and utensils, at the far end of the table, \n"
+            + "is old, cracked, and covered in a thick layer of dust.\n"
+            + "'Who could live here?' you ask yourself.";
+    public static final String diningFirstSearch = ""
+            + "There is nothing here.";
 }

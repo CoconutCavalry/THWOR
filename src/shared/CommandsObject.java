@@ -16,15 +16,17 @@ public class CommandsObject {
     public String message;
     public String[] inputs;
     public int numberOfInputs;
+    public int health;
     public ArrayList<Item> items;
     
     public CommandsObject() {}
     
     public CommandsObject(String _message, String[] _inputs, 
-            ArrayList<Item> _items) {
+            ArrayList<Item> _items, int _health) {
         this.message = _message;
         this.inputs = _inputs;
         this.items = _items;
         this.numberOfInputs = this.inputs.length;
+        this.health = _health;
     }
 }

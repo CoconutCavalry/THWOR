@@ -11,6 +11,7 @@ import java.util.Scanner;
 import characters.Player;
 import items.Item;
 import java.util.ArrayList;
+import services.ConsoleLogger;
 import shared.*;
 import titles.GameStrings;
 
@@ -22,6 +23,7 @@ public class HouseWithOneRoom {
     
     static Game game;
     static Scanner input = new Scanner(System.in);
+    static boolean tryingToEndGame = false;
     //try to use this later on
     static Font outputFont = new Font("Courier", Font.BOLD | Font.ITALIC ,20);
     
@@ -29,8 +31,8 @@ public class HouseWithOneRoom {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // Initialize a new game
-        game = new Game();
+        // Initialize a new game in a certain room
+        game = new Game(2);
 
         // Print welcome dialogues.
         output(game.gameStrings.getWelcome());
@@ -47,8 +49,6 @@ public class HouseWithOneRoom {
         output(game.player.showCharacterReport() + "\n");
         output("\n");
         
-        // Today, we begin in the library.
-        game.currentRoom = game.corridor._corridor.getFirst();
         game.visitedRooms.add(game.currentRoom);
         output(game.currentRoom.getDescription() + "\n");
         
@@ -59,7 +59,7 @@ public class HouseWithOneRoom {
             
             // Collect and filter user commands
             String info = input.nextLine();
-            String[] commands = splitInput(info);
+            String[] commands = splitAndSanitizeInput(info);
             output("\n");
 
             // Process user commands
@@ -74,7 +74,7 @@ public class HouseWithOneRoom {
      * @param content the content to be outputted
      */
     private static void output(String content) {
-        System.out.print(content);
+        ConsoleLogger.log(content);
     }
     
     /**
@@ -90,30 +90,69 @@ public class HouseWithOneRoom {
         return newPlayer;
     }
     
-    private static String[] splitInput(String info) {
-        String[] infoArray = info.split("\\s+");
+    /**
+     * Sanitizes input (toLowerCase) and splits it into separate words
+     * @param input
+     * @return an array of words
+     */
+    private static String[] splitAndSanitizeInput(String input) {
+        String sanitizedInput = input.toLowerCase();
+        String[] infoArray = sanitizedInput.split("\\s+");
         return infoArray;
     }
 
+    /**
+     * Takes the user input and applies the appropriate method
+     * @param commands - array of inputs from the user
+     */
     private static void parseInput(String[] commands) {
         String verb = commands[0];
-        switch (verb) {
+        Game gameObj = game;
+        if (tryingToEndGame) {
+            switch (verb) {
+                case "n":
+                case "no":
+                    tryingToEndGame = false;
+                    output("Good.");
+                    break;
+                case "y":
+                case "yes":
+                    output(game.exitGame());
+                    break;
+                default:
+                    output("Enter y/n to end game.");
+            }
+        } else {
+            switch (verb) {
+            case "a":
+            case "attack":
+                tryToAttack(gameObj.player);
+                break;
             case "c":
             case "character":
-                output(game.player.showCharacterReport());
+                output(gameObj.player.showCharacterReport());
                 break;
             case "desc":
             case "describe":
             case "description":
-                output(game.currentRoom.getDescription());
+                output(gameObj.currentRoom.getDescription());
                 break;
             case "d":
             case "drop":
                 tryDroppingItem(commands[1]);
                 break;
+            case "e":
+            case "equip":
+                if (!validateNoun(commands)) {
+                    output("Try including an item after 'equip'.");
+                } else {
+                    tryEquippingItem(commands[1]);
+                }
+                break;
             case "exit":
             case "x":
-                output(game.exitGame());
+                tryingToEndGame = true;
+                output("Are you sure you want to exit? [y/n]");
                 break;
             case "g":
             case "go":
@@ -130,7 +169,7 @@ public class HouseWithOneRoom {
                 break;
             case "i":
             case "inventory":
-                output(game.player.showInventory());
+                output(gameObj.player.showInventory());
                 break;
             case "stats":
                 if (!validateNoun(commands)) {
@@ -160,9 +199,15 @@ public class HouseWithOneRoom {
                 break;
             default: 
                 passCommandsToCurrentRoom(commands);
+            }
         }
     }
 
+    /**
+     * Passes the user input array and the current player into the room
+     * to perform room-specific actions
+     * @param inputs 
+     */
     private static void passCommandsToCurrentRoom(String[] inputs) {
         CommandsObject resultCommands = 
                 game.currentRoom.performCustomMethods(inputs, game.player);
@@ -172,21 +217,6 @@ public class HouseWithOneRoom {
             output(resultCommands.message);
             game.player.setInventory(resultCommands.items);
         }
-    }
-
-    private static void showHelpDialogue() {
-        output(""
-                + "Commands: \n"
-                + "drop [item] - put down an item from your\n"
-                + "\tinventory\n"
-                + "exit - exits the game\n"
-                + "inventory - view the items that you have\n"
-                + "\tin your inventory\n"
-                + "search - look around in your current\n"
-                + "\troom for items that \n"
-                + "\tyou can pick up\n"
-                + "take [item] - pick up an item that\n"
-                + "\tyou find in your room\n");
     }
 
     private static boolean tryTakingItem(String itemName) {
@@ -227,7 +257,7 @@ public class HouseWithOneRoom {
             // then add back to current room
             game.currentRoom.addItemToItems(droppedItem);
         } else {
-            output("No items of that name are currently in your inventory.");
+            output(GameStrings.NotInInventory);
         } 
     }
     
@@ -257,7 +287,37 @@ public class HouseWithOneRoom {
             output(GameStrings.NotInInventory);
         }
     }
+    
+    public static void tryToAttack(Player player) {
+        AttackArgs results = game.currentRoom.attack(player.getHealth(), 
+                player.getItemsInHand());
+        if (results.getHealth() == -999) {
+            game.state = false;
+        } else if (results.getHealth() != -1) {
+            game.player.setHealth(results.getHealth());
+            game.player.setItemsInHand(results.getInHand());
+        }
+        output(results.getMessage());
+    }
+    
+    private static void tryEquippingItem(String itemName) {
+        Item item = Shared.searchForItemInListByName(
+                itemName, game.player.getInventory());
+        if (item != null) {
+            if (game.player.getNumberOfEmptyHands() > 0) {
+                game.player.equip(item);
+                output(item.getName() + " equipped.");
+                return;
+            }
+        } else {
+            output(GameStrings.NotInInventory);
+        }
+    }
 
+
+    
+    
+    
     private static boolean validateNoun(String[] inputs) {
         if (inputs.length > 1) {
             if (inputs[1] != null) {
@@ -279,6 +339,26 @@ public class HouseWithOneRoom {
         }
     }
 
+    /**
+     * Displays an informative dialogue about possible actions
+     */
+    private static void showHelpDialogue() {
+        output(""
+                + "Commands: \n"
+                + "drop [item] - put down an item from your\n"
+                + "\tinventory\n"
+                + "exit - exits the game\n"
+                + "inventory - view the items that you have\n"
+                + "\tin your inventory\n"
+                + "search - look around in your current\n"
+                + "\troom for items that \n"
+                + "\tyou can pick up\n"
+                + "take [item] - pick up an item that\n"
+                + "\tyou find in your room\n"
+                + "attack, unlock, go, etc.\n");
+    }
+
+    
     
     
 }
