@@ -20,15 +20,16 @@ import shared.Shared;
  */
 public class Hall implements IRoom {
     
+    private static final int id = RoomId.HALL.getId();
+    private static final String name = "Hall";
     private boolean hasBeenSearched = false;
-    private boolean hallDoorIsLocked = true;
     private boolean guardianIsAngry = false;
     private boolean guardianIsDead = false;
-    private int guardianHealth = 20;
-    private final int[] neighbors = {1,3};
+    private int guardianHealth;
+    private final int[] neighbors = {RoomId.STUDY.getId(),
+        RoomId.DININGROOM.getId(), RoomId.MINESWEEPERSIM.getId()};
     private ArrayList<Item> items;
     
-    private final String name = "Hall";
     private final String description = RoomDescriptions.hall;
     private final String firstSearchDescription = 
             RoomDescriptions.hallFirstSearch;
@@ -41,6 +42,7 @@ public class Hall implements IRoom {
         for(int i = 0; i < 3; i++) {
             this.items.add(Item.TORCH_FROM_HALL);
         }
+        this.guardianHealth = 20;
     }
 
     /***********************
@@ -48,11 +50,11 @@ public class Hall implements IRoom {
      ***********************/
     @Override
     public int getId() {
-        return 2;
+        return id;
     }
     @Override
     public String getName() {
-        return this.name;
+        return name;
     }
     @Override
     public String getDescription() {
@@ -129,7 +131,9 @@ public class Hall implements IRoom {
         }
     }
 
-    
+    /*****************
+     *    MOVEMENT   *
+     *****************/
     @Override
     public GoArgs go(String direction) {
         if (this.getGuardianIsAngry()) {
@@ -145,6 +149,8 @@ public class Hall implements IRoom {
                     return new GoArgs(this.neighbors[0]);
                 case "left":
                     return new GoArgs(this.neighbors[1]);
+                case "right":
+                    return new GoArgs(this.neighbors[2]);
                 default:
                     return new GoArgs();
             }

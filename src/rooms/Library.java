@@ -21,8 +21,10 @@ import titles.Excerpts;
  */
 public class Library implements IRoom {
 
+    private static final int id = RoomId.LIBRARY.getId();
+    private static final String name = "Library";
     private boolean hasBeenSearched = false;
-    private final int[] neighbors = {1};
+    private final int[] neighbors = {RoomId.STUDY.getId()};
     public ArrayList<Item> items;
     private final String description = RoomDescriptions.library;
     private final String firstSearchDescription = 
@@ -54,11 +56,11 @@ public class Library implements IRoom {
      ***********************/
     @Override
     public int getId() {
-        return 0;
+        return id;
     }
     @Override
     public String getName() {
-        return "Library";
+        return name;
     }
     @Override
     public String getDescription() {
@@ -148,6 +150,9 @@ public class Library implements IRoom {
         return "Try including a title after 'read'.";
     }
 
+    /*****************
+     *    MOVEMENT   *
+     *****************/
     @Override
     public GoArgs go(String direction) {
         if (direction != null) {

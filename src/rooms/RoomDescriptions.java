@@ -91,7 +91,31 @@ public class RoomDescriptions {
             + "front of you is set for seven, but the seventh set of \n"
             + "dishes and utensils, at the far end of the table, \n"
             + "is old, cracked, and covered in a thick layer of dust.\n"
-            + "'Who could live here?' you ask yourself.";
+            + "'Who could live here?' you ask yourself. \n"
+            + "The door to the Hall is behind you.";
     public static final String diningFirstSearch = ""
             + "There is nothing here.";
+    
+    /***********************
+     *   MINESWEEPER SIM   *
+     ***********************/
+    public static final String msSim = ""
+            + "You are in a wide, dark room. An electronic hum comes \n"
+            + "from a wall on your left, where hundreds of tiny lights \n"
+            + "blink blue, red, orange, and green. Behind you is the \n"
+            + "door to the Hall.";
+    public static final String msSimFirstSearch = ""
+            + "There is a lightswitch on the wall to the left of the \n"
+            + "door.";
+    public static final String msSimOtherSearchNoLight = msSim + "\n" + 
+            msSimFirstSearch;
+    public static final String msSimOtherSearch = ""
+            + "The left wall of the wide room is coverd by computer \n"
+            + "monitors from floor to ceiling. The monitor screens are \n"
+            + "sectioned into grids which are all blank, except for a few \n"
+            + "flickering lights in the corners of the small frames. \n"
+            + "A sticky-note on the center-most monitor has 'RAG??' written \n"
+            + "on it in jagged, angular handwriting with permanent marker. \n"
+            + "Four benches, oddly similar to hospital beds, are spaced \n"
+            + "evenly across the rest of the room.";
 }

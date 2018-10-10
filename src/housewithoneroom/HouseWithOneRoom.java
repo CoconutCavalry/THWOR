@@ -74,7 +74,7 @@ public class HouseWithOneRoom {
      * @param content the content to be outputted
      */
     private static void output(String content) {
-        ConsoleLogger.log(content);
+        ConsoleLogger.output(content);
     }
     
     /**

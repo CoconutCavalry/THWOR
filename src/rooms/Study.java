@@ -19,14 +19,16 @@ import shared.GoArgs;
  */
 public class Study implements IRoom {
     
+    private static final int id = RoomId.STUDY.getId();
+    private static final String name = "Study";
     private boolean hasBeenSearched = false;
     private boolean deskHasBeenSearched = false;
     private boolean fireplaceHasBeenSearched = false;
     private boolean hallDoorIsLocked = true;
-    private final int[] neighbors = {0,2};
+    private final int[] neighbors = {
+        RoomId.LIBRARY.getId(), RoomId.HALL.getId()};
     private ArrayList<Item> items;
     
-    private final String name = "Study";
     private final String description = RoomDescriptions.study;
     private final String firstSearchDescription = 
             RoomDescriptions.studyFirstSearch;
@@ -51,11 +53,11 @@ public class Study implements IRoom {
      ***********************/
     @Override
     public int getId() {
-        return 1;
+        return id;
     }
     @Override
     public String getName() {
-        return this.name;
+        return name;
     }
     @Override
     public String getDescription() {
@@ -180,6 +182,10 @@ public class Study implements IRoom {
         }
     }
     
+    
+    /*****************
+     *    MOVEMENT   *
+     *****************/
     @Override
     public GoArgs go(String direction) {
         if (direction != null) {

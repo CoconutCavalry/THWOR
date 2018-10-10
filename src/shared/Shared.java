@@ -50,4 +50,13 @@ public class Shared {
         }
         return null;
     }
+    
+    public static boolean validateNoun(String[] inputs) {
+        if (inputs.length > 1) {
+            if (!inputs[1].isEmpty()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
