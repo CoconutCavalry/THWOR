@@ -19,7 +19,7 @@ public final class Corridor {
         this._corridor.add(new Study());
         this._corridor.add(new Hall());
         this._corridor.add(new DiningRoom());
-        this._corridor.add(new MinesweeperSim());
+        this._corridor.add(new ComputerRoom());
     }
     
 }
@@ -30,7 +30,7 @@ enum RoomId {
     STUDY(1),
     HALL(2),
     DININGROOM(3),
-    MINESWEEPERSIM(4);
+    COMPUTERROOM(4);
     
     RoomId(int id) {
         this.id = id;

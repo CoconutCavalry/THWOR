@@ -27,7 +27,7 @@ public class Hall implements IRoom {
     private boolean guardianIsDead = false;
     private int guardianHealth;
     private final int[] neighbors = {RoomId.STUDY.getId(),
-        RoomId.DININGROOM.getId(), RoomId.MINESWEEPERSIM.getId()};
+        RoomId.DININGROOM.getId(), RoomId.COMPUTERROOM.getId()};
     private ArrayList<Item> items;
     
     private final String description = RoomDescriptions.hall;

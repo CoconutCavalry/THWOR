@@ -139,7 +139,11 @@ public class HouseWithOneRoom {
                 break;
             case "d":
             case "drop":
-                tryDroppingItem(commands[1]);
+                if (!validateNoun(commands)) {
+                    output("Try including an item after 'drop'.");
+                } else {
+                    tryDroppingItem(commands[1]);
+                }
                 break;
             case "e":
             case "equip":
