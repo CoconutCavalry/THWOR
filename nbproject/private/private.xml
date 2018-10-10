@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="4">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="5">
         <file>
             <url>src/housewithoneroom/HouseWithOneRoom.java</url>
             <bookmark id="2">
@@ -21,6 +21,14 @@
             <bookmark id="4">
                 <name/>
                 <line>320</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>src/rooms/Study.java</url>
+            <bookmark id="5">
+                <name/>
+                <line>103</line>
                 <key/>
             </bookmark>
         </file>

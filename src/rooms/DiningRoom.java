@@ -19,9 +19,11 @@ import shared.Shared;
  */
 public class DiningRoom implements IRoom {
 
+    private static final int id = RoomId.DININGROOM.getId();
     private boolean hasBeenSearched = false;
-    private final int[] neighbors = {2};
+    private final int[] neighbors = {RoomId.HALL.getId()};
     public ArrayList<Item> items;
+    private static final String name = "Dining Room";
     private final String description = RoomDescriptions.dining;
     private final String firstSearchDescription = 
             RoomDescriptions.diningFirstSearch;
@@ -38,11 +40,11 @@ public class DiningRoom implements IRoom {
      ***********************/
     @Override
     public int getId() {
-        return 3;
+        return id;
     }
     @Override
     public String getName() {
-        return "Dining Room";
+        return name;
     }
     @Override
     public String getDescription() {
@@ -105,6 +107,9 @@ public class DiningRoom implements IRoom {
         }
     }
 
+    /*****************
+     *    MOVEMENT   *
+     *****************/
     @Override
     public GoArgs go(String direction) {
         if (direction != null) {
