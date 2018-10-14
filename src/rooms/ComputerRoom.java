@@ -18,9 +18,9 @@ import static shared.Shared.validateNoun;
  *
  * @author esose
  */
-public class MinesweeperSim implements IRoom {
+public class ComputerRoom implements IRoom {
     
-    private static final int id = RoomId.MINESWEEPERSIM.getId();
+    private static final int id = RoomId.COMPUTERROOM.getId();
     private static final String name = "Computer Room";
     private boolean hasBeenSearched = false;
     private boolean computerIsLocked = true;
@@ -28,16 +28,18 @@ public class MinesweeperSim implements IRoom {
     private final int[] neighbors = {RoomId.HALL.getId()};
     private ArrayList<Item> items;
     
-    private static final String description = RoomDescriptions.msSim;
-    private static final String firstSearch = RoomDescriptions.msSimFirstSearch;
-    private static final String lightOnSearch = RoomDescriptions.msSimOtherSearch;
-    private static final String searchNoLight = 
-            RoomDescriptions.msSimOtherSearchNoLight;
+    private static final String description = RoomDescriptions.compRoom;
+    private static final String firstSearchNoLight = 
+            RoomDescriptions.compSearchNoLight;
+    private static final String firstSearchWithLight = 
+            RoomDescriptions.compFirstSearchWithLight;
+    private static final String otherSearchWithLight = 
+            RoomDescriptions.compOtherSearchWithLight;
 
     /**
      * Constructor for the Minesweeper Simulation room
      */
-    public MinesweeperSim() {
+    public ComputerRoom() {
         this.items = new ArrayList<>();
     }
     
@@ -54,7 +56,10 @@ public class MinesweeperSim implements IRoom {
     }
     @Override
     public String getDescription() {
-        return description;
+        if (!this.getLightIsOn()) {
+            return description;
+        }
+        return firstSearchWithLight;
     }
     public boolean getHasBeenSearched() {
         return this.hasBeenSearched;
@@ -67,7 +72,7 @@ public class MinesweeperSim implements IRoom {
         }
     }
     public boolean getComputerIsLocked() {
-        return this.hasBeenSearched;
+        return this.computerIsLocked;
     }
     public void setComputerIsLocked(boolean tf) {
         //possibly additional code in here later.
@@ -100,17 +105,18 @@ public class MinesweeperSim implements IRoom {
      * Search methods *
      ******************/
     public String search() {
-        if (!this.hasBeenSearched) {
-            setHasBeenSearched(true);
-            //output(firstSearch);
-            return firstSearch;
-        }
         if (this.lightIsOn) {
-            //output(lightOnSearch);
-            return lightOnSearch;
+            if (!this.getHasBeenSearched()) {
+                setHasBeenSearched(true);
+                return firstSearchWithLight;
+            }
+            return otherSearchWithLight;
         } else {
-            //output(description + "\n" + firstSearch);
-            return firstSearch;
+//            if (!this.getHasBeenSearched()) {
+//                setHasBeenSearched(true);
+//                return firstSearchNoLight;
+//            }
+            return firstSearchNoLight;
         }
     }
     
@@ -186,7 +192,9 @@ public class MinesweeperSim implements IRoom {
             String noun = inputs[1];
             switch(noun) {
                 case "light":
+                case "lights":
                 case "lightswitch":
+                case "switch":
                     boolean light = this.toggleLights();
                     if (light) {
                         return "Bright bars of light in the ceiling "
@@ -195,7 +203,8 @@ public class MinesweeperSim implements IRoom {
                     return "The lights shut off, plunging you back "
                             + "into the dark.";
                 default:
-                    
+                    return "Try including the title of the object you wish \n"
+                            + "to interact with.";
             }
         }
         return "Try including an object to interact with after the verb.";

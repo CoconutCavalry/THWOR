@@ -11,7 +11,8 @@ import java.util.Scanner;
 import characters.Player;
 import items.Item;
 import java.util.ArrayList;
-import services.ConsoleLogger;
+import static services.ConsoleLogger.*;
+//import services.ConsoleLogger.*;
 import shared.*;
 import titles.GameStrings;
 
@@ -31,26 +32,32 @@ public class HouseWithOneRoom {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // Initialize a new game in a certain room
-        game = new Game(2);
+        // Initialize a new game
+        game = new Game();
 
         // Print welcome dialogues.
-        output(game.gameStrings.getWelcome());
-        output(game.gameStrings.getHouse());
-        output("\n");
+        outputLn(game.gameStrings.getWelcome());
+        outputLn(game.gameStrings.getHouse());
+        outputLn();
         
         // Initialize the player.
-        game.player = initializePlayer(input);
-        output("\n");
-        output("Welcome, " + game.player.getName() + "\n");
-        output("\n");
+        initializePlayer(input, game);
+        
+        // Allow to start in a particular room
+        int roomNum = getStartingRoom(input);
+        if (roomNum >= game.house.getCorridor().size()) {
+            roomNum = 0;
+        }
+        game.currentRoom = game.house.getCorridor().get(roomNum);
+        outputLn("You are starting in the " 
+                + game.house.getCorridor().get(roomNum).getName() + ".\n");
         
         // Show starting stats
-        output(game.player.showCharacterReport() + "\n");
-        output("\n");
+        outputLn(game.player.showCharacterReport());
+        outputLn();
         
         game.visitedRooms.add(game.currentRoom);
-        output(game.currentRoom.getDescription() + "\n");
+        outputLn(game.currentRoom.getDescription());
         
         // Herein lies the major flow of the game
         while (game.state) {
@@ -60,34 +67,48 @@ public class HouseWithOneRoom {
             // Collect and filter user commands
             String info = input.nextLine();
             String[] commands = splitAndSanitizeInput(info);
-            output("\n");
+            outputLn();
 
             // Process user commands
             parseInput(commands);
-            output("\n");
+            outputLn();
         }
-    }
-    
-    /**
-     * Created in order to be able to easily change 
-     * the output method for the game.
-     * @param content the content to be outputted
-     */
-    private static void output(String content) {
-        ConsoleLogger.output(content);
     }
     
     /**
      * Gets the name and gender of the player from the user
      * @returns the player object
      */
-    private static Player initializePlayer(Scanner input) {
-        output("Enter name: ");
-        String name = input.nextLine();
-        output("Male or female? ");
-        String gender = input.nextLine();
-        Player newPlayer = new Player(name, gender);
-        return newPlayer;
+    private static boolean initializePlayer(Scanner input, Game game) {
+        //in order to make startup easier for myself:
+//        output("Enter name: ");
+//        String name = input.nextLine();
+//        output("Male or female? ");
+//        String gender = input.nextLine();
+//        Player newPlayer = new Player(name, gender);
+        Player newPlayer = new Player("CoconutCavalry", "male");
+        game.player = newPlayer;
+        outputLn("Welcome, " + game.player.getName() + ".\n");
+        return true;
+    }
+    /**
+     * Gets the starting room number from the user
+     * @returns the player object
+     */
+    private static int getStartingRoom (Scanner input) {
+        int retVal = -1;
+        String in;
+        while (retVal < 0) {
+            output("Enter starting room number: ");
+            in = input.nextLine();
+            try {
+                retVal = Integer.parseInt(in);
+            } catch (Exception e) {
+                output("You must enter an integer.\n");
+            }
+        }
+        
+        return retVal;
     }
     
     /**
@@ -139,7 +160,11 @@ public class HouseWithOneRoom {
                 break;
             case "d":
             case "drop":
-                tryDroppingItem(commands[1]);
+                if (!validateNoun(commands)) {
+                    output("Try including an item after 'drop'.");
+                } else {
+                    tryDroppingItem(commands[1]);
+                }
                 break;
             case "e":
             case "equip":
@@ -265,7 +290,7 @@ public class HouseWithOneRoom {
         GoArgs newRoomArgs = game.currentRoom.go(direction);
         if (newRoomArgs.roomId > -1) {
             game.currentRoom = 
-                    game.corridor._corridor.get(newRoomArgs.roomId);
+                    game.house.getCorridor().get(newRoomArgs.roomId);
             if (game.visitedRooms.contains(game.currentRoom)) {
                 output("You are now in the " 
                         + game.currentRoom.getName() + ".");
@@ -343,19 +368,7 @@ public class HouseWithOneRoom {
      * Displays an informative dialogue about possible actions
      */
     private static void showHelpDialogue() {
-        output(""
-                + "Commands: \n"
-                + "drop [item] - put down an item from your\n"
-                + "\tinventory\n"
-                + "exit - exits the game\n"
-                + "inventory - view the items that you have\n"
-                + "\tin your inventory\n"
-                + "search - look around in your current\n"
-                + "\troom for items that \n"
-                + "\tyou can pick up\n"
-                + "take [item] - pick up an item that\n"
-                + "\tyou find in your room\n"
-                + "attack, unlock, go, etc.\n");
+        output(GameStrings.HelpDialogue);
     }
 
     

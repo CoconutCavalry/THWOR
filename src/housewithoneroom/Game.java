@@ -7,7 +7,7 @@ package housewithoneroom;
 
 import characters.Player;
 import java.util.LinkedList;
-import rooms.Corridor;
+import rooms.House;
 import rooms.IRoom;
 import titles.GameStrings;
 
@@ -20,21 +20,21 @@ public class Game {
     public GameStrings gameStrings;
     public Player player;
     public IRoom currentRoom;
-    public Corridor corridor = new Corridor();
+    public House house = new House();
     public LinkedList<IRoom> visitedRooms = new LinkedList<>();
     public int numberOfVisitedRooms = 0;
     public boolean state = true;
     
     public Game() {
         this.gameStrings = new GameStrings();
-        this.corridor = new Corridor();
-        this.currentRoom = this.corridor._corridor.getFirst();
+        this.house = new House();
+        this.currentRoom = this.house.getCorridor().getFirst();
     }
     
     public Game(int roomId) {
         this.gameStrings = new GameStrings();
-        this.corridor = new Corridor();
-        this.currentRoom = this.corridor._corridor.get(roomId);
+        this.house = new House();
+        this.currentRoom = this.house.getCorridor().get(roomId);
     }
     
     public String exitGame() {

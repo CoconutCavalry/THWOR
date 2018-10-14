@@ -17,7 +17,7 @@ import shared.TakeArgs;
 public class Player {
     private String _name;
     private String _gender;
-    private int _health = 5;
+    private int _health = 10;
     private ArrayList<Item> _inventory;
     private Item[] _hands = new Item[2];
     private Item[] _pockets = new Item[4];
