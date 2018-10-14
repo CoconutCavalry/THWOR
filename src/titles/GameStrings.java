@@ -17,15 +17,15 @@ public class GameStrings {
             + "   | |  | |_| | |___ \n"
             + "   | |  |  _  |  ___|\n"
             + "   | |  | | | | |___ \n"
-            + "   |_|  |_| |_|_____|\n";
+            + "   |_|  |_| |_|_____|";
     private final String welcome = ""
             + "      Welcome To\n"
-            + "The House With One Room\n";
+            + "The House With One Room";
     private final String house = ""
             + "        _____/\\   \n"
             + "       /     \\|   \n"
             + "       |  _  ||    \n"
-            + "       |_|_|_||    \n";
+            + "       |_|_|_||    ";
 
     public String getTitle() {
         return title;
@@ -56,5 +56,19 @@ public class GameStrings {
                 + "Come back soon! \n"
                 + "The House is waiting.";
     }
+    
+    public static String HelpDialogue = ""
+            + "Commands: \n"
+            + "drop [item] - put down an item from your\n"
+            + "\tinventory\n"
+            + "exit - exits the game\n"
+            + "inventory - view the items that you have\n"
+            + "\tin your inventory\n"
+            + "search - look around in your current\n"
+            + "\troom for items that \n"
+            + "\tyou can pick up\n"
+            + "take [item] - pick up an item that\n"
+            + "\tyou find in your room\n"
+            + "attack, unlock, go, etc.\n";
     
 }

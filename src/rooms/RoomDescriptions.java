@@ -99,15 +99,13 @@ public class RoomDescriptions {
     /***********************
      *    COMPUTER ROOM    *
      ***********************/
-    public static final String msSim = ""
+    public static final String compRoom = ""
             + "You are in a wide, dark room. An electronic hum comes \n"
             + "from a wall on your left, where hundreds of tiny lights \n"
             + "blink blue, red, orange, and green. Behind you is the \n"
             + "door to the Hall.";
-    public static final String compFirstSearchNoLight = ""
+    public static final String compSearchNoLight = ""
             + "There is a lightswitch on the wall beside the door.";
-    public static final String compOtherSearchNoLight = ""
-            + compFirstSearchNoLight;
     public static final String compFirstSearchWithLight = ""
             + "The left wall of the wide room is coverd by computer \n"
             + "monitors from floor to ceiling. The monitor screens are \n"
@@ -117,10 +115,10 @@ public class RoomDescriptions {
             + "on it in jagged, angular handwriting with permanent marker. \n"
             + "Four benches, oddly similar to hospital beds, are spaced \n"
             + "evenly across the rest of the room."
-            + "\n" + compFirstSearchNoLight;
+            + "\n" + compSearchNoLight;
     public static final String compOtherSearchWithLight = ""
             + "Computer monitors with flickering lights cover the left \n"
             + "wall. A sticky-note in the middle reads 'RAG??'. \n"
             + "Four beds are spread across the room. "
-            + "\n" + compFirstSearchNoLight;
+            + "\n" + compSearchNoLight;
 }

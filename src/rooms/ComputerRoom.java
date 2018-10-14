@@ -28,13 +28,11 @@ public class ComputerRoom implements IRoom {
     private final int[] neighbors = {RoomId.HALL.getId()};
     private ArrayList<Item> items;
     
-    private static final String description = RoomDescriptions.msSim;
+    private static final String description = RoomDescriptions.compRoom;
     private static final String firstSearchNoLight = 
-            RoomDescriptions.compFirstSearchNoLight;
+            RoomDescriptions.compSearchNoLight;
     private static final String firstSearchWithLight = 
             RoomDescriptions.compFirstSearchWithLight;
-    private static final String otherSearchNoLight = 
-            RoomDescriptions.compOtherSearchNoLight;
     private static final String otherSearchWithLight = 
             RoomDescriptions.compOtherSearchWithLight;
 
@@ -74,7 +72,7 @@ public class ComputerRoom implements IRoom {
         }
     }
     public boolean getComputerIsLocked() {
-        return this.hasBeenSearched;
+        return this.computerIsLocked;
     }
     public void setComputerIsLocked(boolean tf) {
         //possibly additional code in here later.
@@ -118,7 +116,7 @@ public class ComputerRoom implements IRoom {
 //                setHasBeenSearched(true);
 //                return firstSearchNoLight;
 //            }
-            return otherSearchNoLight;
+            return firstSearchNoLight;
         }
     }
     

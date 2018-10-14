@@ -11,20 +11,24 @@ import java.util.LinkedList;
  *
  * @author esose
  */
-public final class Corridor {
-    public LinkedList<IRoom>_corridor = new LinkedList<>();
+public final class House {
+    private LinkedList<IRoom> corridor = new LinkedList<>();
     
-    public Corridor() {
-        this._corridor.add(new Library());
-        this._corridor.add(new Study());
-        this._corridor.add(new Hall());
-        this._corridor.add(new DiningRoom());
-        this._corridor.add(new ComputerRoom());
+    public House() {
+        this.corridor.add(new Library());
+        this.corridor.add(new Study());
+        this.corridor.add(new Hall());
+        this.corridor.add(new DiningRoom());
+        this.corridor.add(new ComputerRoom());
+    }
+    
+    public LinkedList<IRoom> getCorridor() {
+        return this.corridor;
     }
     
 }
 
-// ID must match its order within the Corridor list
+// ID must match its order within the House list
 enum RoomId {
     LIBRARY(0),
     STUDY(1),

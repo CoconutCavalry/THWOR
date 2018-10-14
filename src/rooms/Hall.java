@@ -31,8 +31,10 @@ public class Hall implements IRoom {
     private ArrayList<Item> items;
     
     private final String description = RoomDescriptions.hall;
-    private final String firstSearchDescription = 
+    private final String guardianAliveSearch = 
             RoomDescriptions.hallFirstSearch;
+    private final String guardianDeadSearch = 
+            RoomDescriptions.hallOtherSearch;
     
     /**
      * Constructor for the Hall
@@ -87,15 +89,23 @@ public class Hall implements IRoom {
      * Search methods *
      ******************/
     public String search() {
+        if (!this.getHasBeenSearched()) {
+            this.setHasBeenSearched(true);
+            if (!this.guardianIsDead) {
+                this.setGuardianIsAngry(true);
+                return this.guardianDeadSearch + "\n" 
+                        + this.guardianAliveSearch;
+            }
+        }
+        if (!this.guardianIsDead) {
+            this.setGuardianIsAngry(true);
+            return this.guardianAliveSearch;
+        }
         ArrayList<Item> itemsInRoom = this.getItems();
         if (itemsInRoom.isEmpty()) {
             return "There are no items to be found here.";
         }
-        if (!this.getHasBeenSearched()) {
-            this.setHasBeenSearched(true);
-            //return this.firstSearchDescription;
-        }
-        return this.firstSearchDescription;
+        return this.guardianDeadSearch;
     }
 
     /*************************
