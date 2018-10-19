@@ -8,10 +8,10 @@ package rooms;
 import characters.Player;
 import items.Item;
 import java.util.ArrayList;
-import shared.AttackArgs;
 import shared.CommandsObject;
 import shared.GoArgs;
 import shared.Shared;
+import titles.GameStrings;
 
 /**
  *
@@ -96,7 +96,7 @@ public class DiningRoom implements IRoom {
     public CommandsObject performCustomMethods(
             String[] inputs, Player player) {
         CommandsObject commandsToReturn = new CommandsObject();
-        commandsToReturn.items = player.getInventory();
+        commandsToReturn.player = player;
         switch (inputs[0]) {
             case "s":
             case "search":
@@ -124,8 +124,8 @@ public class DiningRoom implements IRoom {
     }
 
     @Override
-    public AttackArgs attack(int health, Item[] inHand) {
-        return new AttackArgs();
+    public String attack() {
+        return GameStrings.NothingToAttackHereString;
     }
     
 }

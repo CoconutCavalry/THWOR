@@ -11,35 +11,37 @@ import rooms.House;
 import rooms.IRoom;
 import titles.GameStrings;
 
+import static services.ConsoleLogger.output;
+
 /**
  *
  * @author esose
  */
 public class Game {
     
-    public GameStrings gameStrings;
-    public Player player;
-    public IRoom currentRoom;
-    public House house = new House();
-    public LinkedList<IRoom> visitedRooms = new LinkedList<>();
+    public static GameStrings gameStrings;
+    public static Player player;
+    public static IRoom currentRoom;
+    public static House house = new House();
+    public static LinkedList<IRoom> visitedRooms = new LinkedList<>();
     public int numberOfVisitedRooms = 0;
-    public boolean state = true;
+    public static boolean state = true;
     
-    public Game() {
-        this.gameStrings = new GameStrings();
-        this.house = new House();
-        this.currentRoom = this.house.getCorridor().getFirst();
+    public static void NewGame() {
+        gameStrings = new GameStrings();
+        house = new House();
+        currentRoom = house.getCorridor().getFirst();
     }
     
     public Game(int roomId) {
-        this.gameStrings = new GameStrings();
-        this.house = new House();
-        this.currentRoom = this.house.getCorridor().get(roomId);
+        gameStrings = new GameStrings();
+        house = new House();
+        currentRoom = house.getCorridor().get(roomId);
     }
     
-    public String exitGame() {
-        this.state = false;
-        return gameStrings.getEOGUser();
+    public static void exitGame() {
+        state = false;
+        output(gameStrings.getEOGUser());
     }
     
     //public save(){}

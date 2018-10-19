@@ -6,12 +6,14 @@
 package rooms;
 
 import characters.Player;
+import housewithoneroom.Game;
 import shared.Shared;
 import items.Item;
 import java.util.ArrayList;
-import shared.AttackArgs;
+
 import shared.CommandsObject;
 import shared.GoArgs;
+import titles.GameStrings;
 
 /**
  *
@@ -164,7 +166,7 @@ public class Study implements IRoom {
     public CommandsObject performCustomMethods(
             String[] inputs, Player player) {
         CommandsObject commandsToReturn = new CommandsObject();
-        commandsToReturn.items = player.getInventory();
+        commandsToReturn.player = player;
         switch (inputs[0]) {
             case "s":
             case "search":
@@ -210,24 +212,27 @@ public class Study implements IRoom {
         }
     }
 
-    private CommandsObject tryUnlockingDoor(CommandsObject commands) {
-        //check inventory for black key
-        Item key = Shared.searchForItemInListByName(
-                Item.BLACK_KEY_TO_HALL_FROM_STUDY.getName(), 
-                commands.items);
-        if (key != null) {
-            ArrayList<Item> itemsWOKey = commands.items;
-            itemsWOKey.remove(key);
-            // use the key and drop it
-            this.hallDoorIsLocked = false;
-            commands.items = itemsWOKey;
-            // add an action message
-            commands.message = "You use the black key to unlock the door.";
-            // try using output service
-            //ConsoleLogger.log("USED THE BLACK KEY YAYYYY");
-            return commands;
+    private CommandsObject tryUnlockingDoor(CommandsObject incomingCommands) {
+        //check hands for black key
+        CommandsObject commands = incomingCommands;
+//        Item[] items = commands.player.getItemsInHands();
+        Item[] items = Game.player.getItemsInHands();
+//        Item key = null;
+        for (int i = 0; i < items.length; i++) {
+            Item key = items[i];
+            if (key == Item.BLACK_KEY_TO_HALL_FROM_STUDY) {
+                // use the key and drop it
+                this.hallDoorIsLocked = false;
+                items[i] = null;
+                commands.player.setItemsInHand(items);
+                // add an action message
+                commands.message = "You use the black key to unlock the door.";
+                // try using output service
+                //ConsoleLogger.log("USED THE BLACK KEY YAYYYY");
+                return commands;
+            }
         }
-        commands.message = "You do not have the right key.";
+        commands.message = "You do not have the right key equipped.";
         return commands;
     }
     
@@ -235,8 +240,8 @@ public class Study implements IRoom {
      *    Attacking   *
      ******************/
     @Override
-    public AttackArgs attack(int health, Item[] inHand) {
-        return new AttackArgs();
+    public String attack() {
+        return GameStrings.NothingToAttackHereString;
     }
 
     

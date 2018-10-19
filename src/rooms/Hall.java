@@ -6,13 +6,14 @@
 package rooms;
 
 import characters.Player;
+import housewithoneroom.Game;
 import items.Item;
 import java.util.ArrayList;
-import shared.AttackArgs;
+
 import shared.CommandsObject;
 import shared.DiceRoller;
 import shared.GoArgs;
-import shared.Shared;
+import titles.GameStrings;
 
 /**
  *
@@ -44,7 +45,7 @@ public class Hall implements IRoom {
         for(int i = 0; i < 3; i++) {
             this.items.add(Item.TORCH_FROM_HALL);
         }
-        this.guardianHealth = 20;
+        this.guardianHealth = 1;
     }
 
     /***********************
@@ -127,7 +128,7 @@ public class Hall implements IRoom {
     public CommandsObject performCustomMethods(
             String[] inputs, Player player) {
         CommandsObject commandsToReturn = new CommandsObject();
-        commandsToReturn.items = player.getInventory();
+        commandsToReturn.player = player;
         switch (inputs[0]) {
             case "s":
             case "search":
@@ -172,30 +173,32 @@ public class Hall implements IRoom {
      *    Attacking   *
      ******************/
     @Override
-    public AttackArgs attack(int health, Item[] inHand) {
-        AttackArgs results = new AttackArgs();
+    public String attack() {
+//        AttackArgs results = new AttackArgs();
+        String battle = GameStrings.NothingToAttackHereString;
         if (!this.guardianIsDead) {
-            this.guardianIsAngry = true;
-            String battle = "Yaas die fool";
-            int newHealth = health;
+//            this.guardianIsAngry = true;
+            battle = "Yaas die fool";
             this.setGuardianIsAngry(true);
             battle = battle + attackGuardian();
             if (!this.guardianIsDead) {
                 int damageTaken = DiceRoller.getDamage();
-                newHealth = newHealth - damageTaken;
+//                newHealth = newHealth - damageTaken;
+                Game.player.setHealth(Game.player.getHealth() - damageTaken);
                 battle = battle + "\nThe Guardian hits you for " 
                     + damageTaken + " damage.";
-                if (newHealth < 1) {
-                    newHealth = -999;
+                if (Game.player.getHealth() < 1) {
+                    Game.player.setHealth(0);
+                    Game.state = false;
                     battle = battle + "\nYou are dead.";
                 }
             } 
-            results.setHealth(newHealth);
-            results.setMessage(battle);
-            results.setInHand(inHand);
-            return results;
+//            results.setHealth(newHealth);
+//            results.setMessage(battle);
+//            results.setInHand(inHand);
+            return battle;
         }
-        return results;
+        return battle;
     }
 
     private String attackGuardian() {

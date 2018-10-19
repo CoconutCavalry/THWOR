@@ -70,5 +70,6 @@ public class GameStrings {
             + "take [item] - pick up an item that\n"
             + "\tyou find in your room\n"
             + "attack, unlock, go, etc.\n";
-    
+
+    public static String NothingToAttackHereString = "There is nothing to attack here.";
 }

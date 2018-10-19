@@ -8,10 +8,11 @@ package rooms;
 import characters.Player;
 import items.Item;
 import java.util.ArrayList;
-import shared.AttackArgs;
+
 import shared.CommandsObject;
 import shared.GoArgs;
-import shared.Shared;
+import titles.GameStrings;
+
 import static shared.Shared.validateNoun;
 
 /**
@@ -139,7 +140,7 @@ public class ComputerRoom implements IRoom {
     @Override
     public CommandsObject performCustomMethods(String[] inputs, Player player) {
         CommandsObject commandsToReturn = new CommandsObject();
-        commandsToReturn.items = player.getInventory();
+        commandsToReturn.player = player;
         switch (inputs[0]) {
             case "flip":
             case "turn":
@@ -177,8 +178,8 @@ public class ComputerRoom implements IRoom {
      *    Attacking   *
      ******************/
     @Override
-    public AttackArgs attack(int health, Item[] inHand) {
-        return new AttackArgs();
+    public String attack() {
+        return GameStrings.NothingToAttackHereString;
     }
 
     

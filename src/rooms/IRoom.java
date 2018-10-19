@@ -8,7 +8,7 @@ package rooms;
 import characters.Player;
 import items.Item;
 import java.util.ArrayList;
-import shared.AttackArgs;
+
 import shared.CommandsObject;
 import shared.GoArgs;
 
@@ -33,6 +33,6 @@ public interface IRoom {
     public CommandsObject performCustomMethods(
             String[] inputs, Player player);
     public GoArgs go(String direction);
-    public AttackArgs attack(int health, Item[] inHand);
+    public String attack();
     
 }

@@ -10,10 +10,11 @@ import shared.Shared;
 import items.Item;
 import java.util.ArrayList;
 import java.util.Arrays;
-import shared.AttackArgs;
+
 import shared.CommandsObject;
 import shared.GoArgs;
 import titles.Excerpts;
+import titles.GameStrings;
 
 /**
  *
@@ -109,7 +110,7 @@ public class Library implements IRoom {
     public CommandsObject performCustomMethods(
             String[] inputs, Player player) {
         CommandsObject commandsToReturn = new CommandsObject();
-        commandsToReturn.items = player.getInventory();
+        commandsToReturn.player = player;
         switch (inputs[0]) {
             case "b":
             case "browse":
@@ -172,8 +173,8 @@ public class Library implements IRoom {
      *    Attacking   *
      ******************/
     @Override
-    public AttackArgs attack(int health, Item[] inHand) {
-        return new AttackArgs();
+    public String attack() {
+        return GameStrings.NothingToAttackHereString;
     }
     
 }
