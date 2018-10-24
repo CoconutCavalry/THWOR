@@ -26,7 +26,6 @@ public interface IRoom {
     void addItemToItems(Item item);
     void performCustomMethods(String[] inputs);
     int go(String direction);
-//    GoArgs go(String direction);
     String attack();
     
 }
