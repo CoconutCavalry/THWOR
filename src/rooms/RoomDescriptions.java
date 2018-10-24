@@ -82,6 +82,11 @@ public class RoomDescriptions {
             + "hands reach up as if to grab you.";
     public static final String hallOtherSearch = ""
             + "Several torches are placed along the walls.";
+    public static final String guardianIsAngryCannotLeave = "" +
+            "The shadowy form laughs an eerie, haunting laugh \n"
+            + "that sends chills down your spine. \n"
+            + "'You have angered the Guardian,' it says.\n"
+            + "'You shall not leave.'";
     
     /******************
      *  DINING ROOM   *

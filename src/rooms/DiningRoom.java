@@ -8,7 +8,6 @@ package rooms;
 import items.Item;
 import java.util.ArrayList;
 
-import shared.GoArgs;
 import shared.Shared;
 import titles.GameStrings;
 
@@ -110,16 +109,13 @@ public class DiningRoom implements IRoom {
      *    MOVEMENT   *
      *****************/
     @Override
-    public GoArgs go(String direction) {
-        if (direction != null) {
-            switch (direction) {
-                case "back":
-                    return new GoArgs(this.neighbors[0]);
-                default:
-                    return new GoArgs();
-            }
+    public int go(String direction) {
+        switch (direction) {
+            case "back":
+                return this.neighbors[0];
+            default:
+                return -1;
         }
-        return new GoArgs();
     }
 
     @Override

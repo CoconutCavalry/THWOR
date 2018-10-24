@@ -51,6 +51,9 @@ public class GameStrings {
             + "No item of that name is currently in your inventory.";
     public static final String InvalidNoun = "Invalid noun.";
     public static final String PerformCustomMethodsBadInput = "bad input; try again or use 'help' for help.";
+    public static final String NothingToAttackHereString = "There is nothing to attack here.";
+    public static final String GoInvalidDirection = "You cannot move in that direction from here.";
+    public static final String DoorIsLocked = "The door is locked.";
 
     public String getEOGUser() {
         return "You have ended the game.\n"
@@ -75,5 +78,4 @@ public class GameStrings {
             + "\tyou find in your room\n"
             + "attack, unlock, go, etc.\n";
 
-    public static final String NothingToAttackHereString = "There is nothing to attack here.";
 }

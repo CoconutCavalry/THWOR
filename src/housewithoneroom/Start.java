@@ -249,13 +249,9 @@ public class Start {
         }
         for(Item item : itemsInRoom) {
             if (item.getName().equals(name)){
-                
-                // give the item to the player
-                TakeArgs returnedArgs = Game.player.takeItem(item);
-                output(returnedArgs.message);
-                
-                // remove the item from the room
-                if (returnedArgs.success) {
+
+                // remove the item from the room if taken by player
+                if (Game.player.takeItem(item)) {
                     Game.currentRoom.removeItemFromItems(item);
                     return true;
                 }
@@ -282,10 +278,11 @@ public class Start {
     }
     
     private static void tryGoing(String direction) {
-        GoArgs newRoomArgs = Game.currentRoom.go(direction);
-        if (newRoomArgs.roomId > -1) {
+//        GoArgs newRoomArgs = Game.currentRoom.go(direction);
+        int roomId = Game.currentRoom.go(direction);
+        if (roomId > -1) {
             Game.currentRoom =
-                    Game.house.getCorridor().get(newRoomArgs.roomId);
+                    Game.house.getCorridor().get(roomId);
             if (Game.visitedRooms.contains(Game.currentRoom)) {
                 output("You are now in the " 
                         + Game.currentRoom.getName() + ".");
@@ -293,8 +290,8 @@ public class Start {
                 Game.visitedRooms.add(Game.currentRoom);
                 output(Game.currentRoom.getDescription());
             }
-        } else {
-            output(newRoomArgs.message);
+        } else if (roomId == -1) {
+            output(GameStrings.GoInvalidDirection);
         }
     }
 

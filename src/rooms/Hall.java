@@ -10,7 +10,6 @@ import items.Item;
 import java.util.ArrayList;
 
 import shared.DiceRoller;
-import shared.GoArgs;
 import titles.GameStrings;
 
 import static services.ConsoleLogger.output;
@@ -141,27 +140,22 @@ public class Hall implements IRoom {
      *    MOVEMENT   *
      *****************/
     @Override
-    public GoArgs go(String direction) {
+    public int go(String direction) {
         if (this.getGuardianIsAngry()) {
-            return new GoArgs("The shadowy form laughs an eerie, haunting laugh \n"
-                    + "that sends chills down your spine. \n"
-                    + "'You have angered the Guardian,' it says.\n"
-                    + "'You shall not leave.'");
+            output(RoomDescriptions.guardianIsAngryCannotLeave);
+            return -1;
         }
-        if (direction != null) {
-            switch (direction) {
-                case "back":
-                case "backwards":
-                    return new GoArgs(this.neighbors[0]);
-                case "left":
-                    return new GoArgs(this.neighbors[1]);
-                case "right":
-                    return new GoArgs(this.neighbors[2]);
-                default:
-                    return new GoArgs();
-            }
+        switch (direction) {
+            case "back":
+            case "backwards":
+                return this.neighbors[0];
+            case "left":
+                return this.neighbors[1];
+            case "right":
+                return this.neighbors[2];
+            default:
+                return -1;
         }
-        return new GoArgs();
     }
 
     /******************

@@ -3,7 +3,8 @@ package characters;
 import shared.Shared;
 import items.Item;
 import java.util.ArrayList;
-import shared.TakeArgs;
+
+import static services.ConsoleLogger.output;
 
 /**
  *
@@ -111,16 +112,14 @@ public class Player {
                 + "Inventory: " + this._inventorySize;
     }
 
-    public TakeArgs takeItem(Item item) {
-        TakeArgs returnArgs = new TakeArgs();
+    public boolean takeItem(Item item) {
         if (this.addItemToInventory(item)) {
-            returnArgs.message = "You took the " + item.getName() + ".";
-            returnArgs.success = true;
-            return returnArgs;
+            output("You took the " + item.getName() + ".");
+            return true;
         }
-        returnArgs.message = "You don't have enough space in your inventory \n"
-                + "for that item.";
-        return returnArgs;
+        output("You don't have enough space in your inventory \n"
+                + "for that item.");
+        return false;
     }
 
     private boolean addItemToInventory(Item item) {

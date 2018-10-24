@@ -10,7 +10,6 @@ import shared.Shared;
 import items.Item;
 import java.util.ArrayList;
 
-import shared.GoArgs;
 import titles.GameStrings;
 
 import static services.ConsoleLogger.output;
@@ -187,26 +186,24 @@ public class Study implements IRoom {
      *    MOVEMENT   *
      *****************/
     @Override
-    public GoArgs go(String direction) {
-        if (direction != null) {
-            switch (direction) {
-                case "left":
-                    return tryMovingIntoHall();
-                case "back":
-                case "backwards":
-                    return new GoArgs(this.neighbors[0]);
-                default:
-                    return new GoArgs();
-            }
+    public int go(String direction) {
+        switch (direction) {
+            case "left":
+                return tryMovingIntoHall();
+            case "back":
+            case "backwards":
+                return this.neighbors[0];
+            default:
+                return -1;
         }
-        return new GoArgs();
     }
 
-    private GoArgs tryMovingIntoHall() {
+    private int tryMovingIntoHall() {
         if (!this.hallDoorIsLocked) {
-            return new GoArgs(this.neighbors[1]);
+            return this.neighbors[1];
         } else {
-            return new GoArgs("The door is locked.");
+            output(GameStrings.DoorIsLocked);
+            return -2;
         }
     }
 
@@ -222,6 +219,7 @@ public class Study implements IRoom {
                 Game.player.setItemsInHand(items);
                 // add an action message
                 output("You use the black key to unlock the door.");
+                return;
             }
         }
         output("You do not have the right key equipped.");

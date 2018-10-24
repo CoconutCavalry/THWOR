@@ -8,7 +8,6 @@ package rooms;
 import items.Item;
 import java.util.ArrayList;
 
-import shared.GoArgs;
 import titles.GameStrings;
 
 import static services.ConsoleLogger.output;
@@ -157,18 +156,15 @@ public class ComputerRoom implements IRoom {
      *    MOVEMENT   *
      *****************/
     @Override
-    public GoArgs go(String direction) {
-        if (direction != null) {
-            switch (direction) {
-                case "back":
-                case "backward":
-                case "backwards":
-                    return new GoArgs(this.neighbors[0]);
-                default:
-                    return new GoArgs();
-            }
+    public int go(String direction) {
+        switch (direction) {
+            case "back":
+            case "backward":
+            case "backwards":
+                return this.neighbors[0];
+            default:
+                return -1;
         }
-        return new GoArgs();
     }
 
     /******************

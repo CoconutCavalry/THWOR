@@ -10,7 +10,6 @@ import items.Item;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import shared.GoArgs;
 import titles.Excerpts;
 import titles.GameStrings;
 
@@ -153,18 +152,15 @@ public class Library implements IRoom {
      *    MOVEMENT   *
      *****************/
     @Override
-    public GoArgs go(String direction) {
-        if (direction != null) {
-            switch (direction) {
-                case "ahead":
-                case "forward":
-                case "straight":
-                    return new GoArgs(this.neighbors[0]);
-                default:
-                    return new GoArgs();
-            }
+    public int go(String direction) {
+        switch (direction) {
+            case "ahead":
+            case "forward":
+            case "straight":
+                return this.neighbors[0];
+            default:
+                return -1;
         }
-        return new GoArgs();
     }
     
     /******************

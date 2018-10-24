@@ -8,8 +8,6 @@ package rooms;
 import items.Item;
 import java.util.ArrayList;
 
-import shared.GoArgs;
-
 /**
  *
  * @author esose
@@ -27,7 +25,8 @@ public interface IRoom {
     void removeItemFromItems(Item item);
     void addItemToItems(Item item);
     void performCustomMethods(String[] inputs);
-    GoArgs go(String direction);
+    int go(String direction);
+//    GoArgs go(String direction);
     String attack();
     
 }
