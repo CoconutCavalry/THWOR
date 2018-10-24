@@ -47,9 +47,10 @@ public class GameStrings {
     /**********************
      * Hard-coded strings *
      **********************/
-    public static String NotInInventory = ""
+    public static final String NotInInventory = ""
             + "No item of that name is currently in your inventory.";
-    public static String InvalidNoun = "Invalid noun.";
+    public static final String InvalidNoun = "Invalid noun.";
+    public static final String PerformCustomMethodsBadInput = "bad input; try again or use 'help' for help.";
 
     public String getEOGUser() {
         return "You have ended the game.\n"
@@ -57,10 +58,13 @@ public class GameStrings {
                 + "The House is waiting.";
     }
     
-    public static String HelpDialogue = ""
-            + "Commands: \n"
+    public static final String HelpDialogue = ""
+            + "Commands: \n" +
+            "describe - get current room description"
             + "drop [item] - put down an item from your\n"
-            + "\tinventory\n"
+            + "\tinventory\n" +
+            "equip [item] - puts an item from your inventory \n" +
+            "\tinto your hand so that it can be used"
             + "exit - exits the game\n"
             + "inventory - view the items that you have\n"
             + "\tin your inventory\n"
@@ -71,5 +75,5 @@ public class GameStrings {
             + "\tyou find in your room\n"
             + "attack, unlock, go, etc.\n";
 
-    public static String NothingToAttackHereString = "There is nothing to attack here.";
+    public static final String NothingToAttackHereString = "There is nothing to attack here.";
 }

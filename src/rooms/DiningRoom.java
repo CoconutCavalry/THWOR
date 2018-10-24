@@ -5,13 +5,14 @@
  */
 package rooms;
 
-import characters.Player;
 import items.Item;
 import java.util.ArrayList;
-import shared.CommandsObject;
+
 import shared.GoArgs;
 import shared.Shared;
 import titles.GameStrings;
+
+import static services.ConsoleLogger.output;
 
 /**
  *
@@ -93,17 +94,15 @@ public class DiningRoom implements IRoom {
      * Custom methods *
      ******************/
     @Override
-    public CommandsObject performCustomMethods(
-            String[] inputs, Player player) {
-        CommandsObject commandsToReturn = new CommandsObject();
-        commandsToReturn.player = player;
+    public void performCustomMethods(
+            String[] inputs) {
         switch (inputs[0]) {
             case "s":
             case "search":
-                commandsToReturn.message = this.search();
-                return commandsToReturn;
+                output(this.search());
+                break;
             default:
-                return null;
+                output(GameStrings.PerformCustomMethodsBadInput);
         }
     }
 

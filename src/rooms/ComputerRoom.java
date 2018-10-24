@@ -5,14 +5,13 @@
  */
 package rooms;
 
-import characters.Player;
 import items.Item;
 import java.util.ArrayList;
 
-import shared.CommandsObject;
 import shared.GoArgs;
 import titles.GameStrings;
 
+import static services.ConsoleLogger.output;
 import static shared.Shared.validateNoun;
 
 /**
@@ -138,21 +137,19 @@ public class ComputerRoom implements IRoom {
      ******************/
     //flip lightswitch/turn light(s) on/etc.
     @Override
-    public CommandsObject performCustomMethods(String[] inputs, Player player) {
-        CommandsObject commandsToReturn = new CommandsObject();
-        commandsToReturn.player = player;
+    public void performCustomMethods(String[] inputs) {
         switch (inputs[0]) {
             case "flip":
             case "turn":
             case "toggle":
-                commandsToReturn.message = tryFlippingLightswitch(inputs);
-                return commandsToReturn;
+                output(tryFlippingLightswitch(inputs));
+                break;
             case "s":
             case "search":
-                commandsToReturn.message = this.search();
-                return commandsToReturn;
+                output(this.search());
+                break;
             default:
-                return null;
+                output(GameStrings.PerformCustomMethodsBadInput);
         }
     }
 

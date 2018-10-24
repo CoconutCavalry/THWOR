@@ -2,10 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a3b9fbd6-3c57-42a7-8339-eeb301eadee6" name="Default Changelist" comment="updated readme">
-      <change beforePath="$PROJECT_DIR$/.idea/THWOR.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/project.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/housewithoneroom/Start.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/housewithoneroom/Start.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rooms/ComputerRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rooms/ComputerRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rooms/DiningRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rooms/DiningRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rooms/Hall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rooms/Hall.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rooms/IRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rooms/IRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rooms/Library.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rooms/Library.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rooms/RoomDescriptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rooms/RoomDescriptions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rooms/Study.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rooms/Study.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/CommandsObject.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/titles/GameStrings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/titles/GameStrings.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored mask="*.xml" />
@@ -19,45 +28,145 @@
     <session id="-1565249810">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.21" value="1" />
+          <entry key="project.open.time.30" value="1" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.opened" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
+          <entry key="java" value="35" />
           <entry key="md" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
+          <entry key="JAVA" value="35" />
           <entry key="PLAIN_TEXT" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
+          <entry key="dummy" value="13" />
+          <entry key="java" value="2984" />
           <entry key="md" value="33" />
-          <entry key="txt" value="14" />
+          <entry key="txt" value="50" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="47" />
+          <entry key="JAVA" value="2984" />
+          <entry key="PLAIN_TEXT" value="96" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/README.md">
+        <entry file="file://$PROJECT_DIR$/src/titles/GameStrings.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="219">
+              <caret line="59" column="4" lean-forward="true" selection-start-line="59" selection-start-column="4" selection-end-line="59" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/housewithoneroom/Start.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="265">
+              <caret line="240" column="5" lean-forward="true" selection-start-line="240" selection-start-column="5" selection-end-line="240" selection-end-column="5" />
+              <folding>
+                <element signature="e#7579#7580#0" expanded="true" />
+                <element signature="e#7640#7641#0" expanded="true" />
+                <element signature="e#10324#10325#0" expanded="true" />
+                <element signature="e#10373#10374#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rooms/IRoom.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="27" column="35" selection-start-line="27" selection-start-column="35" selection-end-line="27" selection-end-column="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rooms/Library.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="85">
-              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+              <caret line="108" column="13" selection-start-line="108" selection-start-column="13" selection-end-line="108" selection-end-column="13" />
+              <folding>
+                <element signature="e#4609#4610#0" expanded="true" />
+                <element signature="e#4673#4674#0" expanded="true" />
+                <element signature="e#5836#5837#0" expanded="true" />
+                <element signature="e#5896#5897#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rooms/Study.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="95">
+              <caret line="164" column="13" selection-start-line="164" selection-start-column="13" selection-end-line="164" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rooms/Hall.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="83">
+              <caret line="126" column="13" selection-start-line="126" selection-start-column="13" selection-end-line="126" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rooms/DiningRoom.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="100">
+              <caret line="95" column="13" selection-start-line="95" selection-start-column="13" selection-end-line="95" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rooms/ComputerRoom.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="49">
+              <caret line="138" column="13" selection-start-line="138" selection-start-column="13" selection-end-line="138" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rooms/RoomDescriptions.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="561">
+              <caret line="37" column="34" selection-start-line="37" selection-start-column="34" selection-end-line="37" selection-end-column="34" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>battle</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -66,13 +175,25 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/src/characters/Player.java" />
+        <option value="$PROJECT_DIR$/src/housewithoneroom/HouseWithOneRoom.java" />
+        <option value="$PROJECT_DIR$/src/housewithoneroom/Game.java" />
+        <option value="$PROJECT_DIR$/src/rooms/RoomDescriptions.java" />
+        <option value="$PROJECT_DIR$/src/shared/CommandsObject.java" />
+        <option value="$PROJECT_DIR$/src/housewithoneroom/Start.java" />
+        <option value="$PROJECT_DIR$/src/rooms/IRoom.java" />
+        <option value="$PROJECT_DIR$/src/rooms/Library.java" />
+        <option value="$PROJECT_DIR$/src/rooms/Study.java" />
+        <option value="$PROJECT_DIR$/src/rooms/Hall.java" />
+        <option value="$PROJECT_DIR$/src/rooms/DiningRoom.java" />
+        <option value="$PROJECT_DIR$/src/rooms/ComputerRoom.java" />
+        <option value="$PROJECT_DIR$/src/titles/GameStrings.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="117" />
-    <option name="y" value="-10" />
-    <option name="width" value="1189" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-7" />
+    <option name="width" value="1230" />
     <option name="height" value="775" />
   </component>
   <component name="ProjectView">
@@ -80,6 +201,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -92,14 +215,52 @@
               <item name="THWOR" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="THWOR" type="b2602c69:ProjectViewProjectNode" />
+              <item name="THWOR" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="characters" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="THWOR" type="b2602c69:ProjectViewProjectNode" />
+              <item name="THWOR" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="housewithoneroom" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="THWOR" type="b2602c69:ProjectViewProjectNode" />
+              <item name="THWOR" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="items" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="THWOR" type="b2602c69:ProjectViewProjectNode" />
+              <item name="THWOR" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="rooms" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="THWOR" type="b2602c69:ProjectViewProjectNode" />
+              <item name="THWOR" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="shared" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="THWOR" type="b2602c69:ProjectViewProjectNode" />
+              <item name="THWOR" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="titles" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
-      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540306393524" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -112,6 +273,15 @@
         </RuleState>
       </list>
     </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Unnamed" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="housewithoneroom.Start" />
+      <module name="THWOR" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -131,37 +301,54 @@
       <option name="project" value="LOCAL" />
       <updated>1539561374926</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="static game instance integration pt1">
+      <created>1539970732319</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1539970732322</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
+    <frame x="-7" y="0" width="1230" height="775" extended-state="0" />
     <layout>
-      <window_info id="Image Layers" />
-      <window_info id="Designer" />
-      <window_info id="UI Designer" />
-      <window_info id="Capture Tool" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24962178" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18034188" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Version Control" sideWeight="0.49924356" visible="true" weight="0.3276923" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" sideWeight="0.50075644" side_tool="true" weight="0.3276923" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32917318" />
+      <window_info anchor="bottom" x="880" y="153" width="483" height="610" id="Run" order="2" type="WINDOWED" visible="true" weight="0.3900156" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39937598" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="Palette&#9;" />
-      <window_info anchor="right" id="Maven Projects" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32917318" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32917318" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50075644" side_tool="true" weight="0.3276923" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="9" sideWeight="0.49924356" visible="true" weight="0.48205927" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32917318" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Palette&#9;" order="6" />
+      <window_info anchor="right" id="Maven Projects" order="7" />
     </layout>
   </component>
   <component name="UnknownFeatures">
@@ -172,13 +359,157 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="updated readme" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated readme" />
+    <MESSAGE value="static game instance integration pt1" />
+    <option name="LAST_COMMIT_MESSAGE" value="static game instance integration pt1" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="inHands" />
+        <watch expression="item" />
+        <watch expression="i" />
+        <watch expression="name" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/items/Item.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="93" selection-start-line="93" selection-end-line="93" />
+          <folding>
+            <element signature="e#2860#2861#0" expanded="true" />
+            <element signature="e#2895#2896#0" expanded="true" />
+            <element signature="e#3035#3036#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/characters/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="880">
+          <caret line="236" column="9" lean-forward="true" selection-start-line="236" selection-start-column="9" selection-end-line="236" selection-end-column="9" />
+          <folding>
+            <element signature="e#1754#1755#0" expanded="true" />
+            <element signature="e#1787#1788#0" expanded="true" />
+            <element signature="e#1817#1818#0" expanded="true" />
+            <element signature="e#1850#1851#0" expanded="true" />
+            <element signature="e#1798#1799#0" expanded="true" />
+            <element signature="e#1831#1832#0" expanded="true" />
+            <element signature="e#1962#1963#0" expanded="true" />
+            <element signature="e#1995#1996#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/ConsoleLogger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="18" column="23" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
+          <folding>
+            <element signature="e#470#471#0" expanded="true" />
+            <element signature="e#511#512#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/shared/AttackArgs.java" />
+    <entry file="file://$PROJECT_DIR$/src/housewithoneroom/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="43" column="41" selection-start-line="43" selection-start-column="41" selection-end-line="43" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rooms/RoomDescriptions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="37" column="34" selection-start-line="37" selection-start-column="34" selection-end-line="37" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/shared/CommandsObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="11" column="20" lean-forward="true" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/housewithoneroom/Start.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="240" column="5" lean-forward="true" selection-start-line="240" selection-start-column="5" selection-end-line="240" selection-end-column="5" />
+          <folding>
+            <element signature="e#7579#7580#0" expanded="true" />
+            <element signature="e#7640#7641#0" expanded="true" />
+            <element signature="e#10324#10325#0" expanded="true" />
+            <element signature="e#10373#10374#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rooms/IRoom.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="27" column="35" selection-start-line="27" selection-start-column="35" selection-end-line="27" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rooms/Library.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+          <caret line="108" column="13" selection-start-line="108" selection-start-column="13" selection-end-line="108" selection-end-column="13" />
+          <folding>
+            <element signature="e#4609#4610#0" expanded="true" />
+            <element signature="e#4673#4674#0" expanded="true" />
+            <element signature="e#5836#5837#0" expanded="true" />
+            <element signature="e#5896#5897#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rooms/Study.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="164" column="13" selection-start-line="164" selection-start-column="13" selection-end-line="164" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rooms/Hall.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="83">
+          <caret line="126" column="13" selection-start-line="126" selection-start-column="13" selection-end-line="126" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rooms/DiningRoom.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="95" column="13" selection-start-line="95" selection-start-column="13" selection-end-line="95" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rooms/ComputerRoom.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="49">
+          <caret line="138" column="13" selection-start-line="138" selection-start-column="13" selection-end-line="138" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/titles/GameStrings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="59" column="4" lean-forward="true" selection-start-line="59" selection-start-column="4" selection-end-line="59" selection-end-column="4" />
         </state>
       </provider>
     </entry>

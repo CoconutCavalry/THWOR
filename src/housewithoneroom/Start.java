@@ -32,7 +32,6 @@ public class Start {
      */
     public static void main(String[] args) {
         // Initialize a new game
-//        game = new Game();
         Game.NewGame();
 
         // Print welcome dialogues.
@@ -238,18 +237,10 @@ public class Start {
      * @param inputs 
      */
     private static void passCommandsToCurrentRoom(String[] inputs) {
-        CommandsObject resultCommands =
-                Game.currentRoom.performCustomMethods(inputs, Game.player);
-        if (resultCommands == null) {
-            output("bad input; try again or use 'help' for help");
-        } else {
-            output(resultCommands.message);
-            Game.player = resultCommands.player;
-        }
+        Game.currentRoom.performCustomMethods(inputs);
     }
 
     private static boolean tryTakingItem(String itemName) {
-        //if (currentRoom.getItems().find)
         String name = itemName;
         ArrayList<Item> itemsInRoom = Game.currentRoom.getItems();
         if (itemsInRoom == null) {
@@ -318,14 +309,6 @@ public class Start {
     }
     
     public static void tryToAttack() {
-//        AttackArgs results = Game.currentRoom.attack();
-//        if (results.getHealth() == -999) {
-//            Game.state = false;
-//        } else if (results.getHealth() != -1) {
-//            Game.player.setHealth(results.getHealth());
-//            Game.player.setItemsInHand(results.getInHand());
-//        }
-//        output(results.getMessage());
         output(Game.currentRoom.attack());
     }
     

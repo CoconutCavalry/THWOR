@@ -35,7 +35,7 @@ public class RoomDescriptions {
      *******************/
     public static final String study = ""
             + "You are in a small, dimly lit room. A \n"
-            + "high-backed armchar sits behind a large oak \n"
+            + "high-backed armchair sits behind a large oak \n"
             + "desk on one side. The other side has a \n"
             + "fireplace, in which some struggling embers \n"
             + "fight to produce a meager source of heat.\n"

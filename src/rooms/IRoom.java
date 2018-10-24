@@ -5,11 +5,9 @@
  */
 package rooms;
 
-import characters.Player;
 import items.Item;
 import java.util.ArrayList;
 
-import shared.CommandsObject;
 import shared.GoArgs;
 
 /**
@@ -20,19 +18,16 @@ public interface IRoom {
     /* initialized properties */
     
     /* Constructor - save for later???*/
-//    public Room Room(int id, String name, String description, 
-//            Room[] neighbors);
     
     /* methods shared by all Rooms */
-    public int getId();
-    public String getName();
-    public String getDescription();
-    public ArrayList<Item> getItems();
-    public void removeItemFromItems(Item item);
-    public void addItemToItems(Item item);
-    public CommandsObject performCustomMethods(
-            String[] inputs, Player player);
-    public GoArgs go(String direction);
-    public String attack();
+    int getId();
+    String getName();
+    String getDescription();
+    ArrayList<Item> getItems();
+    void removeItemFromItems(Item item);
+    void addItemToItems(Item item);
+    void performCustomMethods(String[] inputs);
+    GoArgs go(String direction);
+    String attack();
     
 }

@@ -5,16 +5,16 @@
  */
 package rooms;
 
-import characters.Player;
 import shared.Shared;
 import items.Item;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import shared.CommandsObject;
 import shared.GoArgs;
 import titles.Excerpts;
 import titles.GameStrings;
+
+import static services.ConsoleLogger.output;
 
 /**
  *
@@ -107,26 +107,24 @@ public class Library implements IRoom {
      * Custom methods *
      ******************/
     @Override
-    public CommandsObject performCustomMethods(
-            String[] inputs, Player player) {
-        CommandsObject commandsToReturn = new CommandsObject();
-        commandsToReturn.player = player;
-        switch (inputs[0]) {
-            case "b":
-            case "browse":
-                commandsToReturn.message = showBookTitles();
-                return commandsToReturn;
-            case "r":
-            case "read":
-                commandsToReturn.message = readBook(inputs);
-                return commandsToReturn;
-            case "s":
-            case "search":
-                commandsToReturn.message = this.search();
-                return commandsToReturn;
-            default:
-                return null;
-        }
+        public void performCustomMethods(
+                String[] inputs) {
+            switch (inputs[0]) {
+                case "b":
+                case "browse":
+                    output(showBookTitles());
+                    break;
+                case "r":
+                case "read":
+                    output(readBook(inputs));
+                    break;
+                case "s":
+                case "search":
+                    output(this.search());
+                    break;
+                default:
+                    output(GameStrings.PerformCustomMethodsBadInput);
+            }
     }
 
     private String showBookTitles() {
