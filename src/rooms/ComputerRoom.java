@@ -5,13 +5,12 @@
  */
 package rooms;
 
-import characters.Player;
 import items.Item;
 import java.util.ArrayList;
-import shared.AttackArgs;
-import shared.CommandsObject;
-import shared.GoArgs;
-import shared.Shared;
+
+import titles.GameStrings;
+
+import static services.ConsoleLogger.output;
 import static shared.Shared.validateNoun;
 
 /**
@@ -137,21 +136,19 @@ public class ComputerRoom implements IRoom {
      ******************/
     //flip lightswitch/turn light(s) on/etc.
     @Override
-    public CommandsObject performCustomMethods(String[] inputs, Player player) {
-        CommandsObject commandsToReturn = new CommandsObject();
-        commandsToReturn.items = player.getInventory();
+    public void performCustomMethods(String[] inputs) {
         switch (inputs[0]) {
             case "flip":
             case "turn":
             case "toggle":
-                commandsToReturn.message = tryFlippingLightswitch(inputs);
-                return commandsToReturn;
+                output(tryFlippingLightswitch(inputs));
+                break;
             case "s":
             case "search":
-                commandsToReturn.message = this.search();
-                return commandsToReturn;
+                output(this.search());
+                break;
             default:
-                return null;
+                output(GameStrings.PerformCustomMethodsBadInput);
         }
     }
 
@@ -159,26 +156,23 @@ public class ComputerRoom implements IRoom {
      *    MOVEMENT   *
      *****************/
     @Override
-    public GoArgs go(String direction) {
-        if (direction != null) {
-            switch (direction) {
-                case "back":
-                case "backward":
-                case "backwards":
-                    return new GoArgs(this.neighbors[0]);
-                default:
-                    return new GoArgs();
-            }
+    public int go(String direction) {
+        switch (direction) {
+            case "back":
+            case "backward":
+            case "backwards":
+                return this.neighbors[0];
+            default:
+                return -1;
         }
-        return new GoArgs();
     }
 
     /******************
      *    Attacking   *
      ******************/
     @Override
-    public AttackArgs attack(int health, Item[] inHand) {
-        return new AttackArgs();
+    public void attack() {
+        output(GameStrings.NothingToAttackHereString);
     }
 
     

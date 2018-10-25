@@ -35,7 +35,7 @@ public class RoomDescriptions {
      *******************/
     public static final String study = ""
             + "You are in a small, dimly lit room. A \n"
-            + "high-backed armchar sits behind a large oak \n"
+            + "high-backed armchair sits behind a large oak \n"
             + "desk on one side. The other side has a \n"
             + "fireplace, in which some struggling embers \n"
             + "fight to produce a meager source of heat.\n"
@@ -82,6 +82,11 @@ public class RoomDescriptions {
             + "hands reach up as if to grab you.";
     public static final String hallOtherSearch = ""
             + "Several torches are placed along the walls.";
+    public static final String guardianIsAngryCannotLeave = "" +
+            "The shadowy form laughs an eerie, haunting laugh \n"
+            + "that sends chills down your spine. \n"
+            + "'You have angered the Guardian,' it says.\n"
+            + "'You shall not leave.'";
     
     /******************
      *  DINING ROOM   *

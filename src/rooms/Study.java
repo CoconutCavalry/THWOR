@@ -5,13 +5,14 @@
  */
 package rooms;
 
-import characters.Player;
+import housewithoneroom.Game;
 import shared.Shared;
 import items.Item;
 import java.util.ArrayList;
-import shared.AttackArgs;
-import shared.CommandsObject;
-import shared.GoArgs;
+
+import titles.GameStrings;
+
+import static services.ConsoleLogger.output;
 
 /**
  *
@@ -161,82 +162,75 @@ public class Study implements IRoom {
      * Custom methods *
      ******************/
     @Override
-    public CommandsObject performCustomMethods(
-            String[] inputs, Player player) {
-        CommandsObject commandsToReturn = new CommandsObject();
-        commandsToReturn.items = player.getInventory();
+    public void performCustomMethods(
+            String[] inputs) {
         switch (inputs[0]) {
             case "s":
             case "search":
                 if (inputs.length > 1) {
-                    commandsToReturn.message = this.search(inputs);
+                    output(this.search(inputs));
                 } else {
-                    commandsToReturn.message = this.search();
+                    output(this.search());
                 }
-                return commandsToReturn;
+                break;
             case "u":
             case "unlock":
-                return tryUnlockingDoor(commandsToReturn);
+                tryUnlockingDoor();
+                break;
             default:
-                return null;
+                output(GameStrings.PerformCustomMethodsBadInput);
         }
     }
-    
     
     /*****************
      *    MOVEMENT   *
      *****************/
     @Override
-    public GoArgs go(String direction) {
-        if (direction != null) {
-            switch (direction) {
-                case "left":
-                    return tryMovingIntoHall();
-                case "back":
-                case "backwards":
-                    return new GoArgs(this.neighbors[0]);
-                default:
-                    return new GoArgs();
+    public int go(String direction) {
+        switch (direction) {
+            case "left":
+                return tryMovingIntoHall();
+            case "back":
+            case "backwards":
+                return this.neighbors[0];
+            default:
+                return -1;
+        }
+    }
+
+    private int tryMovingIntoHall() {
+        if (!this.hallDoorIsLocked) {
+            return this.neighbors[1];
+        } else {
+            output(GameStrings.DoorIsLocked);
+            return -2;
+        }
+    }
+
+    private void tryUnlockingDoor() {
+        //check hands for black key
+        Item[] items = Game.player.getItemsInHands();
+        for (int i = 0; i < items.length; i++) {
+            Item key = items[i];
+            if (key == Item.BLACK_KEY_TO_HALL_FROM_STUDY) {
+                // use the key and drop it
+                this.hallDoorIsLocked = false;
+                items[i] = null;
+                Game.player.setItemsInHand(items);
+                // add an action message
+                output("You use the black key to unlock the door.");
+                return;
             }
         }
-        return new GoArgs();
-    }
-
-    private GoArgs tryMovingIntoHall() {
-        if (!this.hallDoorIsLocked) {
-            return new GoArgs(this.neighbors[1]);
-        } else {
-            return new GoArgs("The door is locked.");
-        }
-    }
-
-    private CommandsObject tryUnlockingDoor(CommandsObject commands) {
-        //check inventory for black key
-        Item key = Shared.searchForItemInListByName(
-                Item.BLACK_KEY_TO_HALL_FROM_STUDY.getName(), 
-                commands.items);
-        if (key != null) {
-            ArrayList<Item> itemsWOKey = commands.items;
-            itemsWOKey.remove(key);
-            // use the key and drop it
-            this.hallDoorIsLocked = false;
-            commands.items = itemsWOKey;
-            // add an action message
-            commands.message = "You use the black key to unlock the door.";
-            // try using output service
-            //ConsoleLogger.log("USED THE BLACK KEY YAYYYY");
-            return commands;
-        }
-        commands.message = "You do not have the right key.";
-        return commands;
+        output("You do not have the right key equipped.");
     }
     
     /******************
      *    Attacking   *
      ******************/
     @Override
-    public AttackArgs attack(int health, Item[] inHand) {
-        return new AttackArgs();
+    public void attack() {
+        output(GameStrings.NothingToAttackHereString);
     }
 
     

@@ -5,14 +5,14 @@
  */
 package rooms;
 
-import characters.Player;
+import housewithoneroom.Game;
 import items.Item;
 import java.util.ArrayList;
-import shared.AttackArgs;
-import shared.CommandsObject;
+
 import shared.DiceRoller;
-import shared.GoArgs;
-import shared.Shared;
+import titles.GameStrings;
+
+import static services.ConsoleLogger.output;
 
 /**
  *
@@ -44,7 +44,7 @@ public class Hall implements IRoom {
         for(int i = 0; i < 3; i++) {
             this.items.add(Item.TORCH_FROM_HALL);
         }
-        this.guardianHealth = 20;
+        this.guardianHealth = 1;
     }
 
     /***********************
@@ -124,20 +124,15 @@ public class Hall implements IRoom {
      * Custom methods *
      ******************/
     @Override
-    public CommandsObject performCustomMethods(
-            String[] inputs, Player player) {
-        CommandsObject commandsToReturn = new CommandsObject();
-        commandsToReturn.items = player.getInventory();
+    public void performCustomMethods(
+            String[] inputs) {
         switch (inputs[0]) {
             case "s":
             case "search":
-                commandsToReturn.message = this.search();
-                return commandsToReturn;
-//            case "u":
-//            case "unlock":
-//                return tryUnlockingDoor(commandsToReturn);
+                output(this.search());
+                break;
             default:
-                return null;
+                output(GameStrings.PerformCustomMethodsBadInput);
         }
     }
 
@@ -145,57 +140,49 @@ public class Hall implements IRoom {
      *    MOVEMENT   *
      *****************/
     @Override
-    public GoArgs go(String direction) {
+    public int go(String direction) {
         if (this.getGuardianIsAngry()) {
-            return new GoArgs("The shadowy form laughs an eerie, haunting laugh \n"
-                    + "that sends chills down your spine. \n"
-                    + "'You have angered the Guardian,' it says.\n"
-                    + "'You shall not leave.'");
+            output(RoomDescriptions.guardianIsAngryCannotLeave);
+            return -2;
         }
-        if (direction != null) {
-            switch (direction) {
-                case "back":
-                case "backwards":
-                    return new GoArgs(this.neighbors[0]);
-                case "left":
-                    return new GoArgs(this.neighbors[1]);
-                case "right":
-                    return new GoArgs(this.neighbors[2]);
-                default:
-                    return new GoArgs();
-            }
+        switch (direction) {
+            case "back":
+            case "backwards":
+                return this.neighbors[0];
+            case "left":
+                return this.neighbors[1];
+            case "right":
+                return this.neighbors[2];
+            default:
+                return -1;
         }
-        return new GoArgs();
     }
 
     /******************
      *    Attacking   *
      ******************/
     @Override
-    public AttackArgs attack(int health, Item[] inHand) {
-        AttackArgs results = new AttackArgs();
-        if (!this.guardianIsDead) {
-            this.guardianIsAngry = true;
-            String battle = "Yaas die fool";
-            int newHealth = health;
+    public void attack() {
+        String battleScript = GameStrings.NothingToAttackHereString;
+        if (!this.guardianIsDead && this.guardianIsAngry) {
+            battleScript = "Yaas die fool";
             this.setGuardianIsAngry(true);
-            battle = battle + attackGuardian();
+            battleScript = battleScript + attackGuardian();
             if (!this.guardianIsDead) {
                 int damageTaken = DiceRoller.getDamage();
-                newHealth = newHealth - damageTaken;
-                battle = battle + "\nThe Guardian hits you for " 
+                Game.player.setHealth(Game.player.getHealth() - damageTaken);
+                battleScript = battleScript + "\nThe Guardian hits you for "
                     + damageTaken + " damage.";
-                if (newHealth < 1) {
-                    newHealth = -999;
-                    battle = battle + "\nYou are dead.";
+                if (Game.player.getHealth() < 1) {
+                    Game.player.setHealth(0);
+                    Game.state = false;
+                    battleScript = battleScript + "\nYou are dead.";
                 }
-            } 
-            results.setHealth(newHealth);
-            results.setMessage(battle);
-            results.setInHand(inHand);
-            return results;
+            }
+            output(battleScript);
+        }else {
+            output(battleScript);
         }
-        return results;
     }
 
     private String attackGuardian() {

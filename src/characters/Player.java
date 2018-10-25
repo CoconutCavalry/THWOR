@@ -1,14 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package characters;
 
 import shared.Shared;
 import items.Item;
 import java.util.ArrayList;
-import shared.TakeArgs;
+
+import static services.ConsoleLogger.output;
 
 /**
  *
@@ -19,8 +15,10 @@ public class Player {
     private String _gender;
     private int _health = 10;
     private ArrayList<Item> _inventory;
-    private Item[] _hands = new Item[2];
-    private Item[] _pockets = new Item[4];
+    private Item lHand = null;
+    private Item rHand = null;
+    //private Item[] hands = {rHand, lHand};
+    private Item[] pockets = new Item[4];
     private int _backpackSpaceAvailable = 0;
     //this size is relative, not universal.
     private double _inventorySize;
@@ -51,38 +49,56 @@ public class Player {
     public void setGender(String gender) { this._gender = gender; }
     public int getHealth() { return this._health; }
     public void setHealth(int newHealth) { this._health = newHealth; }
-    public Item[] getItemsInHand() { return this._hands; }
-    
+
+    public Item[] getItemsInHands() {
+        Item[] retVal = {this.getLHand(), this.getRHand()};
+        return retVal;
+    }
+
+    private Item getRHand() {
+        return this.rHand;
+    }
+    private void setRHand(Item item) {
+        this.rHand = item;
+    }
+
+    private Item getLHand() {
+        return this.lHand;
+    }
+    private void setLHand(Item item) {
+        this.lHand = item;
+    }
+
+    /**
+     * Overwrites whatever items used to be in-hand
+     * @param items an array of items to put in-hand
+     */
     public void setItemsInHand(Item[] items) {
-        if (items != null) {
-            if (items.length <= 2) {
-                int count = 0;
-                for (Item item : items) {
-                    if (item != null) {
-                        this._hands[count] = item;
-                    } else { 
-                        this._hands[count] = null;
-                    }
-                    count++;
-                }
+        if (items != null && items.length > 0 && items.length <= 2) {
+            this.setRHand(items[0]);
+            if(items.length == 2) {
+                this.setLHand(items[1]);
             }
         } else {
-            this._hands = null;
+            this.setLHand(null);
+            this.setRHand(null);
         }
     }
     
     public int getNumberOfEmptyHands() {
         int count = 2;
-        for (Item item : this._hands) {
-            if (item != null) {
-                count--;
-            }
+        if (this.getRHand() != null) {
+            count--;
+        }
+        if (this.getLHand() != null) {
+            count--;
         }
         return count;
     }
+
     public double getPocketSpaceRemaining() {
         double space = 4.0;
-        for (Item item : this._pockets) {
+        for (Item item : this.pockets) {
             if (item != null) {
                 space = space - item.getSize();
             }
@@ -96,24 +112,37 @@ public class Player {
                 + "Inventory: " + this._inventorySize;
     }
 
-    public TakeArgs takeItem(Item item) {
-        TakeArgs returnArgs = new TakeArgs();
+    public boolean takeItem(Item item) {
+        if (this.addItemToInventory(item)) {
+            output("You took the " + item.getName() + ".");
+            return true;
+        }
+        output("You don't have enough space in your inventory \n"
+                + "for that item.");
+        return false;
+    }
+
+    private boolean addItemToInventory(Item item) {
         if (item.getSize() <= this._remainingInventorySpace) {
             if (this._inventory == null) {
                 this._inventory = new ArrayList<>();
             }
             this._inventory.add(item);
             this._remainingInventorySpace -= item.getSize();
-            returnArgs.message = "You took the " + item.getName() + ".";
-            returnArgs.success = true;
-            return returnArgs;
+            return true;
         }
-        returnArgs.message = "You don't have enough space in your inventory \n"
-                + "for that item.";
-        return returnArgs;
-        
+        return false;
     }
-    
+
+    private boolean removeItemFromInventory(Item item) {
+        if (this.getInventory().contains(item)) {
+            this._inventory.remove(item);
+            this._remainingInventorySpace += item.getSize();
+            return true;
+        }
+        return false;
+    }
+
     public ArrayList<Item> getInventory() {
         if (this._inventory == null || this._inventory.isEmpty()) {
             this._inventory = new ArrayList<>();
@@ -140,25 +169,47 @@ public class Player {
     }
 
     public Item dropItem(String itemName) {
-        if (this._inventory.isEmpty() || this._inventory == null) {
+        if (this.getInventory() == null || this.getInventory().isEmpty()) {
             return null;
         }
         for(Item item : this._inventory) {
             if (item.getName().equals(itemName)){
-                this._inventory.remove(item);
-                this._remainingInventorySpace += item.getSize();
+                this.removeItemFromInventory(item);
                 return item;
             }
         }
         return null;
     }
-    
-    public void equip(Item item) {
-        for (int i = 0; i < 2; i++) {
-            if (this._hands[i] == null) {
-                this._hands[i] = item;
-                return;
+
+    public String equip(Item item) {
+        if (this.getRHand() == null) {
+            this.setRHand(item);
+            this.removeItemFromInventory(item);
+            return "You equipped the " + item.getName() + ".";
+        } else if (this.getLHand() == null) {
+            this.setLHand(item);
+            this.removeItemFromInventory(item);
+            return "You equipped the " + item.getName() + ".";
+        } else {
+            return "You do not have a free hand.";
+        }
+    }
+
+    public String pocket(Item item) {
+        if (this.getRHand() == item) {
+            if (this.addItemToInventory(item)){
+                this.setRHand(null);
+                return "You pocketed the " + item.getName() + ".";
             }
+            return "You don't have space in your inventory to pocket that item.";
+        } else if (this.getLHand() == item) {
+            if (this.addItemToInventory(item)){
+                this.setLHand(null);
+                return "You pocketed the " + item.getName() + ".";
+            }
+            return "You don't have space in your inventory to pocket that item.";
+        } else {
+            return "You do not have that item equipped.";
         }
     }
 
@@ -166,10 +217,24 @@ public class Player {
         return "Character report for " + this._name + ":\n" 
                 + "Gender: " + this._gender + "\n"
                 + "Health: " + this._health + "\n"
-                + "Empty hands: " + this.getNumberOfEmptyHands() + "\n"
+                + inHandToString()
                 + "Pocket space: " + this.getPocketSpaceRemaining() + "\n"
                 + "Inventory size: " + this._inventorySize + "\n"
                 + this.showInventory();
+    }
+
+    private String inHandToString() {
+        String retVal = "Empty hands: " + this.getNumberOfEmptyHands() + "\n";
+        Item[] items = this.getItemsInHands();
+        Item lHandItem = items[0];
+        if (lHandItem != null) {
+            retVal += "You are holding the " + lHandItem.getName() + " in your left hand.\n";
+        }
+        Item rHandItem = items[1];
+        if (rHandItem != null) {
+            retVal += "You are holding the " + rHandItem.getName() + " in your right hand.\n";
+        }
+        return retVal;
     }
     
     
