@@ -119,8 +119,8 @@ public class DiningRoom implements IRoom {
     }
 
     @Override
-    public String attack() {
-        return GameStrings.NothingToAttackHereString;
+    public void attack() {
+        output(GameStrings.NothingToAttackHereString);
     }
     
 }

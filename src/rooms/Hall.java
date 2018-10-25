@@ -143,7 +143,7 @@ public class Hall implements IRoom {
     public int go(String direction) {
         if (this.getGuardianIsAngry()) {
             output(RoomDescriptions.guardianIsAngryCannotLeave);
-            return -1;
+            return -2;
         }
         switch (direction) {
             case "back":
@@ -162,7 +162,7 @@ public class Hall implements IRoom {
      *    Attacking   *
      ******************/
     @Override
-    public String attack() {
+    public void attack() {
         String battleScript = GameStrings.NothingToAttackHereString;
         if (!this.guardianIsDead && this.guardianIsAngry) {
             battleScript = "Yaas die fool";
@@ -179,9 +179,10 @@ public class Hall implements IRoom {
                     battleScript = battleScript + "\nYou are dead.";
                 }
             }
-            return battleScript;
+            output(battleScript);
+        }else {
+            output(battleScript);
         }
-        return battleScript;
     }
 
     private String attackGuardian() {

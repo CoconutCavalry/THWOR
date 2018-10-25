@@ -35,8 +35,9 @@ public class Start {
         Game.NewGame();
 
         // Print welcome dialogues.
-        outputLn(Game.gameStrings.getWelcome());
-        outputLn(Game.gameStrings.getHouse());
+        outputLn(GameStrings.getTitleInBigWords());
+        outputLn(GameStrings.getWelcome());
+        outputLn(GameStrings.getHouse());
         outputLn();
         
         // Initialize the player.
@@ -306,7 +307,7 @@ public class Start {
     }
     
     public static void tryToAttack() {
-        output(Game.currentRoom.attack());
+        Game.currentRoom.attack();
     }
     
     private static void tryEquippingItem(String itemName) {

@@ -19,7 +19,7 @@ import static services.ConsoleLogger.output;
  */
 public class Game {
     
-    public static GameStrings gameStrings;
+//    public static GameStrings gameStrings;
     public static Player player;
     public static IRoom currentRoom;
     public static House house = new House();
@@ -28,20 +28,20 @@ public class Game {
     public static boolean state = true;
     
     public static void NewGame() {
-        gameStrings = new GameStrings();
+//        gameStrings = new GameStrings();
         house = new House();
         currentRoom = house.getCorridor().getFirst();
     }
     
     public Game(int roomId) {
-        gameStrings = new GameStrings();
+//        gameStrings = new GameStrings();
         house = new House();
         currentRoom = house.getCorridor().get(roomId);
     }
     
     public static void exitGame() {
         state = false;
-        output(gameStrings.getEOGUser());
+        output(GameStrings.getEOGUser());
     }
     
     //public save(){}

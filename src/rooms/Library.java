@@ -167,8 +167,8 @@ public class Library implements IRoom {
      *    Attacking   *
      ******************/
     @Override
-    public String attack() {
-        return GameStrings.NothingToAttackHereString;
+    public void attack() {
+        output(GameStrings.NothingToAttackHereString);
     }
     
 }
