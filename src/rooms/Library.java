@@ -74,7 +74,7 @@ public class Library implements IRoom {
     /******************
      * Search methods *
      ******************/
-    public String search() {
+    private String search() {
         ArrayList<Item> itemsInRoom = this.getItems();
         if (itemsInRoom.isEmpty()) {
             return "There are no items to be found here.";

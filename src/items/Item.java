@@ -48,12 +48,12 @@ public enum Item {
 
     /**
      * Constructor for WEAPON items
-     * @param id
-     * @param nameWithArticle
-     * @param idName
-     * @param description
-     * @param size
-     * @param damage 
+     * @param id - int
+     * @param nameWithArticle - short description with name
+     * @param idName - identifying string
+     *@param description of item
+     * @param size  - inventory space necessary
+     * @param damage -
      */
     private Item(int id, String nameWithArticle, 
             String idName, String description, double size,
@@ -69,11 +69,11 @@ public enum Item {
 
     /**
      * Constructor for NON-WEAPON items
-     * @param id
-     * @param nameWithArticle
-     * @param idName
-     * @param description
-     * @param size 
+     * @param id - int
+     * @param nameWithArticle - short description with name
+     * @param idName - identifying string
+     * @param description of item
+     * @param size  - inventory space necessary
      */
     private Item(int id, String nameWithArticle, 
             String idName, String description, double size) {

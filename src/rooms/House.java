@@ -39,7 +39,7 @@ enum RoomId {
     RoomId(int id) {
         this.id = id;
     }
-    
+
     private final int id;
     public int getId() {
         return this.id;

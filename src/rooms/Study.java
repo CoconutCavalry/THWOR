@@ -64,30 +64,31 @@ public class Study implements IRoom {
     public String getDescription() {
         return description;
     }
-    public boolean getHasBeenSearched() {
+
+    private boolean getHasBeenSearched() {
         return this.hasBeenSearched;
     }
-    public void setHasBeenSearched(boolean tf) {
-        if (tf == true) {
-            this.hasBeenSearched = tf; 
+    private void setHasBeenSearched() {
+        if (!this.hasBeenSearched) {
+            this.hasBeenSearched = true;
             //starts as false but can never go back
         }
     }
-    public boolean getDeskHasBeenSearched() {
+    private boolean getDeskHasBeenSearched() {
         return this.deskHasBeenSearched;
     }
-    public void setDeskHasBeenSearched(boolean tf) {
-        if (tf == true) {
-            this.deskHasBeenSearched = tf;
+    private void setDeskHasBeenSearched() {
+        if (!this.deskHasBeenSearched) {
+            this.deskHasBeenSearched = true;
             this.addItemToItems(Item.BLACK_KEY_TO_HALL_FROM_STUDY);
         }
     }
     private boolean getFireplaceHasBeenSearched() {
         return this.fireplaceHasBeenSearched;
     }
-    private void setFireplaceHasBeenSearched(boolean tf) {
-        if (tf == true) {
-            this.fireplaceHasBeenSearched = tf;
+    private void setFireplaceHasBeenSearched() {
+        if (!this.fireplaceHasBeenSearched) {
+            this.fireplaceHasBeenSearched = true;
             this.addItemToItems(Item.MESSAGE_FROM_FIREPLACE_IN_STUDY);
         }
     }
@@ -110,7 +111,7 @@ public class Study implements IRoom {
             return "There are no items to be found here.";
         }
         if (!this.getHasBeenSearched()) {
-            this.setHasBeenSearched(true);
+            this.setHasBeenSearched();
             return Shared.appendDescriptionToItemsString(
                     this.firstSearchDescription, itemsInRoom);
         }
@@ -133,14 +134,14 @@ public class Study implements IRoom {
     }
     private String searchDesk() {
         if (!this.getDeskHasBeenSearched()) {
-            this.setDeskHasBeenSearched(true);
+            this.setDeskHasBeenSearched();
             return this.deskFirstSearchDescription;
         }
         return this.deskOtherSearchDescription;
     }
     private String searchFireplace() {
         if (!this.getFireplaceHasBeenSearched()) {
-            this.setFireplaceHasBeenSearched(true);
+            this.setFireplaceHasBeenSearched();
             return this.fireplaceFirstSearchDescription;
         }
         return this.fireplaceOtherSearchDescription;
@@ -209,20 +210,17 @@ public class Study implements IRoom {
 
     private void tryUnlockingDoor() {
         //check hands for black key
-        Item[] items = Game.player.getItemsInHands();
-        for (int i = 0; i < items.length; i++) {
-            Item key = items[i];
-            if (key == Item.BLACK_KEY_TO_HALL_FROM_STUDY) {
-                // use the key and drop it
-                this.hallDoorIsLocked = false;
-                items[i] = null;
-                Game.player.setItemsInHand(items);
-                // add an action message
-                output("You use the black key to unlock the door.");
-                return;
-            }
+        if (Game.player.getRHand() == Item.BLACK_KEY_TO_HALL_FROM_STUDY) {
+            Game.player.setRHand(null);
+            output("You use the black key to unlock the door.");
+            this.hallDoorIsLocked = false;
+        } else if (Game.player.getLHand() == Item.BLACK_KEY_TO_HALL_FROM_STUDY) {
+            Game.player.setLHand(null);
+            output("You use the black key to unlock the door.");
+            this.hallDoorIsLocked = false;
+        } else {
+            output("You do not have the right key equipped.");
         }
-        output("You do not have the right key equipped.");
     }
     
     /******************

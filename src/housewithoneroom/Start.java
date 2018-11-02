@@ -299,6 +299,9 @@ public class Start {
     private static void tryViewingItem(String itemName) {
         Item item = Shared.searchForItemInListByName(
                 itemName, Game.player.getInventory());
+        if (item == null) {
+            item = Shared.searchForItemInListByName(itemName, Game.player.getItemsInHands());
+        }
         if (item != null) {
             output(item.getDescription());
         } else {
@@ -306,7 +309,7 @@ public class Start {
         }
     }
     
-    public static void tryToAttack() {
+    private static void tryToAttack() {
         Game.currentRoom.attack();
     }
     
@@ -321,21 +324,7 @@ public class Start {
     }
 
     private static void tryPocketingItem(String itemName) {
-        Item[] inHands = Game.player.getItemsInHands();
-        Item item = null;
-        for (Item i : inHands) {
-            if (i != null) {
-                String name = i.getName();
-                if (name.equals(itemName)) {
-                    item = i;
-                }
-            }
-        }
-        if (item != null) {
-            output(Game.player.pocket(item));
-        } else {
-            output(GameStrings.NotInInventory);
-        }
+        Game.player.pocket(itemName);
     }
 
 

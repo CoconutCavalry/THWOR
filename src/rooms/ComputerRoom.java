@@ -38,7 +38,7 @@ public class ComputerRoom implements IRoom {
     /**
      * Constructor for the Minesweeper Simulation room
      */
-    public ComputerRoom() {
+    ComputerRoom() {
         this.items = new ArrayList<>();
     }
     
@@ -60,14 +60,12 @@ public class ComputerRoom implements IRoom {
         }
         return firstSearchWithLight;
     }
-    public boolean getHasBeenSearched() {
+    private boolean getHasBeenSearched() {
         return this.hasBeenSearched;
     }
-    public void setHasBeenSearched(boolean tf) {
+    private void setHasBeenSearched() {
         if (!this.hasBeenSearched) {
-            if (tf) {
-               this.hasBeenSearched = true; 
-            }
+            this.hasBeenSearched = true;
         }
     }
     public boolean getComputerIsLocked() {
@@ -77,10 +75,10 @@ public class ComputerRoom implements IRoom {
         //possibly additional code in here later.
         this.computerIsLocked = tf;
     }
-    public boolean getLightIsOn() {
+    private boolean getLightIsOn() {
         return this.lightIsOn;
     }
-    public boolean toggleLights() {
+    private boolean toggleLights() {
         //possibly additional code in here later.
         if (this.lightIsOn) {
             this.lightIsOn = false;
@@ -103,10 +101,10 @@ public class ComputerRoom implements IRoom {
     /******************
      * Search methods *
      ******************/
-    public String search() {
+    private String search() {
         if (this.lightIsOn) {
             if (!this.getHasBeenSearched()) {
-                setHasBeenSearched(true);
+                setHasBeenSearched();
                 return firstSearchWithLight;
             }
             return otherSearchWithLight;

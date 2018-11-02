@@ -5,8 +5,12 @@
  */
 package shared;
 
+import characters.Player;
 import items.Item;
 import java.util.ArrayList;
+
+import static services.ConsoleLogger.output;
+import static services.ConsoleLogger.outputLn;
 
 /**
  *
@@ -44,7 +48,7 @@ public class Shared {
     public static Item searchForItemInListByName(String itemName, 
             ArrayList<Item> listOfItems) {
         for (Item item : listOfItems) {
-            if (item.getName().equals(itemName)) {
+            if (item != null && item.getName().equals(itemName)) {
                 return item;
             }
         }
@@ -59,4 +63,42 @@ public class Shared {
         }
         return false;
     }
+
+    public static void attack (Player user, Player npc) {
+        int damage;
+        int weaponDamage;
+
+        // Round 1
+        damage = DiceRoller.getDamage();
+        weaponDamage = damage * GetDamageModifier(user);
+        npc.takeDamage(weaponDamage);
+        outputLn(user.getName() + " hit " + npc.getName() +
+                " for " + weaponDamage + ", " + npc.getName() + "'s new health: " +
+                npc.getHealth());
+
+//
+//        // Round 2
+//        damage = DiceRoller.getDamage();
+//        weaponDamage = damage * GetDamageModifier(npc);
+//        user.takeDamage(weaponDamage);
+//        output("hit for " + weaponDamage + ", new health: " + user.getHealth());
+
+    }
+
+    private static int GetDamageModifier(Player p) {
+        int retVal = 1;
+        if (p.getRHand() != null) {
+            retVal += p.getRHand().getDamage();
+        }
+        if (p.getLHand() != null) {
+            retVal += p.getLHand().getDamage();
+        }
+        return retVal;
+    }
+
+
+
+
+
+
 }
