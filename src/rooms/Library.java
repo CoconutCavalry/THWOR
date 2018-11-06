@@ -5,14 +5,16 @@
  */
 package rooms;
 
+import items.*;
 import shared.Shared;
-import items.Item;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import titles.Excerpts;
 import titles.GameStrings;
 
+import static housewithoneroom.Start.admin;
 import static services.ConsoleLogger.output;
 
 /**
@@ -25,7 +27,7 @@ public class Library implements IRoom {
     private static final String name = "Library";
     private boolean hasBeenSearched = false;
     private final int[] neighbors = {RoomId.STUDY.getId()};
-    public ArrayList<Item> items;
+    public ArrayList<iItem> items;
     private final String description = RoomDescriptions.library;
     private final String firstSearchDescription = 
             RoomDescriptions.libraryFirstSearch;
@@ -46,9 +48,12 @@ public class Library implements IRoom {
      */
     public Library() {
         this.items = new ArrayList<>();
-        this.items.add(Item.FLASHLIGHT);
-        this.items.add(Item.KNIFE);
-        this.items.add(Item.MATCHES);
+        this.items.add(new Flashlight());
+        this.items.add(new Knife());
+//        this.items.add(eItem.MATCHES);
+        if (admin) {
+            this.items.add(new Excalibur());
+        }
     }
     
     /***********************
@@ -67,15 +72,15 @@ public class Library implements IRoom {
         return description;
     }
     @Override
-    public ArrayList<Item> getItems() {
+    public ArrayList<iItem> getItems() {
         return this.items;
     }
     
     /******************
      * Search methods *
      ******************/
-    public String search() {
-        ArrayList<Item> itemsInRoom = this.getItems();
+    private String search() {
+        ArrayList<iItem> itemsInRoom = this.getItems();
         if (itemsInRoom.isEmpty()) {
             return "There are no items to be found here.";
         }
@@ -93,11 +98,11 @@ public class Library implements IRoom {
      * RoomInventory Methods *
      *************************/
     @Override
-    public void removeItemFromItems(Item item) {
+    public void removeItemFromItems(iItem item) {
         this.items.remove(item);
     }
     @Override
-    public void addItemToItems(Item item) {
+    public void addItemToItems(iItem item) {
         this.items.add(item);
     }
     

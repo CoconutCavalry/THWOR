@@ -124,6 +124,7 @@ public class GameStrings {
             "\tin your inventory\n" +
             "'search' - look around in your current room for items that \n" +
             "\tyou can pick up\n" +
+            "'stats' [item] - view the specified item's stats\n" +
             "'take' [item] - pick up an item that\n" +
             "\tyou find in your room\n" +
             "'unlock' - unlocks a locked door, if the necessary key is\n" +

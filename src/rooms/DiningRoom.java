@@ -5,9 +5,9 @@
  */
 package rooms;
 
-import items.Item;
 import java.util.ArrayList;
 
+import items.iItem;
 import shared.Shared;
 import titles.GameStrings;
 
@@ -22,16 +22,16 @@ public class DiningRoom implements IRoom {
     private static final int id = RoomId.DININGROOM.getId();
     private boolean hasBeenSearched = false;
     private final int[] neighbors = {RoomId.HALL.getId()};
-    public ArrayList<Item> items;
+    public ArrayList<iItem> items;
     private static final String name = "Dining Room";
     private final String description = RoomDescriptions.dining;
-    private final String firstSearchDescription = 
+    private final String firstSearchDescription =
             RoomDescriptions.diningFirstSearch;
-    
+
     /**
-     * Constructor for the Library
+     * Constructor for the DiningRoom
      */
-    public DiningRoom() {
+    DiningRoom() {
         this.items = new ArrayList<>();
     }
     
@@ -51,7 +51,7 @@ public class DiningRoom implements IRoom {
         return this.description;
     }
     @Override
-    public ArrayList<Item> getItems() {
+    public ArrayList<iItem> getItems() {
         if (this.items ==  null) {
             this.items = new ArrayList<>();
             return this.items;
@@ -62,8 +62,8 @@ public class DiningRoom implements IRoom {
     /******************
      * Search methods *
      ******************/
-    public String search() {
-        ArrayList<Item> itemsInRoom = this.getItems();
+    private String search() {
+        ArrayList<iItem> itemsInRoom = this.getItems();
         if (itemsInRoom.isEmpty()) {
             return "There are no items to be found here.";
         }
@@ -81,11 +81,11 @@ public class DiningRoom implements IRoom {
      * RoomInventory Methods *
      *************************/
     @Override
-    public void removeItemFromItems(Item item) {
+    public void removeItemFromItems(iItem item) {
         this.items.remove(item);
     }
     @Override
-    public void addItemToItems(Item item) {
+    public void addItemToItems(iItem item) {
         this.items.add(item);
     }
 

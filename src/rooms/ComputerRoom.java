@@ -5,9 +5,9 @@
  */
 package rooms;
 
-import items.Item;
 import java.util.ArrayList;
 
+import items.iItem;
 import titles.GameStrings;
 
 import static services.ConsoleLogger.output;
@@ -25,7 +25,7 @@ public class ComputerRoom implements IRoom {
     private boolean computerIsLocked = true;
     private boolean lightIsOn = false;
     private final int[] neighbors = {RoomId.HALL.getId()};
-    private ArrayList<Item> items;
+    private ArrayList<iItem> items;
     
     private static final String description = RoomDescriptions.compRoom;
     private static final String firstSearchNoLight = 
@@ -38,7 +38,7 @@ public class ComputerRoom implements IRoom {
     /**
      * Constructor for the Minesweeper Simulation room
      */
-    public ComputerRoom() {
+    ComputerRoom() {
         this.items = new ArrayList<>();
     }
     
@@ -60,14 +60,12 @@ public class ComputerRoom implements IRoom {
         }
         return firstSearchWithLight;
     }
-    public boolean getHasBeenSearched() {
+    private boolean getHasBeenSearched() {
         return this.hasBeenSearched;
     }
-    public void setHasBeenSearched(boolean tf) {
+    private void setHasBeenSearched() {
         if (!this.hasBeenSearched) {
-            if (tf) {
-               this.hasBeenSearched = true; 
-            }
+            this.hasBeenSearched = true;
         }
     }
     public boolean getComputerIsLocked() {
@@ -77,10 +75,10 @@ public class ComputerRoom implements IRoom {
         //possibly additional code in here later.
         this.computerIsLocked = tf;
     }
-    public boolean getLightIsOn() {
+    private boolean getLightIsOn() {
         return this.lightIsOn;
     }
-    public boolean toggleLights() {
+    private boolean toggleLights() {
         //possibly additional code in here later.
         if (this.lightIsOn) {
             this.lightIsOn = false;
@@ -92,7 +90,7 @@ public class ComputerRoom implements IRoom {
     }
     
     @Override
-    public ArrayList<Item> getItems() {
+    public ArrayList<iItem> getItems() {
         if (this.items ==  null) {
             this.items = new ArrayList<>();
             return this.items;
@@ -103,10 +101,10 @@ public class ComputerRoom implements IRoom {
     /******************
      * Search methods *
      ******************/
-    public String search() {
+    private String search() {
         if (this.lightIsOn) {
             if (!this.getHasBeenSearched()) {
-                setHasBeenSearched(true);
+                setHasBeenSearched();
                 return firstSearchWithLight;
             }
             return otherSearchWithLight;
@@ -123,11 +121,11 @@ public class ComputerRoom implements IRoom {
      * RoomInventory Methods *
      *************************/
     @Override
-    public void removeItemFromItems(Item item) {
+    public void removeItemFromItems(iItem item) {
         this.items.remove(item);
     }
     @Override
-    public void addItemToItems(Item item) {
+    public void addItemToItems(iItem item) {
         this.items.add(item);
     }
 

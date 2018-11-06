@@ -5,14 +5,16 @@
  */
 package rooms;
 
+import characters.Player;
 import housewithoneroom.Game;
-import items.Item;
 import java.util.ArrayList;
 
-import shared.DiceRoller;
+import items.iItem;
+import shared.Shared;
 import titles.GameStrings;
 
 import static services.ConsoleLogger.output;
+import static services.ConsoleLogger.outputLn;
 
 /**
  *
@@ -28,23 +30,27 @@ public class Hall implements IRoom {
     private int guardianHealth;
     private final int[] neighbors = {RoomId.STUDY.getId(),
         RoomId.DININGROOM.getId(), RoomId.COMPUTERROOM.getId()};
-    private ArrayList<Item> items;
+    private ArrayList<iItem> items;
     
     private final String description = RoomDescriptions.hall;
     private final String guardianAliveSearch = 
             RoomDescriptions.hallFirstSearch;
     private final String guardianDeadSearch = 
             RoomDescriptions.hallOtherSearch;
-    
+
+    public Player guardian;
+
     /**
      * Constructor for the Hall
      */
     public Hall() {
         this.items = new ArrayList<>();
         for(int i = 0; i < 3; i++) {
-            this.items.add(Item.TORCH_FROM_HALL);
+//            this.items.add();
         }
         this.guardianHealth = 1;
+        this.guardian = new Player("The Guardian", 100,
+                "The dark form dissolves in a cloud of mist.");
     }
 
     /***********************
@@ -63,45 +69,47 @@ public class Hall implements IRoom {
         return this.description;
     }
     @Override
-    public ArrayList<Item> getItems() {
+    public ArrayList<iItem> getItems() {
         if (this.items ==  null) {
             this.items = new ArrayList<>();
             return this.items;
         }
         return this.items;
     }
-    public boolean getHasBeenSearched() {
+    private boolean getHasBeenSearched() {
         return this.hasBeenSearched;
     }
-    public void setHasBeenSearched(boolean tf) {
-        if (tf == true) {
+    private void setHasBeenSearched() {
+        if (!this.hasBeenSearched) {
             this.hasBeenSearched = true;
         }
     }
     private boolean getGuardianIsAngry() {
         return this.guardianIsAngry;
     }
-    private void setGuardianIsAngry(boolean tf) {
-        this.guardianIsAngry = tf;
+    private void setGuardianIsAngry() {
+        if (!this.guardianIsAngry) {
+            this.guardianIsAngry = true;
+        }
     }
     
     /******************
      * Search methods *
      ******************/
-    public String search() {
+    private String search() {
         if (!this.getHasBeenSearched()) {
-            this.setHasBeenSearched(true);
+            this.setHasBeenSearched();
             if (!this.guardianIsDead) {
-                this.setGuardianIsAngry(true);
+                this.setGuardianIsAngry();
                 return this.guardianDeadSearch + "\n" 
                         + this.guardianAliveSearch;
             }
         }
         if (!this.guardianIsDead) {
-            this.setGuardianIsAngry(true);
+            this.setGuardianIsAngry();
             return this.guardianAliveSearch;
         }
-        ArrayList<Item> itemsInRoom = this.getItems();
+        ArrayList<iItem> itemsInRoom = this.getItems();
         if (itemsInRoom.isEmpty()) {
             return "There are no items to be found here.";
         }
@@ -112,11 +120,11 @@ public class Hall implements IRoom {
      * RoomInventory Methods *
      *************************/
     @Override
-    public void removeItemFromItems(Item item) {
+    public void removeItemFromItems(iItem item) {
         this.items.remove(item);
     }
     @Override
-    public void addItemToItems(Item item) {
+    public void addItemToItems(iItem item) {
         this.items.add(item);
     }
 
@@ -165,37 +173,21 @@ public class Hall implements IRoom {
     public void attack() {
         String battleScript = GameStrings.NothingToAttackHereString;
         if (!this.guardianIsDead && this.guardianIsAngry) {
-            battleScript = "Yaas die fool";
-            this.setGuardianIsAngry(true);
-            battleScript = battleScript + attackGuardian();
-            if (!this.guardianIsDead) {
-                int damageTaken = DiceRoller.getDamage();
-                Game.player.setHealth(Game.player.getHealth() - damageTaken);
-                battleScript = battleScript + "\nThe Guardian hits you for "
-                    + damageTaken + " damage.";
-                if (Game.player.getHealth() < 1) {
-                    Game.player.setHealth(0);
+            Shared.attack(Game.player, this.guardian);
+            if (this.guardian.getHealth() == 0) {
+                this.guardianIsDead = true;
+                this.guardianIsAngry = false;
+                outputLn(guardian.death);
+            } else {
+                Shared.defend(Game.player, this.guardian);
+                if (Game.player.getHealth() == 0) {
                     Game.state = false;
-                    battleScript = battleScript + "\nYou are dead.";
+                    output(Game.player.death);
                 }
             }
-            output(battleScript);
         }else {
-            output(battleScript);
+            outputLn(battleScript);
         }
     }
 
-    private String attackGuardian() {
-        int damage = DiceRoller.getDamage();
-        this.guardianHealth = this.guardianHealth - damage;
-        String results = "\nYou hit the Guardian for " + damage + " damage.";
-        if (this.guardianHealth < 1) {
-            this.guardianIsDead = true;
-            this.guardianIsAngry = false;
-            this.guardianHealth = 0;
-            results = results 
-                    + "\nThe dark form dissolves in a cloud of mist.";
-        }
-        return results;
-    }
 }

@@ -6,8 +6,12 @@
 package rooms;
 
 import housewithoneroom.Game;
+import items.HallKey;
+import items.Message;
+import items.iItem;
+import items.iKey;
 import shared.Shared;
-import items.Item;
+
 import java.util.ArrayList;
 
 import titles.GameStrings;
@@ -28,7 +32,7 @@ public class Study implements IRoom {
     private boolean hallDoorIsLocked = true;
     private final int[] neighbors = {
         RoomId.LIBRARY.getId(), RoomId.HALL.getId()};
-    private ArrayList<Item> items;
+    private ArrayList<iItem> items;
     
     private final String description = RoomDescriptions.study;
     private final String firstSearchDescription = 
@@ -64,36 +68,37 @@ public class Study implements IRoom {
     public String getDescription() {
         return description;
     }
-    public boolean getHasBeenSearched() {
+
+    private boolean getHasBeenSearched() {
         return this.hasBeenSearched;
     }
-    public void setHasBeenSearched(boolean tf) {
-        if (tf == true) {
-            this.hasBeenSearched = tf; 
+    private void setHasBeenSearched() {
+        if (!this.hasBeenSearched) {
+            this.hasBeenSearched = true;
             //starts as false but can never go back
         }
     }
-    public boolean getDeskHasBeenSearched() {
+    private boolean getDeskHasBeenSearched() {
         return this.deskHasBeenSearched;
     }
-    public void setDeskHasBeenSearched(boolean tf) {
-        if (tf == true) {
-            this.deskHasBeenSearched = tf;
-            this.addItemToItems(Item.BLACK_KEY_TO_HALL_FROM_STUDY);
+    private void setDeskHasBeenSearched() {
+        if (!this.deskHasBeenSearched) {
+            this.deskHasBeenSearched = true;
+            this.addItemToItems(new HallKey());
         }
     }
     private boolean getFireplaceHasBeenSearched() {
         return this.fireplaceHasBeenSearched;
     }
-    private void setFireplaceHasBeenSearched(boolean tf) {
-        if (tf == true) {
-            this.fireplaceHasBeenSearched = tf;
-            this.addItemToItems(Item.MESSAGE_FROM_FIREPLACE_IN_STUDY);
+    private void setFireplaceHasBeenSearched() {
+        if (!this.fireplaceHasBeenSearched) {
+            this.fireplaceHasBeenSearched = true;
+            this.addItemToItems(new Message());
         }
     }
     
     @Override
-    public ArrayList<Item> getItems() {
+    public ArrayList<iItem> getItems() {
         if (this.items ==  null) {
             this.items = new ArrayList<>();
             return this.items;
@@ -105,12 +110,12 @@ public class Study implements IRoom {
      * Search methods *
      ******************/
     private String search() {
-        ArrayList<Item> itemsInRoom = this.getItems();
+        ArrayList<iItem> itemsInRoom = this.getItems();
         if (itemsInRoom.isEmpty()) {
             return "There are no items to be found here.";
         }
         if (!this.getHasBeenSearched()) {
-            this.setHasBeenSearched(true);
+            this.setHasBeenSearched();
             return Shared.appendDescriptionToItemsString(
                     this.firstSearchDescription, itemsInRoom);
         }
@@ -133,14 +138,14 @@ public class Study implements IRoom {
     }
     private String searchDesk() {
         if (!this.getDeskHasBeenSearched()) {
-            this.setDeskHasBeenSearched(true);
+            this.setDeskHasBeenSearched();
             return this.deskFirstSearchDescription;
         }
         return this.deskOtherSearchDescription;
     }
     private String searchFireplace() {
         if (!this.getFireplaceHasBeenSearched()) {
-            this.setFireplaceHasBeenSearched(true);
+            this.setFireplaceHasBeenSearched();
             return this.fireplaceFirstSearchDescription;
         }
         return this.fireplaceOtherSearchDescription;
@@ -150,11 +155,11 @@ public class Study implements IRoom {
      * RoomInventory Methods *
      *************************/
     @Override
-    public void removeItemFromItems(Item item) {
+    public void removeItemFromItems(iItem item) {
         this.items.remove(item);
     }
     @Override
-    public void addItemToItems(Item item) {
+    public void addItemToItems(iItem item) {
         this.items.add(item);
     }
     
@@ -209,20 +214,23 @@ public class Study implements IRoom {
 
     private void tryUnlockingDoor() {
         //check hands for black key
-        Item[] items = Game.player.getItemsInHands();
-        for (int i = 0; i < items.length; i++) {
-            Item key = items[i];
-            if (key == Item.BLACK_KEY_TO_HALL_FROM_STUDY) {
-                // use the key and drop it
-                this.hallDoorIsLocked = false;
-                items[i] = null;
-                Game.player.setItemsInHand(items);
-                // add an action message
+        if (Game.player.getRHand() != null && Game.player.getRHand() instanceof iKey) {
+            iKey key = (iKey)Game.player.getRHand();
+            if (key.unlocks() == neighbors[1]) {
+                Game.player.setRHand(null);
                 output("You use the black key to unlock the door.");
-                return;
+                this.hallDoorIsLocked = false;
             }
+        } else if (Game.player.getLHand() != null && Game.player.getLHand() instanceof iKey) {
+            iKey key = (iKey)Game.player.getLHand();
+            if (key.unlocks() == neighbors[1]) {
+                Game.player.setLHand(null);
+                output("You use the black key to unlock the door.");
+                this.hallDoorIsLocked = false;
+            }
+        } else {
+            output("You do not have the right key equipped.");
         }
-        output("You do not have the right key equipped.");
     }
     
     /******************
