@@ -5,11 +5,10 @@
  */
 package housewithoneroom;
 
-import java.awt.Font;
 import java.util.Scanner;
 
 import characters.Player;
-import items.Item;
+import items.iItem;
 import java.util.ArrayList;
 import static services.ConsoleLogger.*;
 //import services.ConsoleLogger.*;
@@ -22,10 +21,10 @@ import titles.GameStrings;
  */
 public class Start {
 
+    public static boolean admin = true;
+
     static Scanner input = new Scanner(System.in);
     static boolean tryingToEndGame = false;
-    //try to use this later on
-    static Font outputFont = new Font("Courier", Font.BOLD | Font.ITALIC ,20);
     
     /**
      * @param args the command line arguments
@@ -42,15 +41,20 @@ public class Start {
         
         // Initialize the player.
         initializePlayer(input);
-        
-        // Allow to start in a particular room
-        int roomNum = getStartingRoom(input);
-        if (roomNum >= Game.house.getCorridor().size()) {
-            roomNum = 0;
+
+        if (admin) {
+            // Allow to start in a particular room
+            int roomNum = getStartingRoom(input);
+            if (roomNum >= Game.house.getCorridor().size()) {
+                roomNum = 0;
+            }
+            Game.currentRoom = Game.house.getCorridor().get(roomNum);
+        } else {
+            Game.currentRoom = Game.house.getCorridor().getFirst();
         }
-        Game.currentRoom = Game.house.getCorridor().get(roomNum);
-        outputLn("You are starting in the " 
-                + Game.house.getCorridor().get(roomNum).getName() + ".\n");
+
+        outputLn("You are starting in the "
+                + Game.currentRoom.getName() + ".\n");
         
         // Show starting stats
         outputLn(Game.player.showCharacterReport());
@@ -81,11 +85,15 @@ public class Start {
      */
     private static boolean initializePlayer(Scanner input) {
         //in order to make startup easier for myself:
-//        output("Enter name: ");
-//        String name = input.nextLine();
-//        output("Male or female? ");
-//        String gender = input.nextLine();
-        Game.player = new Player("CoconutCavalry", "male");
+        if (admin) {
+            Game.player = new Player("CoconutCavalry", "male");
+        } else {
+            output("Enter name: ");
+            String name = input.nextLine();
+            output("Male or female? ");
+            String gender = input.nextLine();
+            Game.player = new Player(name, gender);
+        }
         outputLn("Welcome, " + Game.player.getName() + ".\n");
         return true;
     }
@@ -243,12 +251,12 @@ public class Start {
 
     private static boolean tryTakingItem(String itemName) {
         String name = itemName;
-        ArrayList<Item> itemsInRoom = Game.currentRoom.getItems();
+        ArrayList<iItem> itemsInRoom = Game.currentRoom.getItems();
         if (itemsInRoom == null) {
             output("You don't see any items.");
             return false;
         }
-        for(Item item : itemsInRoom) {
+        for(iItem item : itemsInRoom) {
             if (item.getName().equals(name)){
 
                 // remove the item from the room if taken by player
@@ -266,7 +274,7 @@ public class Start {
     private static void tryDroppingItem(String itemName) {
         // try to drop from inventory
         String name = itemName;
-        Item droppedItem = Game.player.dropItem(name);
+        iItem droppedItem = Game.player.dropItem(name);
         if (droppedItem != null) {
             // print result of action
             output("You dropped the " + name + ".");
@@ -297,7 +305,7 @@ public class Start {
     }
 
     private static void tryViewingItem(String itemName) {
-        Item item = Shared.searchForItemInListByName(
+        iItem item = Shared.searchForItemInListByName(
                 itemName, Game.player.getInventory());
         if (item == null) {
             item = Shared.searchForItemInListByName(itemName, Game.player.getItemsInHands());
@@ -314,7 +322,7 @@ public class Start {
     }
     
     private static void tryEquippingItem(String itemName) {
-        Item item = Shared.searchForItemInListByName(
+        iItem item = Shared.searchForItemInListByName(
                 itemName, Game.player.getInventory());
         if (item != null) {
             output(Game.player.equip(item));
@@ -343,7 +351,7 @@ public class Start {
     }
 
     private static void showItemStats(String command) {
-        Item item = Shared.searchForItemInListByName(
+        iItem item = Shared.searchForItemInListByName(
                 command, Game.player.getInventory());
         if (item != null) {
             output(item.getStats());

@@ -5,9 +5,9 @@
  */
 package rooms;
 
-import items.Item;
 import java.util.ArrayList;
 
+import items.iItem;
 import titles.GameStrings;
 
 import static services.ConsoleLogger.output;
@@ -25,7 +25,7 @@ public class ComputerRoom implements IRoom {
     private boolean computerIsLocked = true;
     private boolean lightIsOn = false;
     private final int[] neighbors = {RoomId.HALL.getId()};
-    private ArrayList<Item> items;
+    private ArrayList<iItem> items;
     
     private static final String description = RoomDescriptions.compRoom;
     private static final String firstSearchNoLight = 
@@ -90,7 +90,7 @@ public class ComputerRoom implements IRoom {
     }
     
     @Override
-    public ArrayList<Item> getItems() {
+    public ArrayList<iItem> getItems() {
         if (this.items ==  null) {
             this.items = new ArrayList<>();
             return this.items;
@@ -121,11 +121,11 @@ public class ComputerRoom implements IRoom {
      * RoomInventory Methods *
      *************************/
     @Override
-    public void removeItemFromItems(Item item) {
+    public void removeItemFromItems(iItem item) {
         this.items.remove(item);
     }
     @Override
-    public void addItemToItems(Item item) {
+    public void addItemToItems(iItem item) {
         this.items.add(item);
     }
 

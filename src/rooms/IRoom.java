@@ -5,7 +5,9 @@
  */
 package rooms;
 
-import items.Item;
+import items.eItem;
+import items.iItem;
+
 import java.util.ArrayList;
 
 /**
@@ -15,15 +17,13 @@ import java.util.ArrayList;
 public interface IRoom {
     /* initialized properties */
     
-    /* Constructor - save for later???*/
-    
     /* methods shared by all Rooms */
     int getId();
     String getName();
     String getDescription();
-    ArrayList<Item> getItems();
-    void removeItemFromItems(Item item);
-    void addItemToItems(Item item);
+    ArrayList<iItem> getItems();
+    void removeItemFromItems(iItem item);
+    void addItemToItems(iItem item);
     void performCustomMethods(String[] inputs);
     int go(String direction);
     void attack();

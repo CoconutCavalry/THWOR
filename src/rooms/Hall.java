@@ -7,10 +7,9 @@ package rooms;
 
 import characters.Player;
 import housewithoneroom.Game;
-import items.Item;
 import java.util.ArrayList;
 
-import shared.DiceRoller;
+import items.iItem;
 import shared.Shared;
 import titles.GameStrings;
 
@@ -31,7 +30,7 @@ public class Hall implements IRoom {
     private int guardianHealth;
     private final int[] neighbors = {RoomId.STUDY.getId(),
         RoomId.DININGROOM.getId(), RoomId.COMPUTERROOM.getId()};
-    private ArrayList<Item> items;
+    private ArrayList<iItem> items;
     
     private final String description = RoomDescriptions.hall;
     private final String guardianAliveSearch = 
@@ -47,7 +46,7 @@ public class Hall implements IRoom {
     public Hall() {
         this.items = new ArrayList<>();
         for(int i = 0; i < 3; i++) {
-            this.items.add(Item.TORCH_FROM_HALL);
+//            this.items.add();
         }
         this.guardianHealth = 1;
         this.guardian = new Player("The Guardian", 100,
@@ -70,7 +69,7 @@ public class Hall implements IRoom {
         return this.description;
     }
     @Override
-    public ArrayList<Item> getItems() {
+    public ArrayList<iItem> getItems() {
         if (this.items ==  null) {
             this.items = new ArrayList<>();
             return this.items;
@@ -110,7 +109,7 @@ public class Hall implements IRoom {
             this.setGuardianIsAngry();
             return this.guardianAliveSearch;
         }
-        ArrayList<Item> itemsInRoom = this.getItems();
+        ArrayList<iItem> itemsInRoom = this.getItems();
         if (itemsInRoom.isEmpty()) {
             return "There are no items to be found here.";
         }
@@ -121,11 +120,11 @@ public class Hall implements IRoom {
      * RoomInventory Methods *
      *************************/
     @Override
-    public void removeItemFromItems(Item item) {
+    public void removeItemFromItems(iItem item) {
         this.items.remove(item);
     }
     @Override
-    public void addItemToItems(Item item) {
+    public void addItemToItems(iItem item) {
         this.items.add(item);
     }
 
@@ -180,7 +179,7 @@ public class Hall implements IRoom {
                 this.guardianIsAngry = false;
                 outputLn(guardian.death);
             } else {
-                Shared.attack(this.guardian, Game.player);
+                Shared.defend(Game.player, this.guardian);
                 if (Game.player.getHealth() == 0) {
                     Game.state = false;
                     output(Game.player.death);
