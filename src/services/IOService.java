@@ -13,11 +13,10 @@ import java.util.Scanner;
  */
 public class IOService {
     
-    static Scanner input = new Scanner(System.in);
+    private static Scanner input = new Scanner(System.in);
     
     public static String getNextLine() {
         String retVal = input.nextLine();
-        input.close();
         return retVal;
     }
     

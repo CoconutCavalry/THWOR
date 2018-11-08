@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import static services.ConsoleLogger.*;
 //import services.ConsoleLogger.*;
 import shared.*;
+import services.*;
 import titles.GameStrings;
 
 /**
@@ -23,7 +24,6 @@ public class Start {
 
     public static boolean admin = true;
 
-    static Scanner input = new Scanner(System.in);
     static boolean tryingToEndGame = false;
     
     /**
@@ -40,11 +40,11 @@ public class Start {
         outputLn();
         
         // Initialize the player.
-        initializePlayer(input);
+        initializePlayer();
 
         if (admin) {
             // Allow to start in a particular room
-            int roomNum = getStartingRoom(input);
+            int roomNum = getStartingRoom();
             if (roomNum >= Game.house.getCorridor().size()) {
                 roomNum = 0;
             }
@@ -69,7 +69,7 @@ public class Start {
             output("> ");
             
             // Collect and filter user commands
-            String info = input.nextLine();
+            String info = IOService.getNextLine();
             String[] commands = splitAndSanitizeInput(info);
             outputLn();
 
@@ -83,15 +83,15 @@ public class Start {
      * Gets the name and gender of the player from the user
      * @return the player object
      */
-    private static boolean initializePlayer(Scanner input) {
+    private static boolean initializePlayer() {
         //in order to make startup easier for myself:
         if (admin) {
             Game.player = new Player("CoconutCavalry", "male");
         } else {
             output("Enter name: ");
-            String name = input.nextLine();
+            String name = IOService.getNextLine();
             output("Male or female? ");
-            String gender = input.nextLine();
+            String gender = IOService.getNextLine();
             Game.player = new Player(name, gender);
         }
         outputLn("Welcome, " + Game.player.getName() + ".\n");
@@ -101,12 +101,12 @@ public class Start {
      * Gets the starting room number from the user
      * @return the player object
      */
-    private static int getStartingRoom (Scanner input) {
+    private static int getStartingRoom () {
         int retVal = -1;
         String in;
         while (retVal < 0) {
             output("Enter starting room number: ");
-            in = input.nextLine();
+            in = IOService.getNextLine();
             try {
                 retVal = Integer.parseInt(in);
             } catch (Exception e) {
