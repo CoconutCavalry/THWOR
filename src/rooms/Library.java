@@ -6,6 +6,7 @@
 package rooms;
 
 import items.*;
+import services.IOService;
 import shared.Shared;
 
 import java.util.ArrayList;
@@ -16,12 +17,13 @@ import titles.GameStrings;
 
 import static housewithoneroom.Start.admin;
 import static services.ConsoleLogger.output;
+import static services.ConsoleLogger.showLong;
 
 /**
  *
  * @author esose
  */
-public class Library implements IRoom {
+public class Library implements iRoom {
 
     private static final int id = RoomId.LIBRARY.getId();
     private static final String name = "Library";
@@ -59,19 +61,19 @@ public class Library implements IRoom {
     /***********************
      * Getters and setters *
      ***********************/
-    @Override
+     
     public int getId() {
         return id;
     }
-    @Override
+     
     public String getName() {
         return name;
     }
-    @Override
+     
     public String getDescription() {
         return description;
     }
-    @Override
+     
     public ArrayList<iItem> getItems() {
         return this.items;
     }
@@ -97,11 +99,10 @@ public class Library implements IRoom {
     /*************************
      * RoomInventory Methods *
      *************************/
-    @Override
     public void removeItemFromItems(iItem item) {
         this.items.remove(item);
     }
-    @Override
+    
     public void addItemToItems(iItem item) {
         this.items.add(item);
     }
@@ -110,25 +111,24 @@ public class Library implements IRoom {
     /******************
      * Custom methods *
      ******************/
-    @Override
-        public void performCustomMethods(
-                String[] inputs) {
-            switch (inputs[0]) {
-                case "b":
-                case "browse":
-                    output(showBookTitles());
-                    break;
-                case "r":
-                case "read":
-                    output(readBook(inputs));
-                    break;
-                case "s":
-                case "search":
-                    output(this.search());
-                    break;
-                default:
-                    output(GameStrings.PerformCustomMethodsBadInput);
-            }
+    public void performCustomMethods(
+            String[] inputs) {
+        switch (inputs[0]) {
+            case "b":
+            case "browse":
+                output(showBookTitles());
+                break;
+            case "r":
+            case "read":
+                output(readBook(inputs));
+                break;
+            case "s":
+            case "search":
+                showLong(this.search());
+                break;
+            default:
+                output(GameStrings.PerformCustomMethodsBadInput);
+        }
     }
 
     private String showBookTitles() {
@@ -156,7 +156,6 @@ public class Library implements IRoom {
     /*****************
      *    MOVEMENT   *
      *****************/
-    @Override
     public int go(String direction) {
         switch (direction) {
             case "ahead":
@@ -171,9 +170,17 @@ public class Library implements IRoom {
     /******************
      *    Attacking   *
      ******************/
-    @Override
     public void attack() {
         output(GameStrings.NothingToAttackHereString);
     }
-    
+
+
+    /******************
+     *      Other     *
+     ******************/
+    public void roomActions() {
+        String input = IOService.getNextLine();
+        showLong("You entered " + input);
+    }
+
 }

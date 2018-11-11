@@ -1,7 +1,5 @@
 package items;
 
-import rooms.IRoom;
-
 public interface iKey {
 
     /**

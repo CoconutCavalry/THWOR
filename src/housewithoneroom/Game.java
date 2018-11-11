@@ -8,8 +8,10 @@ package housewithoneroom;
 import characters.Player;
 import java.util.LinkedList;
 import rooms.House;
-import rooms.IRoom;
+import rooms.iRoom;
 import titles.GameStrings;
+import static services.ConsoleLogger.*;
+import services.IOService;
 
 import static services.ConsoleLogger.output;
 
@@ -18,30 +20,34 @@ import static services.ConsoleLogger.output;
  * @author esose
  */
 public class Game {
-    
-//    public static GameStrings gameStrings;
+
     public static Player player;
-    public static IRoom currentRoom;
+    public static iRoom currentRoom;
     public static House house = new House();
-    public static LinkedList<IRoom> visitedRooms = new LinkedList<>();
+    public static LinkedList<iRoom> visitedRooms = new LinkedList<>();
     public int numberOfVisitedRooms = 0;
     public static boolean state = true;
     
     public static void NewGame() {
-//        gameStrings = new GameStrings();
         house = new House();
         currentRoom = house.getCorridor().getFirst();
     }
     
     public Game(int roomId) {
-//        gameStrings = new GameStrings();
         house = new House();
         currentRoom = house.getCorridor().get(roomId);
     }
     
     public static void exitGame() {
-        state = false;
-        output(GameStrings.getEOGUser());
+        output("Are you sure you want to exit? [y/n] ");
+        if (IOService.getNextLine().equals("y")) {
+            state = false;
+            outputLn();
+            output(GameStrings.getEOGUser());
+        } else {
+            outputLn();
+            output("Good");
+        }
     }
     
     //public save(){}

@@ -8,16 +8,18 @@ package rooms;
 import java.util.ArrayList;
 
 import items.iItem;
+import services.IOService;
 import titles.GameStrings;
 
 import static services.ConsoleLogger.output;
+import static services.ConsoleLogger.showLong;
 import static shared.Shared.validateNoun;
 
 /**
  *
  * @author esose
  */
-public class ComputerRoom implements IRoom {
+public class ComputerRoom implements iRoom {
     
     private static final int id = RoomId.COMPUTERROOM.getId();
     private static final String name = "Computer Room";
@@ -45,15 +47,15 @@ public class ComputerRoom implements IRoom {
     /***********************
      * Getters and setters *
      ***********************/
-    @Override
+      
     public int getId() {
         return id;
     }
-    @Override
+      
     public String getName() {
         return name;
     }
-    @Override
+      
     public String getDescription() {
         if (!this.getLightIsOn()) {
             return description;
@@ -89,7 +91,7 @@ public class ComputerRoom implements IRoom {
         }
     }
     
-    @Override
+      
     public ArrayList<iItem> getItems() {
         if (this.items ==  null) {
             this.items = new ArrayList<>();
@@ -120,11 +122,11 @@ public class ComputerRoom implements IRoom {
     /*************************
      * RoomInventory Methods *
      *************************/
-    @Override
+      
     public void removeItemFromItems(iItem item) {
         this.items.remove(item);
     }
-    @Override
+      
     public void addItemToItems(iItem item) {
         this.items.add(item);
     }
@@ -133,7 +135,7 @@ public class ComputerRoom implements IRoom {
      * Custom methods *
      ******************/
     //flip lightswitch/turn light(s) on/etc.
-    @Override
+      
     public void performCustomMethods(String[] inputs) {
         switch (inputs[0]) {
             case "flip":
@@ -143,7 +145,7 @@ public class ComputerRoom implements IRoom {
                 break;
             case "s":
             case "search":
-                output(this.search());
+                showLong(this.search());
                 break;
             default:
                 output(GameStrings.PerformCustomMethodsBadInput);
@@ -153,7 +155,7 @@ public class ComputerRoom implements IRoom {
     /*****************
      *    MOVEMENT   *
      *****************/
-    @Override
+      
     public int go(String direction) {
         switch (direction) {
             case "back":
@@ -168,7 +170,7 @@ public class ComputerRoom implements IRoom {
     /******************
      *    Attacking   *
      ******************/
-    @Override
+      
     public void attack() {
         output(GameStrings.NothingToAttackHereString);
     }
@@ -202,5 +204,16 @@ public class ComputerRoom implements IRoom {
         return "Try including an object to interact with after the verb.";
             
     }
-    
+
+
+    /******************
+     *      Other     *
+     ******************/
+      
+    public void roomActions() {
+        String input = IOService.getNextLine();
+        showLong("You entered " + input);
+    }
+
+
 }

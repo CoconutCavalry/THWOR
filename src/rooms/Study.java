@@ -10,6 +10,7 @@ import items.HallKey;
 import items.Message;
 import items.iItem;
 import items.iKey;
+import services.IOService;
 import shared.Shared;
 
 import java.util.ArrayList;
@@ -17,12 +18,13 @@ import java.util.ArrayList;
 import titles.GameStrings;
 
 import static services.ConsoleLogger.output;
+import static services.ConsoleLogger.showLong;
 
 /**
  *
  * @author esose
  */
-public class Study implements IRoom {
+public class Study implements iRoom {
     
     private static final int id = RoomId.STUDY.getId();
     private static final String name = "Study";
@@ -56,15 +58,15 @@ public class Study implements IRoom {
     /***********************
      * Getters and setters *
      ***********************/
-    @Override
+     
     public int getId() {
         return id;
     }
-    @Override
+     
     public String getName() {
         return name;
     }
-    @Override
+     
     public String getDescription() {
         return description;
     }
@@ -97,7 +99,7 @@ public class Study implements IRoom {
         }
     }
     
-    @Override
+     
     public ArrayList<iItem> getItems() {
         if (this.items ==  null) {
             this.items = new ArrayList<>();
@@ -154,11 +156,11 @@ public class Study implements IRoom {
     /*************************
      * RoomInventory Methods *
      *************************/
-    @Override
+     
     public void removeItemFromItems(iItem item) {
         this.items.remove(item);
     }
-    @Override
+     
     public void addItemToItems(iItem item) {
         this.items.add(item);
     }
@@ -166,16 +168,16 @@ public class Study implements IRoom {
     /******************
      * Custom methods *
      ******************/
-    @Override
+     
     public void performCustomMethods(
             String[] inputs) {
         switch (inputs[0]) {
             case "s":
             case "search":
                 if (inputs.length > 1) {
-                    output(this.search(inputs));
+                    showLong(this.search(inputs));
                 } else {
-                    output(this.search());
+                    showLong(this.search());
                 }
                 break;
             case "u":
@@ -190,7 +192,7 @@ public class Study implements IRoom {
     /*****************
      *    MOVEMENT   *
      *****************/
-    @Override
+     
     public int go(String direction) {
         switch (direction) {
             case "left":
@@ -236,12 +238,21 @@ public class Study implements IRoom {
     /******************
      *    Attacking   *
      ******************/
-    @Override
+     
     public void attack() {
         output(GameStrings.NothingToAttackHereString);
     }
 
-    
+
+    /******************
+     *      Other     *
+     ******************/
+     
+    public void roomActions() {
+        String input = IOService.getNextLine();
+        showLong("You entered " + input);
+    }
+
 }
 
 

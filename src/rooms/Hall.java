@@ -10,17 +10,19 @@ import housewithoneroom.Game;
 import java.util.ArrayList;
 
 import items.iItem;
+import services.IOService;
 import shared.Shared;
 import titles.GameStrings;
 
 import static services.ConsoleLogger.output;
 import static services.ConsoleLogger.outputLn;
+import static services.ConsoleLogger.showLong;
 
 /**
  *
  * @author esose
  */
-public class Hall implements IRoom {
+public class Hall implements iRoom {
     
     private static final int id = RoomId.HALL.getId();
     private static final String name = "Hall";
@@ -56,19 +58,19 @@ public class Hall implements IRoom {
     /***********************
      * Getters and setters *
      ***********************/
-    @Override
+      
     public int getId() {
         return id;
     }
-    @Override
+      
     public String getName() {
         return name;
     }
-    @Override
+      
     public String getDescription() {
         return this.description;
     }
-    @Override
+      
     public ArrayList<iItem> getItems() {
         if (this.items ==  null) {
             this.items = new ArrayList<>();
@@ -119,11 +121,11 @@ public class Hall implements IRoom {
     /*************************
      * RoomInventory Methods *
      *************************/
-    @Override
+      
     public void removeItemFromItems(iItem item) {
         this.items.remove(item);
     }
-    @Override
+      
     public void addItemToItems(iItem item) {
         this.items.add(item);
     }
@@ -131,13 +133,13 @@ public class Hall implements IRoom {
     /******************
      * Custom methods *
      ******************/
-    @Override
+      
     public void performCustomMethods(
             String[] inputs) {
         switch (inputs[0]) {
             case "s":
             case "search":
-                output(this.search());
+                showLong(this.search());
                 break;
             default:
                 output(GameStrings.PerformCustomMethodsBadInput);
@@ -147,7 +149,7 @@ public class Hall implements IRoom {
     /*****************
      *    MOVEMENT   *
      *****************/
-    @Override
+      
     public int go(String direction) {
         if (this.getGuardianIsAngry()) {
             output(RoomDescriptions.guardianIsAngryCannotLeave);
@@ -169,7 +171,7 @@ public class Hall implements IRoom {
     /******************
      *    Attacking   *
      ******************/
-    @Override
+      
     public void attack() {
         String battleScript = GameStrings.NothingToAttackHereString;
         if (!this.guardianIsDead && this.guardianIsAngry) {
@@ -188,6 +190,15 @@ public class Hall implements IRoom {
         }else {
             outputLn(battleScript);
         }
+    }
+
+    /******************
+     *      Other     *
+     ******************/
+      
+    public void roomActions() {
+        String input = IOService.getNextLine();
+        showLong("You entered " + input);
     }
 
 }
