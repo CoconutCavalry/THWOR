@@ -25,10 +25,13 @@ import static services.ConsoleLogger.showLong;
  */
 public class Library implements iRoom {
 
+    private final Door[] doors = {new Door(RoomId.STUDY.getId(),
+            "\nStraight ahead in the distance, you see a wooden door.")};
+
     private static final int id = RoomId.LIBRARY.getId();
     private static final String name = "Library";
     private boolean hasBeenSearched = false;
-    private final int[] neighbors = {RoomId.STUDY.getId()};
+//    private final int[] neighbors = {RoomId.STUDY.getId()};
     public ArrayList<iItem> items;
     private final String description = RoomDescriptions.library;
     private final String firstSearchDescription = 
@@ -71,11 +74,19 @@ public class Library implements iRoom {
     }
      
     public String getDescription() {
-        return description;
+        return description + doors[0].getDescription();
     }
      
     public ArrayList<iItem> getItems() {
         return this.items;
+    }
+
+    private String doorsToString() {
+        String doorsString = "";
+        for (Door d : doors) {
+            doorsString += "\n" + d.getDescription();
+        }
+        return doorsString;
     }
     
     /******************
@@ -161,7 +172,7 @@ public class Library implements iRoom {
             case "ahead":
             case "forward":
             case "straight":
-                return this.neighbors[0];
+                return this.doors[0].getRoomId();
             default:
                 return -1;
         }

@@ -4,7 +4,7 @@ import items.iKey;
 
 public class Door {
 
-    private int room;
+    private int roomId;
     private String description;
     private iKey key;
     private boolean isLocked;
@@ -17,7 +17,7 @@ public class Door {
      * @param locked true if door is locked
      */
     public Door(int roomId, String desc, iKey keyToUnlock, boolean locked) {
-        room = roomId;
+        roomId = roomId;
         description = desc;
         key = keyToUnlock;
         isLocked = locked;
@@ -29,14 +29,14 @@ public class Door {
      * @param desc of the door itself for showing in the room in which this Door exists
      */
     public Door(int roomId, String desc) {
-        room = roomId;
+        roomId = roomId;
         description = desc;
         key = null;
         isLocked = false;
     }
 
-    public int getRoom() {
-        return room;
+    public int getRoomId() {
+        return roomId;
     }
 
     public String getDescription() {

@@ -25,6 +25,10 @@ import static services.ConsoleLogger.showLong;
  * @author esose
  */
 public class Study implements iRoom {
+
+    private final Door[] doors = {
+            new Door(RoomId.HALL.getId(), "\nOn your left, beside the desk, is a dark-colored door."),
+            new Door(RoomId.LIBRARY.getId(), "\nBehind you is the door to the library.")};
     
     private static final int id = RoomId.STUDY.getId();
     private static final String name = "Study";

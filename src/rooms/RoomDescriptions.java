@@ -20,8 +20,7 @@ public class RoomDescriptions {
             "You are in a large room, surrounded by a labyrinth of " +
             "tall bookshelves made of a magnificent dark wood. " +
             "Golden autumnal light floods the place from high " +
-            "windows somewhere outside of your field of vision. " +
-            "Straight ahead in the distance, you see a wooden door.";
+            "windows somewhere outside of your field of vision.";
     public static final String libraryFirstSearch = "" +
             "You wander about the room for a minute, glancing at " +
             "the titles of the old, worn books. Lying about on the " +
@@ -34,9 +33,7 @@ public class RoomDescriptions {
             "You are in a small, dimly lit room. A high-backed " +
             "armchair sits behind a large oak desk on one side. " +
             "The other side has a fireplace, in which some struggling" +
-            " embers fight to produce a meager source of heat.\nOn your" +
-            " left, beside the desk, is a dark-colored door, and behind" +
-            " you is the door to the library.";
+            " embers fight to produce a meager source of heat.";
     public static final String studyFirstSearch = "" +
             "You see ";
     public static final String studyDeskFirstSearch = "" +
