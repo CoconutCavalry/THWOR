@@ -12,7 +12,7 @@ import java.util.LinkedList;
  * @author esose
  */
 public final class House {
-    private LinkedList<IRoom> corridor = new LinkedList<>();
+    private LinkedList<iRoom> corridor = new LinkedList<>();
     
     public House() {
         this.corridor.add(new Library());
@@ -22,7 +22,7 @@ public final class House {
         this.corridor.add(new ComputerRoom());
     }
     
-    public LinkedList<IRoom> getCorridor() {
+    public LinkedList<iRoom> getCorridor() {
         return this.corridor;
     }
     

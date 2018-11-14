@@ -1,8 +1,6 @@
 package items;
 
-import rooms.IRoom;
-
-public interface iKey {
+public interface iKey extends iItem {
 
     /**
      *

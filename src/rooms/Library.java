@@ -5,7 +5,9 @@
  */
 package rooms;
 
+import adventures.LibraryBookshelfAdventure;
 import items.*;
+import services.IOService;
 import shared.Shared;
 
 import java.util.ArrayList;
@@ -16,33 +18,26 @@ import titles.GameStrings;
 
 import static housewithoneroom.Start.admin;
 import static services.ConsoleLogger.output;
+import static services.ConsoleLogger.showLong;
 
 /**
  *
  * @author esose
  */
-public class Library implements IRoom {
+public class Library implements iRoom {
+
+    private final Door[] doors = {new Door(RoomId.STUDY.getId(),
+            "\nStraight ahead in the distance, you see a wooden door.")};
 
     private static final int id = RoomId.LIBRARY.getId();
     private static final String name = "Library";
     private boolean hasBeenSearched = false;
-    private final int[] neighbors = {RoomId.STUDY.getId()};
+//    private final int[] neighbors = {RoomId.STUDY.getId()};
     public ArrayList<iItem> items;
     private final String description = RoomDescriptions.library;
     private final String firstSearchDescription = 
             RoomDescriptions.libraryFirstSearch;
-    private final String[] bookTitlesInLibrary = {""
-            + "The Tragic Youth of Ambrose Fogarty: \n"
-            + "\tYoung Master Fogarty, by KM",
-            "\nThe Tragic Youth of Ambrose Fogarty: \n"
-            + "\tFogarty, Esquire, by KM",
-            "\nThe Tragic Youth of Ambrose Fogarty: \n"
-            + "\tIn Her Majesty's Service, by KM",
-            "\nThe Perilous Adventures of Jon Legenn, by KM",
-            "\nMcEver, by KM",
-            "\nThe Complete Clocktower Books, by KM and FM"
-            };
-    
+
     /**
      * Constructor for the Library
      */
@@ -59,21 +54,29 @@ public class Library implements IRoom {
     /***********************
      * Getters and setters *
      ***********************/
-    @Override
+     
     public int getId() {
         return id;
     }
-    @Override
+     
     public String getName() {
         return name;
     }
-    @Override
+     
     public String getDescription() {
-        return description;
+        return description + doors[0].getDescription();
     }
-    @Override
+     
     public ArrayList<iItem> getItems() {
         return this.items;
+    }
+
+    private String doorsToString() {
+        String doorsString = "";
+        for (Door d : doors) {
+            doorsString += "\n" + d.getDescription();
+        }
+        return doorsString;
     }
     
     /******************
@@ -97,11 +100,10 @@ public class Library implements IRoom {
     /*************************
      * RoomInventory Methods *
      *************************/
-    @Override
     public void removeItemFromItems(iItem item) {
         this.items.remove(item);
     }
-    @Override
+    
     public void addItemToItems(iItem item) {
         this.items.add(item);
     }
@@ -110,59 +112,34 @@ public class Library implements IRoom {
     /******************
      * Custom methods *
      ******************/
-    @Override
-        public void performCustomMethods(
-                String[] inputs) {
-            switch (inputs[0]) {
-                case "b":
-                case "browse":
-                    output(showBookTitles());
-                    break;
-                case "r":
-                case "read":
-                    output(readBook(inputs));
-                    break;
-                case "s":
-                case "search":
-                    output(this.search());
-                    break;
-                default:
-                    output(GameStrings.PerformCustomMethodsBadInput);
-            }
-    }
-
-    private String showBookTitles() {
-        return Arrays.toString(this.bookTitlesInLibrary);
-    }
-
-    private String readBook(String[] commands) {
-        if (commands.length > 1) {
-            switch (commands[1]) {
-                case "m":
-                    return Excerpts.mcEver; 
-                case "l":
-                    return Excerpts.legenn;
-                case "f":
-                    return Excerpts.fogarty;
-                case "c":
-                    return Excerpts.clocktower;
-                default:
-                    return "Try 'm', 'l', 'f', or 'c'.";
-            }
+    public void performCustomMethods(
+            String[] inputs) {
+        switch (inputs[0]) {
+            case "b":
+            case "browse":
+                LibraryBookshelfAdventure.browseLibrary();
+                break;
+            case "r":
+            case "read":
+                break;
+            case "s":
+            case "search":
+                showLong(this.search());
+                break;
+            default:
+                output(GameStrings.PerformCustomMethodsBadInput);
         }
-        return "Try including a title after 'read'.";
     }
 
     /*****************
      *    MOVEMENT   *
      *****************/
-    @Override
     public int go(String direction) {
         switch (direction) {
             case "ahead":
             case "forward":
             case "straight":
-                return this.neighbors[0];
+                return this.doors[0].getRoomId();
             default:
                 return -1;
         }
@@ -171,9 +148,14 @@ public class Library implements IRoom {
     /******************
      *    Attacking   *
      ******************/
-    @Override
     public void attack() {
         output(GameStrings.NothingToAttackHereString);
     }
-    
+
+
+    /******************
+     *      Other     *
+     ******************/
+
+
 }

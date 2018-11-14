@@ -8,16 +8,18 @@ package rooms;
 import java.util.ArrayList;
 
 import items.iItem;
+import services.IOService;
 import shared.Shared;
 import titles.GameStrings;
 
 import static services.ConsoleLogger.output;
+import static services.ConsoleLogger.showLong;
 
 /**
  *
  * @author esose
  */
-public class DiningRoom implements IRoom {
+public class DiningRoom implements iRoom {
 
     private static final int id = RoomId.DININGROOM.getId();
     private boolean hasBeenSearched = false;
@@ -38,19 +40,19 @@ public class DiningRoom implements IRoom {
     /***********************
      * Getters and setters *
      ***********************/
-    @Override
+      
     public int getId() {
         return id;
     }
-    @Override
+      
     public String getName() {
         return name;
     }
-    @Override
+      
     public String getDescription() {
         return this.description;
     }
-    @Override
+      
     public ArrayList<iItem> getItems() {
         if (this.items ==  null) {
             this.items = new ArrayList<>();
@@ -80,11 +82,11 @@ public class DiningRoom implements IRoom {
     /*************************
      * RoomInventory Methods *
      *************************/
-    @Override
+      
     public void removeItemFromItems(iItem item) {
         this.items.remove(item);
     }
-    @Override
+      
     public void addItemToItems(iItem item) {
         this.items.add(item);
     }
@@ -92,13 +94,13 @@ public class DiningRoom implements IRoom {
     /******************
      * Custom methods *
      ******************/
-    @Override
+      
     public void performCustomMethods(
             String[] inputs) {
         switch (inputs[0]) {
             case "s":
             case "search":
-                output(this.search());
+                showLong(this.search());
                 break;
             default:
                 output(GameStrings.PerformCustomMethodsBadInput);
@@ -108,7 +110,7 @@ public class DiningRoom implements IRoom {
     /*****************
      *    MOVEMENT   *
      *****************/
-    @Override
+      
     public int go(String direction) {
         switch (direction) {
             case "back":
@@ -118,9 +120,20 @@ public class DiningRoom implements IRoom {
         }
     }
 
-    @Override
+      
     public void attack() {
         output(GameStrings.NothingToAttackHereString);
     }
-    
+
+
+    /******************
+     *      Other     *
+     ******************/
+      
+    public void roomActions() {
+        String input = IOService.getNextLine();
+        showLong("You entered " + input);
+    }
+
+
 }

@@ -1,17 +1,16 @@
 package characters;
 
-import items.iItem;
-import shared.Shared;
-
 import java.util.ArrayList;
 
+import items.iItem;
+import shared.Shared;
 import static services.ConsoleLogger.output;
 
 /**
  *
  * @author esose
  */
-public class Player {
+public class Player implements iCharacter {
     private String _name;
     private String _gender;
     private int _health = 10;

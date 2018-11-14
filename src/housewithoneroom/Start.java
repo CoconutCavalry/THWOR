@@ -5,14 +5,12 @@
  */
 package housewithoneroom;
 
-import java.util.Scanner;
-
 import characters.Player;
 import items.iItem;
 import java.util.ArrayList;
 import static services.ConsoleLogger.*;
-//import services.ConsoleLogger.*;
 import shared.*;
+import services.*;
 import titles.GameStrings;
 
 /**
@@ -22,9 +20,6 @@ import titles.GameStrings;
 public class Start {
 
     public static boolean admin = true;
-
-    static Scanner input = new Scanner(System.in);
-    static boolean tryingToEndGame = false;
     
     /**
      * @param args the command line arguments
@@ -33,6 +28,10 @@ public class Start {
         // Initialize a new game
         Game.NewGame();
 
+        ///////
+        showLong("XXXXX XXXXXXX XX XXXXX XXXXXX XXX \nNewLineXXX XXXXX XX XXX XX XXXXXXX XXXX\nNewLineXXX XX X XXXXX XXXXXX XXX\nNewLineXX XXX XXXXXXX X XXXXX XXXXX XXXXXX XX XXXXX\nNewLine XXXXXXX X");
+        ///////
+
         // Print welcome dialogues.
         outputLn(GameStrings.getTitleInBigWords());
         outputLn(GameStrings.getWelcome());
@@ -40,11 +39,11 @@ public class Start {
         outputLn();
         
         // Initialize the player.
-        initializePlayer(input);
+        initializePlayer();
 
         if (admin) {
             // Allow to start in a particular room
-            int roomNum = getStartingRoom(input);
+            int roomNum = getStartingRoom();
             if (roomNum >= Game.house.getCorridor().size()) {
                 roomNum = 0;
             }
@@ -61,7 +60,7 @@ public class Start {
         outputLn();
 
         Game.visitedRooms.add(Game.currentRoom);
-        outputLn(Game.currentRoom.getDescription());
+        showLong(Game.currentRoom.getDescription());
         
         // Herein lies the major flow of the game
         while (Game.state) {
@@ -69,7 +68,7 @@ public class Start {
             output("> ");
             
             // Collect and filter user commands
-            String info = input.nextLine();
+            String info = IOService.getNextLine();
             String[] commands = splitAndSanitizeInput(info);
             outputLn();
 
@@ -81,32 +80,31 @@ public class Start {
     
     /**
      * Gets the name and gender of the player from the user
-     * @return the player object
+     * and creates the player
      */
-    private static boolean initializePlayer(Scanner input) {
+    private static void initializePlayer() {
         //in order to make startup easier for myself:
         if (admin) {
             Game.player = new Player("CoconutCavalry", "male");
         } else {
             output("Enter name: ");
-            String name = input.nextLine();
+            String name = IOService.getNextLine();
             output("Male or female? ");
-            String gender = input.nextLine();
+            String gender = IOService.getNextLine();
             Game.player = new Player(name, gender);
         }
         outputLn("Welcome, " + Game.player.getName() + ".\n");
-        return true;
     }
     /**
      * Gets the starting room number from the user
      * @return the player object
      */
-    private static int getStartingRoom (Scanner input) {
+    private static int getStartingRoom () {
         int retVal = -1;
         String in;
         while (retVal < 0) {
             output("Enter starting room number: ");
-            in = input.nextLine();
+            in = IOService.getNextLine();
             try {
                 retVal = Integer.parseInt(in);
             } catch (Exception e) {
@@ -124,8 +122,8 @@ public class Start {
      */
     private static String[] splitAndSanitizeInput(String input) {
         String sanitizedInput = input.toLowerCase();
-        String[] infoArray = sanitizedInput.split("\\s+");
-        return infoArray;
+//        String[] infoArray = sanitizedInput.split("\\s+");
+        return sanitizedInput.split("\\s+");
     }
 
     /**
@@ -134,22 +132,10 @@ public class Start {
      */
     private static void parseInput(String[] commands) {
         String verb = commands[0];
-        if (tryingToEndGame) {
-            switch (verb) {
-                case "n":
-                case "no":
-                    tryingToEndGame = false;
-                    output("Good.");
-                    break;
-                case "y":
-                case "yes":
-                    Game.exitGame();
-                    break;
-                default:
-                    output("Enter y/n to end game.");
-            }
-        } else {
-            switch (verb) {
+        switch (verb) {
+            //////////
+            // ROOM //
+            //////////
             case "a":
             case "attack":
                 tryToAttack();
@@ -158,10 +144,13 @@ public class Start {
             case "character":
                 output(Game.player.showCharacterReport());
                 break;
+            //////////
+            // ROOM //
+            //////////
             case "desc":
             case "describe":
             case "description":
-                output(Game.currentRoom.getDescription());
+                showLong(Game.currentRoom.getDescription());
                 break;
             case "d":
             case "drop":
@@ -181,9 +170,11 @@ public class Start {
                 break;
             case "exit":
             case "x":
-                tryingToEndGame = true;
-                output("Are you sure you want to exit? [y/n]");
+                Game.exitGame();
                 break;
+            //////////?????????????
+            // ROOM //?????????????
+            //////////?????????????
             case "g":
             case "go":
             case "move":
@@ -208,6 +199,12 @@ public class Start {
                     tryPocketingItem(commands[1]);
                 }
                 break;
+            //////////
+            // ROOM //
+            //////////
+//            case "ra":
+//                Game.currentRoom.roomActions();
+//                break;
             case "stats":
                 if (!validateNoun(commands)) {
                     output("Try including an item from your inventory \n"
@@ -222,7 +219,7 @@ public class Start {
                 if (!validateNoun(commands)) {
                     output("Try including an item after 'take'.");
                 } else {
-                    boolean success = tryTakingItem(commands[1]);
+                    tryTakingItem(commands[1]);
                 }
                 break;
             case "view":
@@ -234,60 +231,58 @@ public class Start {
                     tryViewingItem(commands[1]);
                 }
                 break;
-            default: 
+            //////////
+            // ROOM //
+            //////////
+            default:
                 passCommandsToCurrentRoom(commands);
-            }
         }
     }
 
     /**
      * Passes the user input array and the current player into the room
      * to perform room-specific actions
-     * @param inputs 
+     * @param inputs the commands
      */
     private static void passCommandsToCurrentRoom(String[] inputs) {
         Game.currentRoom.performCustomMethods(inputs);
     }
 
-    private static boolean tryTakingItem(String itemName) {
-        String name = itemName;
+    private static void tryTakingItem(String itemName) {
         ArrayList<iItem> itemsInRoom = Game.currentRoom.getItems();
         if (itemsInRoom == null) {
             output("You don't see any items.");
-            return false;
-        }
-        for(iItem item : itemsInRoom) {
-            if (item.getName().equals(name)){
+        } else {
+            for(iItem item : itemsInRoom) {
+                if (item.getName().equals(itemName)){
 
-                // remove the item from the room if taken by player
-                if (Game.player.takeItem(item)) {
-                    Game.currentRoom.removeItemFromItems(item);
-                    return true;
+                    // remove the item from the room if taken by player
+                    if (Game.player.takeItem(item)) {
+                        Game.currentRoom.removeItemFromItems(item);
+                        return;
+                    }
+                    return;
                 }
-                return false;
             }
         }
         output("No item of that name is available.");
-        return false;
     }
 
     private static void tryDroppingItem(String itemName) {
         // try to drop from inventory
-        String name = itemName;
-        iItem droppedItem = Game.player.dropItem(name);
+        iItem droppedItem = Game.player.dropItem(itemName);
         if (droppedItem != null) {
             // print result of action
-            output("You dropped the " + name + ".");
+            output("You dropped the " + itemName + ".");
             
             // then add back to current room
             Game.currentRoom.addItemToItems(droppedItem);
         } else {
             output(GameStrings.NotInInventory);
-        } 
+        }
     }
     
     private static void tryGoing(String direction) {
-//        GoArgs newRoomArgs = Game.currentRoom.go(direction);
         int roomId = Game.currentRoom.go(direction);
         if (roomId > -1) {
             Game.currentRoom =
@@ -297,7 +292,7 @@ public class Start {
                         + Game.currentRoom.getName() + ".");
             } else {
                 Game.visitedRooms.add(Game.currentRoom);
-                output(Game.currentRoom.getDescription());
+                showLong(Game.currentRoom.getDescription());
             }
         } else if (roomId == -1) {
             output(GameStrings.GoInvalidDirection);

@@ -10,7 +10,9 @@ package services;
  * @author esose
  */
 public class ConsoleLogger {
-    
+
+    private static int MAX_CHAR_LENGTH = 50;
+
     /**
      * Created in order to be able to easily change 
      * the output method for the game.
@@ -27,7 +29,39 @@ public class ConsoleLogger {
         System.out.println();
     }
     
-    public static void outputFm(String content) {
-        System.out.printf(content);
+//    public static void outputFm(String content) {
+//        System.out.printf(content);
+//    }
+
+    public static void showLong(String content) {
+        String[] contentArr = content.split("\n");
+        for (String c : contentArr) {
+            int origin = 0;
+            String remaining = c;
+
+            String s = "";
+            while (remaining.length() > MAX_CHAR_LENGTH) {
+                s = remaining.substring(origin, MAX_CHAR_LENGTH);
+                remaining = remaining.substring(MAX_CHAR_LENGTH);
+                if (!s.contains("\n")) {
+                    String[] sArr = s.split("\n");
+                    printEachArrayElementOnNewLine(sArr);
+                } else {
+                    System.out.println(s);
+                }
+            }
+            System.out.println(remaining);
+
+        }
+
+
     }
+
+    private static void printEachArrayElementOnNewLine(String[] stringArr) {
+        for (String s :
+                stringArr) {
+            System.out.println(s);
+        }
+    }
+
 }
