@@ -70,7 +70,7 @@ public class Shared {
         int weaponDamage;
 
         damage = DiceRoller.getDamage();
-        weaponDamage = damage * GetDamageModifier(user);
+        weaponDamage = damage * getDamageModifier(user);
         npc.takeDamage(weaponDamage);
         outputLn("You hit " + npc.getName() +
                 " for " + weaponDamage + " damage.\n" +
@@ -82,14 +82,14 @@ public class Shared {
         int weaponDamage;
 
         damage = DiceRoller.getDamage();
-        weaponDamage = damage * GetDamageModifier(user);
+        weaponDamage = damage * getDamageModifier(npc);
         user.takeDamage(weaponDamage);
         outputLn(npc.getName() + " hit you for " +
                 weaponDamage + " damage.\n" +
                 "Your health is now " + user.getHealth() + ".");
     }
 
-    private static int GetDamageModifier(Player p) {
+    private static int getDamageModifier(Player p) {
         int retVal = 1;
         if (p.getRHand() != null && p.getRHand() instanceof iWeapon) {
             iWeapon weapon = (iWeapon)p.getRHand();

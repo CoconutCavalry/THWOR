@@ -1,6 +1,6 @@
 package items;
 
-public interface iKey {
+public interface iKey extends iItem {
 
     /**
      *

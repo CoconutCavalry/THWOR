@@ -25,7 +25,5 @@ public interface iRoom {
     void performCustomMethods(String[] inputs);
     int go(String direction);
     void attack();
-
-    void roomActions();
     
 }

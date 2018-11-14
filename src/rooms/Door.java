@@ -17,10 +17,10 @@ public class Door {
      * @param locked true if door is locked
      */
     public Door(int roomId, String desc, iKey keyToUnlock, boolean locked) {
-        roomId = roomId;
-        description = desc;
-        key = keyToUnlock;
-        isLocked = locked;
+        this.roomId = roomId;
+        this.description = desc;
+        this.key = keyToUnlock;
+        this.isLocked = locked;
     }
 
     /**
@@ -29,29 +29,29 @@ public class Door {
      * @param desc of the door itself for showing in the room in which this Door exists
      */
     public Door(int roomId, String desc) {
-        roomId = roomId;
-        description = desc;
-        key = null;
-        isLocked = false;
+        this.roomId = roomId;
+        this.description = desc;
+        this.key = null;
+        this.isLocked = false;
     }
 
     public int getRoomId() {
-        return roomId;
+        return this.roomId;
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     public iKey getKey() {
-        return key;
+        return this.key;
     }
 
     public boolean isLocked() {
-        return isLocked;
+        return this.isLocked;
     }
 
     public void setLocked(boolean locked) {
-        isLocked = locked;
+        this.isLocked = locked;
     }
 }

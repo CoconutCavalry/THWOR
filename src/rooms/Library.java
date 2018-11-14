@@ -5,6 +5,7 @@
  */
 package rooms;
 
+import adventures.LibraryBookshelfAdventure;
 import items.*;
 import services.IOService;
 import shared.Shared;
@@ -36,18 +37,7 @@ public class Library implements iRoom {
     private final String description = RoomDescriptions.library;
     private final String firstSearchDescription = 
             RoomDescriptions.libraryFirstSearch;
-    private final String[] bookTitlesInLibrary = {""
-            + "The Tragic Youth of Ambrose Fogarty: \n"
-            + "\tYoung Master Fogarty, by KM",
-            "\nThe Tragic Youth of Ambrose Fogarty: \n"
-            + "\tFogarty, Esquire, by KM",
-            "\nThe Tragic Youth of Ambrose Fogarty: \n"
-            + "\tIn Her Majesty's Service, by KM",
-            "\nThe Perilous Adventures of Jon Legenn, by KM",
-            "\nMcEver, by KM",
-            "\nThe Complete Clocktower Books, by KM and FM"
-            };
-    
+
     /**
      * Constructor for the Library
      */
@@ -127,11 +117,10 @@ public class Library implements iRoom {
         switch (inputs[0]) {
             case "b":
             case "browse":
-                output(showBookTitles());
+                LibraryBookshelfAdventure.browseLibrary();
                 break;
             case "r":
             case "read":
-                output(readBook(inputs));
                 break;
             case "s":
             case "search":
@@ -140,28 +129,6 @@ public class Library implements iRoom {
             default:
                 output(GameStrings.PerformCustomMethodsBadInput);
         }
-    }
-
-    private String showBookTitles() {
-        return Arrays.toString(this.bookTitlesInLibrary);
-    }
-
-    private String readBook(String[] commands) {
-        if (commands.length > 1) {
-            switch (commands[1]) {
-                case "m":
-                    return Excerpts.mcEver; 
-                case "l":
-                    return Excerpts.legenn;
-                case "f":
-                    return Excerpts.fogarty;
-                case "c":
-                    return Excerpts.clocktower;
-                default:
-                    return "Try 'm', 'l', 'f', or 'c'.";
-            }
-        }
-        return "Try including a title after 'read'.";
     }
 
     /*****************
@@ -189,9 +156,6 @@ public class Library implements iRoom {
     /******************
      *      Other     *
      ******************/
-    public void roomActions() {
-        String input = IOService.getNextLine();
-        showLong("You entered " + input);
-    }
+
 
 }

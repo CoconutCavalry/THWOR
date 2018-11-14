@@ -1,6 +1,6 @@
 package items;
 
-public class Knife implements iItem, iWeapon {
+public class Knife implements iWeapon {
 
     public Knife() {}
 
@@ -31,17 +31,12 @@ public class Knife implements iItem, iWeapon {
     }
 
       
-    public boolean getIsWeapon() {
-        return true;
-    }
-
-      
     public int getDamage() {
         return 2;
     }
 
       
-    public String getAttackVerb() {
-        return "slash";
-    }
+//    public String getAttackVerb() {
+//        return "slash";
+//    }
 }

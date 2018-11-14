@@ -2,7 +2,7 @@ package items;
 
 import rooms.RoomId;
 
-public class HallKey implements iItem, iKey {
+public class HallKey implements iKey {
 
     public HallKey() {}
 

@@ -20,8 +20,6 @@ import titles.GameStrings;
 public class Start {
 
     public static boolean admin = true;
-
-//    private static boolean tryingToEndGame = false;
     
     /**
      * @param args the command line arguments
@@ -135,6 +133,9 @@ public class Start {
     private static void parseInput(String[] commands) {
         String verb = commands[0];
         switch (verb) {
+            //////////
+            // ROOM //
+            //////////
             case "a":
             case "attack":
                 tryToAttack();
@@ -143,10 +144,13 @@ public class Start {
             case "character":
                 output(Game.player.showCharacterReport());
                 break;
+            //////////
+            // ROOM //
+            //////////
             case "desc":
             case "describe":
             case "description":
-                output(Game.currentRoom.getDescription());
+                showLong(Game.currentRoom.getDescription());
                 break;
             case "d":
             case "drop":
@@ -166,10 +170,11 @@ public class Start {
                 break;
             case "exit":
             case "x":
-    //                tryingToEndGame = true;
-    //                output("Are you sure you want to exit? [y/n]");
                 Game.exitGame();
                 break;
+            //////////?????????????
+            // ROOM //?????????????
+            //////////?????????????
             case "g":
             case "go":
             case "move":
@@ -194,9 +199,12 @@ public class Start {
                     tryPocketingItem(commands[1]);
                 }
                 break;
-            case "ra":
-                Game.currentRoom.roomActions();
-                break;
+            //////////
+            // ROOM //
+            //////////
+//            case "ra":
+//                Game.currentRoom.roomActions();
+//                break;
             case "stats":
                 if (!validateNoun(commands)) {
                     output("Try including an item from your inventory \n"
@@ -223,6 +231,9 @@ public class Start {
                     tryViewingItem(commands[1]);
                 }
                 break;
+            //////////
+            // ROOM //
+            //////////
             default:
                 passCommandsToCurrentRoom(commands);
         }
@@ -268,11 +279,10 @@ public class Start {
             Game.currentRoom.addItemToItems(droppedItem);
         } else {
             output(GameStrings.NotInInventory);
-        } 
+        }
     }
     
     private static void tryGoing(String direction) {
-//        GoArgs newRoomArgs = Game.currentRoom.go(direction);
         int roomId = Game.currentRoom.go(direction);
         if (roomId > -1) {
             Game.currentRoom =

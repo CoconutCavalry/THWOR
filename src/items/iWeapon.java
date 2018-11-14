@@ -1,12 +1,6 @@
 package items;
 
-public interface iWeapon {
-
-    /**
-     *
-     * @return true if the item can be used as a weapon
-     */
-    boolean getIsWeapon();
+public interface iWeapon extends iItem {
 
     /**
      *
@@ -18,6 +12,6 @@ public interface iWeapon {
      *
      * @return the item's attack verb
      */
-    String getAttackVerb();
+//    String getAttackVerb();
 
 }

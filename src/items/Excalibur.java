@@ -1,9 +1,11 @@
 package items;
 
-public class Excalibur implements iItem, iWeapon {
-    private int numAttacks = 0;
+public class Excalibur implements iWeapon {
+//    private int numAttacks;
 
-    public Excalibur() {}
+    public Excalibur() {
+//        this.numAttacks = 0;
+    }
 
       
     public String getName() {
@@ -32,21 +34,16 @@ public class Excalibur implements iItem, iWeapon {
     }
 
       
-    public boolean getIsWeapon() {
-        return true;
-    }
-
-      
     public int getDamage() {
         return 20;
     }
 
       
-    public String getAttackVerb() {
-        numAttacks++;
-        if (numAttacks % 3 == 0) {
-            return "stab";
-        }
-        return "slash";
-    }
+//    public String getAttackVerb() {
+//        this.numAttacks++;
+//        if (this.numAttacks % 3 == 0) {
+//            return "stab";
+//        }
+//        return "slash";
+//    }
 }
