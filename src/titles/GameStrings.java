@@ -107,29 +107,20 @@ public class GameStrings {
     
     public static final String HelpDialogue = "" +
             "Example Commands: \n" +
-            "'attack' - engage in battle with a hostile entity sharing\n" +
-            "\tyour room. The equipped items will be used to\n" +
-            "\tcalculate damage done.\n" +
-            "'character' - generates a report on the stats, inventory,\n" +
-            "\tand equipped items of your player\n" +
+            "'attack' - engage in battle with a hostile entity sharing your room. " +
+            "The equipped items will be used to calculate damage done.\n" +
+            "'character' - generates a report on the stats, inventory, and equipped items of your player\n" +
             "'describe' - get current room description\n" +
             "'drop [item]' - put down an item from your inventory\n" +
-            "'equip [item]' - puts an item from your inventory \n" +
-            "\tinto your hand so that it can be used\n" +
+            "'equip [item]' - puts an item from your inventory into your hand so that it can be used\n" +
             "'exit' - 'y' or 'n' to exit the game\n" +
-            "'go' [direction] - move into an adjacent room\n" +
-            "\texample directions: left, right, forward, \n" +
-            "\tback, up, down\n" +
-            "'inventory' - view the items that you have\n" +
-            "\tin your inventory\n" +
-            "'search' - look around in your current room for items that \n" +
-            "\tyou can pick up\n" +
-            "'stats' [item] - view the specified item's stats\n" +
-            "'take' [item] - pick up an item that\n" +
-            "\tyou find in your room\n" +
-            "'unlock' - unlocks a locked door, if the necessary key is\n" +
-            "\tequipped\n" +
-            "'view [item]' - get details on the specified item, if it is\n" +
-            "\tin your current inventory\n";
+            "'go [direction]' - move into an adjacent room " +
+            "(example directions: left, right, forward, back, up, down)\n" +
+            "'inventory' - view the items that you have in your inventory\n" +
+            "'search' - look around in your current room for items that you can interact with\n" +
+            "'stats [item]' - view the specified item's stats\n" +
+            "'take [item]' - pick up an item that you find in your room\n" +
+            "'unlock' - unlocks a locked door, if the necessary key is equipped\n" +
+            "'view [item]' - get details on the specified item, if it is in your current inventory\n";
 
 }

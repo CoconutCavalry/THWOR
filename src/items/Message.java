@@ -11,8 +11,7 @@ public class Message implements iItem {
 
       
     public String getDescription() {
-        return "The scrap of paper has a single word scrawled \n" +
-                "into it: CoconutCavalry";
+        return "The scrap of paper has a single word scrawled into it: CoconutCavalry";
     }
 
       

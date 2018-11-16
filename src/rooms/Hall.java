@@ -16,7 +16,6 @@ import titles.GameStrings;
 
 import static services.ConsoleLogger.output;
 import static services.ConsoleLogger.outputLn;
-import static services.ConsoleLogger.showLong;
 
 /**
  *
@@ -139,7 +138,7 @@ public class Hall implements iRoom {
         switch (inputs[0]) {
             case "s":
             case "search":
-                showLong(this.search());
+                output(this.search());
                 break;
             default:
                 output(GameStrings.PerformCustomMethodsBadInput);
@@ -198,7 +197,7 @@ public class Hall implements iRoom {
       
     public void roomActions() {
         String input = IOService.getNextLine();
-        showLong("You entered " + input);
+        output("You entered " + input);
     }
 
 }

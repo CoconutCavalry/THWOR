@@ -33,7 +33,7 @@ public class LibraryBookshelfAdventure {
                     output(readBook(actionsArray));
                     break;
                 default:
-                    output("invalid");
+                    output("enter 'leave' to leave");
             }
 
             actionsArray = IOService.getNextLine().split(" ");

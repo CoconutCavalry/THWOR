@@ -20,9 +20,12 @@ public class Knife implements iWeapon {
         return 1;
     }
 
-      
+
     public String getStats() {
-        return null;
+        String damageString = "Damage: " + this.getDamage() + "\n";
+        return "Name: " + this.getName() + "\n"
+                + damageString
+                + "Size: " + Double.toString(this.getSize());
     }
 
       

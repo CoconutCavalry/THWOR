@@ -12,7 +12,6 @@ import services.IOService;
 import titles.GameStrings;
 
 import static services.ConsoleLogger.output;
-import static services.ConsoleLogger.showLong;
 import static shared.Shared.validateNoun;
 
 /**
@@ -145,7 +144,7 @@ public class ComputerRoom implements iRoom {
                 break;
             case "s":
             case "search":
-                showLong(this.search());
+                output(this.search());
                 break;
             default:
                 output(GameStrings.PerformCustomMethodsBadInput);
@@ -212,7 +211,7 @@ public class ComputerRoom implements iRoom {
       
     public void roomActions() {
         String input = IOService.getNextLine();
-        showLong("You entered " + input);
+        output("You entered " + input);
     }
 
 

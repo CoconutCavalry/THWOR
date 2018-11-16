@@ -11,6 +11,8 @@ package services;
  */
 public class ConsoleLogger {
 
+    private static boolean noLineWrap = false;
+
     private static int MAX_CHAR_LENGTH = 50;
 
     /**
@@ -19,7 +21,7 @@ public class ConsoleLogger {
      * @param content the content to be outputted
      */
     public static void output(String content) {
-        System.out.print(content);
+        showLong(content);
     }
     
     public static void outputLn(String content) {
@@ -33,25 +35,29 @@ public class ConsoleLogger {
 //        System.out.printf(content);
 //    }
 
-    public static void showLong(String content) {
-        String[] contentArr = content.split("\n");
-        for (String c : contentArr) {
-            int origin = 0;
-            String remaining = c;
+    private static void showLong(String content) {
+        if (noLineWrap) {
+            String[] contentArr = content.split("\n");
+            for (String c : contentArr) {
+                int origin = 0;
+                String remaining = c;
 
-            String s = "";
-            while (remaining.length() > MAX_CHAR_LENGTH) {
-                s = remaining.substring(origin, MAX_CHAR_LENGTH);
-                remaining = remaining.substring(MAX_CHAR_LENGTH);
-                if (!s.contains("\n")) {
-                    String[] sArr = s.split("\n");
-                    printEachArrayElementOnNewLine(sArr);
-                } else {
-                    System.out.println(s);
+                String s = "";
+                while (remaining.length() > MAX_CHAR_LENGTH) {
+                    s = remaining.substring(origin, MAX_CHAR_LENGTH);
+                    remaining = remaining.substring(MAX_CHAR_LENGTH);
+                    if (!s.contains("\n")) {
+                        String[] sArr = s.split("\n");
+                        printEachArrayElementOnNewLine(sArr);
+                    } else {
+                        System.out.println(s);
+                    }
                 }
-            }
-            System.out.println(remaining);
+                System.out.println(remaining);
 
+            }
+        } else {
+            System.out.println(content);
         }
 
 

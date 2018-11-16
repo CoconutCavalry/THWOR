@@ -18,7 +18,6 @@ import titles.GameStrings;
 
 import static housewithoneroom.Start.admin;
 import static services.ConsoleLogger.output;
-import static services.ConsoleLogger.showLong;
 
 /**
  *
@@ -124,7 +123,7 @@ public class Library implements iRoom {
                 break;
             case "s":
             case "search":
-                showLong(this.search());
+                output(this.search());
                 break;
             default:
                 output(GameStrings.PerformCustomMethodsBadInput);

@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import titles.GameStrings;
 
 import static services.ConsoleLogger.output;
-import static services.ConsoleLogger.showLong;
 
 /**
  *
@@ -179,9 +178,9 @@ public class Study implements iRoom {
             case "s":
             case "search":
                 if (inputs.length > 1) {
-                    showLong(this.search(inputs));
+                    output(this.search(inputs));
                 } else {
-                    showLong(this.search());
+                    output(this.search());
                 }
                 break;
             case "u":
@@ -254,7 +253,7 @@ public class Study implements iRoom {
      
     public void roomActions() {
         String input = IOService.getNextLine();
-        showLong("You entered " + input);
+        output("You entered " + input);
     }
 
 }

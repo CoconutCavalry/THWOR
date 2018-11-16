@@ -29,7 +29,7 @@ public class Start {
         Game.NewGame();
 
         ///////
-        showLong("XXXXX XXXXXXX XX XXXXX XXXXXX XXX \nNewLineXXX XXXXX XX XXX XX XXXXXXX XXXX\nNewLineXXX XX X XXXXX XXXXXX XXX\nNewLineXX XXX XXXXXXX X XXXXX XXXXX XXXXXX XX XXXXX\nNewLine XXXXXXX X");
+        output("XXXXX XXXXXXX XX XXXXX XXXXXX XXX \nNewLineXXX XXXXX XX XXX XX XXXXXXX XXXX\nNewLineXXX XX X XXXXX XXXXXX XXX\nNewLineXX XXX XXXXXXX X XXXXX XXXXX XXXXXX XX XXXXX\nNewLine XXXXXXX X");
         ///////
 
         // Print welcome dialogues.
@@ -60,7 +60,7 @@ public class Start {
         outputLn();
 
         Game.visitedRooms.add(Game.currentRoom);
-        showLong(Game.currentRoom.getDescription());
+        output(Game.currentRoom.getDescription());
         
         // Herein lies the major flow of the game
         while (Game.state) {
@@ -150,7 +150,7 @@ public class Start {
             case "desc":
             case "describe":
             case "description":
-                showLong(Game.currentRoom.getDescription());
+                output(Game.currentRoom.getDescription());
                 break;
             case "d":
             case "drop":
@@ -292,7 +292,7 @@ public class Start {
                         + Game.currentRoom.getName() + ".");
             } else {
                 Game.visitedRooms.add(Game.currentRoom);
-                showLong(Game.currentRoom.getDescription());
+                output(Game.currentRoom.getDescription());
             }
         } else if (roomId == -1) {
             output(GameStrings.GoInvalidDirection);

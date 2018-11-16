@@ -23,9 +23,12 @@ public class Excalibur implements iWeapon {
         return 0;
     }
 
-      
+
     public String getStats() {
-        return null;
+        return "Name: EXCALIBVR\n"
+                + "Damage: " + this.getDamage() + "\n"
+                + "Size: " + Double.toString(this.getSize())
+                + "\nThis item requires the use of both hands.";
     }
 
       
