@@ -6,18 +6,21 @@
 package shared;
 
 import characters.Player;
+import characters.SimpleMonster;
+import housewithoneroom.Game;
 import items.iItem;
 import items.iWeapon;
+import static services.ConsoleLogger.outputLn;
 
 import java.util.ArrayList;
 
-import static services.ConsoleLogger.outputLn;
 
 /**
  *
  * @author esose
  */
-public class Shared {
+public class
+Shared {
     public static String convertItemsInListToString(ArrayList<iItem> items) {
         if (items == null) {
             return "";
@@ -65,6 +68,45 @@ public class Shared {
         return false;
     }
 
+    /**
+     * Simple method for attacking simple monsters
+     * @param monster
+     */
+    public static void attack (SimpleMonster monster) {
+        int damage;
+        int weaponDamage;
+
+        damage = DiceRoller.getDamage();
+        if (damage == 0) {
+            outputLn("You miss the " + monster.getName() + " with your attack.");
+        } else {
+            weaponDamage = damage * getDamageModifier(Game.player);
+            ArrayList<String> damageTypes = getDamageTypes(Game.player);
+            int damageDealt = monster.takeDamage(weaponDamage, damageTypes);
+            outputLn("You hit the " + monster.getName() +
+                    " for " + damageDealt + " damage.");
+        }
+    }
+
+    /**
+     * Simple method to defend against simple monsters
+     * @param monster
+     */
+    public static void defend (SimpleMonster monster) {
+        int damage;
+        int weaponDamage;
+
+        damage = DiceRoller.getDamage();
+        if (damage == 0) {
+            outputLn("The " + monster.getName() + " misses you with its attack.");
+        } else {
+            weaponDamage = damage * monster.getStrength();
+            Game.player.takeDamage(weaponDamage);
+            outputLn("The " + monster.getName() + " hit you for " +
+                    weaponDamage + " damage.");
+        }
+    }
+
     public static void attack (Player user, Player npc) {
         int damage;
         int weaponDamage;
@@ -89,6 +131,11 @@ public class Shared {
                 "Your health is now " + user.getHealth() + ".");
     }
 
+    /**
+     * Calculates the total damage from whatever weapons the player has equipped
+     * @param p
+     * @return
+     */
     private static int getDamageModifier(Player p) {
         int retVal = 1;
         if (p.getRHand() != null && p.getRHand() instanceof iWeapon) {
@@ -102,9 +149,37 @@ public class Shared {
         return retVal;
     }
 
+    /**
+     * Check equipped items for damage types
+     * @param player
+     * @return
+     */
+    private static ArrayList<String> getDamageTypes(Player player) {
+        ArrayList<String> retVal = new ArrayList<>();
+        if (player.getRHand() != null && player.getRHand() instanceof iWeapon) {
+            iWeapon weapon = (iWeapon)player.getRHand();
+            retVal.add(weapon.getDamageType());
+        }
+        if (player.getLHand() != null && player.getLHand() instanceof iWeapon) {
+            iWeapon weapon = (iWeapon)player.getLHand();
+            retVal.add(weapon.getDamageType());
+        }
+        return retVal;
+    }
 
-
-
-
-
+    /**
+     * Check if a specific word starts with a vowel
+     * - for pronoun agreement ("a" vs. "an")
+     * @param word
+     * @return
+     */
+    public static boolean startsWithVowel(String word) {
+        if (word.startsWith("a") || word.startsWith("e")
+                || word.startsWith("i") || word.startsWith("o")
+                || word.startsWith("u")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

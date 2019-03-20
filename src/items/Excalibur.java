@@ -14,8 +14,7 @@ public class Excalibur implements iWeapon {
 
       
     public String getDescription() {
-        return "The sword has strange runes carved into the blade\n" +
-                "and a dark jewel set into the pommel.";
+        return "The sword has strange runes carved into the blade and a dark jewel set into the pommel.";
     }
 
       
@@ -24,21 +23,25 @@ public class Excalibur implements iWeapon {
     }
 
 
-    public String getStats() {
-        return "Name: EXCALIBVR\n"
-                + "Damage: " + this.getDamage() + "\n"
-                + "Size: " + Double.toString(this.getSize())
-                + "\nThis item requires the use of both hands.";
-    }
+//    public String getStats() {
+//        return "Name: EXCALIBVR\n"
+//                + "Damage: " + this.getDamage() + "\n"
+//                + "Size: " + Double.toString(this.getSize())
+//                + "\nThis item requires the use of both hands.";
+//    }
 
       
     public String toStringShort() {
-        return "a shining longsword";
+        return "a shining sword";
     }
 
       
     public int getDamage() {
         return 20;
+    }
+
+    public String getDamageType() {
+        return "blade";
     }
 
       

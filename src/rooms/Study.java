@@ -10,7 +10,7 @@ import items.HallKey;
 import items.Message;
 import items.iItem;
 import items.iKey;
-import services.IOService;
+import rooms.doors.Door;
 import shared.Shared;
 
 import java.util.ArrayList;
@@ -23,11 +23,13 @@ import static services.ConsoleLogger.output;
  *
  * @author esose
  */
-public class Study implements iRoom {
+public class Study extends RoomFull {
 
-    private final Door[] doors = {
-            new Door(RoomId.HALL.getId(), "\nOn your left, beside the desk, is a dark-colored door."),
-            new Door(RoomId.LIBRARY.getId(), "\nBehind you is the door to the library.")};
+//    private final Door[] doors = {
+//            new Door(RoomId.HALL.getId(), "\nOn your left, beside the desk, is a dark-colored door.",
+//                    new String[]{"left"}, new HallKey(), true),
+//            new Door(RoomId.LIBRARY.getId(), "\nBehind you is the door to the library.",
+//                    new String[]{"back", "backward", "backwards"})};
     
     private static final int id = RoomId.STUDY.getId();
     private static final String name = "Study";
@@ -37,7 +39,6 @@ public class Study implements iRoom {
     private boolean hallDoorIsLocked = true;
     private final int[] neighbors = {
         RoomId.LIBRARY.getId(), RoomId.HALL.getId()};
-    private ArrayList<iItem> items;
     
     private final String description = RoomDescriptions.study;
     private final String firstSearchDescription = 
@@ -54,9 +55,7 @@ public class Study implements iRoom {
     /**
      * Constructor for the Study
      */
-    public Study() {
-        this.items = new ArrayList<>();
-    }
+    public Study() {}
     
     /***********************
      * Getters and setters *
@@ -100,15 +99,6 @@ public class Study implements iRoom {
             this.fireplaceHasBeenSearched = true;
             this.addItemToItems(new Message());
         }
-    }
-    
-     
-    public ArrayList<iItem> getItems() {
-        if (this.items ==  null) {
-            this.items = new ArrayList<>();
-            return this.items;
-        }
-        return this.items;
     }
 
     /******************
@@ -156,24 +146,11 @@ public class Study implements iRoom {
         return this.fireplaceOtherSearchDescription;
     }
     
-    /*************************
-     * RoomInventory Methods *
-     *************************/
-     
-    public void removeItemFromItems(iItem item) {
-        this.items.remove(item);
-    }
-     
-    public void addItemToItems(iItem item) {
-        this.items.add(item);
-    }
-    
     /******************
      * Custom methods *
      ******************/
      
-    public void performCustomMethods(
-            String[] inputs) {
+    public void performCustomMethods(String[] inputs) {
         switch (inputs[0]) {
             case "s":
             case "search":
@@ -185,7 +162,7 @@ public class Study implements iRoom {
                 break;
             case "u":
             case "unlock":
-                tryUnlockingDoor();
+                tryUnlockingDoor(inputs);
                 break;
             default:
                 output(GameStrings.PerformCustomMethodsBadInput);
@@ -201,6 +178,7 @@ public class Study implements iRoom {
             case "left":
                 return tryMovingIntoHall();
             case "back":
+            case "backward":
             case "backwards":
                 return this.neighbors[0];
             default:
@@ -217,43 +195,55 @@ public class Study implements iRoom {
         }
     }
 
-    private void tryUnlockingDoor() {
+    /**
+     * unlocks the door to the hall if the player has the right key equipped
+     */
+    private void tryUnlockingDoor(String[] inputs) {
+        // Validate input
+        if (inputs.length == 1) {
+            output("What would you like to unlock?");
+        } else if (inputs.length == 2) {
+            if (inputs[1].equals("door")) {
+                output("Which door would you like to unlock?");
+            } else {
+                output(GameStrings.PerformCustomMethodsBadInput);
+            }
+        } else if (inputs.length == 3) {
+            if (inputs[1].equals("left")) {
+                if (inputs[2].equals("door")) {
+                    unlockHallDoor();
+                } else {
+                    output("try: 'unlock left door'");
+                }
+            } else {
+                output(GameStrings.PerformCustomMethodsBadInput);
+            }
+        }
+        else {
+            output(GameStrings.PerformCustomMethodsBadInput);
+        }
+
+    }
+
+    private void unlockHallDoor() {
         //check hands for black key
         if (Game.player.getRHand() != null && Game.player.getRHand() instanceof iKey) {
             iKey key = (iKey)Game.player.getRHand();
             if (key.unlocks() == neighbors[1]) {
                 Game.player.setRHand(null);
-                output("You use the black key to unlock the door.");
+                output("You use the black key to unlock the door on the left.");
                 this.hallDoorIsLocked = false;
             }
         } else if (Game.player.getLHand() != null && Game.player.getLHand() instanceof iKey) {
             iKey key = (iKey)Game.player.getLHand();
             if (key.unlocks() == neighbors[1]) {
                 Game.player.setLHand(null);
-                output("You use the black key to unlock the door.");
+                output("You use the black key to unlock the door on the left.");
                 this.hallDoorIsLocked = false;
             }
         } else {
             output("You do not have the right key equipped.");
         }
-    }
-    
-    /******************
-     *    Attacking   *
-     ******************/
-     
-    public void attack() {
-        output(GameStrings.NothingToAttackHereString);
-    }
-
-
-    /******************
-     *      Other     *
-     ******************/
-     
-    public void roomActions() {
-        String input = IOService.getNextLine();
-        output("You entered " + input);
     }
 
 }

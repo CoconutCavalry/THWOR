@@ -1,17 +1,25 @@
 package items;
 
-public class Knife implements iWeapon {
+public class Torch implements iWeapon {
 
-    private String name = "knife";
-    private String description = "A small, sharp, folding " +
-            "pocketknife with a wooden handle.";
+    private String name = "torch";
+    private String description = "The torch has a wooden handle " +
+            "with a cloth wrapped around one end. The cloth is " +
+            "burning slowly but brightly.";
     private int size = 1;
     private int damage = 2;
-    private String damageType = "blade";
+    private String damageType = "fire";
 
-    public Knife() {}
+    public Torch() {}
 
-      
+    public int getDamage() {
+        return damage;
+    }
+
+    public String getDamageType() {
+        return damageType;
+    }
+
     public String getName() {
         return name;
     }
@@ -19,7 +27,7 @@ public class Knife implements iWeapon {
     public String getDescription() {
         return description;
     }
-      
+
     public double getSize() {
         return size;
     }
@@ -29,21 +37,8 @@ public class Knife implements iWeapon {
 //                "\nDamage: " + this.getDamage() +
 //                "\nSize: " + Double.toString(this.getSize());
 //    }
-      
+
     public String toStringShort() {
         return "a " + this.name;
     }
-      
-    public int getDamage() {
-        return damage;
-    }
-
-    public String getDamageType() {
-        return damageType;
-    }
-
-      
-//    public String getAttackVerb() {
-//        return "slash";
-//    }
 }

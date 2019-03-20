@@ -1,19 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package rooms;
 
 import adventures.LibraryBookshelfAdventure;
+import characters.SimpleMonster;
+import housewithoneroom.Game;
 import items.*;
-import services.IOService;
 import shared.Shared;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
-import titles.Excerpts;
 import titles.GameStrings;
 
 import static housewithoneroom.Start.admin;
@@ -23,30 +17,31 @@ import static services.ConsoleLogger.output;
  *
  * @author esose
  */
-public class Library implements iRoom {
+public class Library extends RoomFull {
 
-    private final Door[] doors = {new Door(RoomId.STUDY.getId(),
-            "\nStraight ahead in the distance, you see a wooden door.")};
+//    private final Door[] doors = {new Door(RoomId.STUDY.getId(),
+//            "\nStraight ahead in the distance, you see a wooden door.",
+//            new String[]{"straight", "ahead", "forward", "forwards"})};
 
     private static final int id = RoomId.LIBRARY.getId();
     private static final String name = "Library";
-    private boolean hasBeenSearched = false;
-//    private final int[] neighbors = {RoomId.STUDY.getId()};
-    public ArrayList<iItem> items;
+    private final int neighbor = RoomId.STUDY.getId();
+    private SimpleMonster monster;
     private final String description = RoomDescriptions.library;
-    private final String firstSearchDescription = 
+    private final String firstSearchDescription =
             RoomDescriptions.libraryFirstSearch;
+    private boolean hasBeenSearched;
 
-    /**
-     * Constructor for the Library
-     */
+
+
     public Library() {
-        this.items = new ArrayList<>();
-        this.items.add(new Flashlight());
-        this.items.add(new Knife());
+        this.hasBeenSearched = false;
+        this.addItemToItems(new Flashlight());
+        this.addItemToItems(new Knife());
 //        this.items.add(eItem.MATCHES);
+        this.monster = new SimpleMonster("gremlin", 50, 5, "blade");
         if (admin) {
-            this.items.add(new Excalibur());
+            this.addItemToItems(new Excalibur());
         }
     }
     
@@ -63,19 +58,22 @@ public class Library implements iRoom {
     }
      
     public String getDescription() {
-        return description + doors[0].getDescription();
-    }
-     
-    public ArrayList<iItem> getItems() {
-        return this.items;
+        String retVal = description;
+//        for (Door door : doors) {
+//            retVal += door.getDescription();
+//        }
+        if (monster != null) {
+            if (monster.isDead()){
+                retVal += "\nThere is a dead " + monster.getName() + " here.";
+            } else {
+                retVal += "\nThere is " + monster.getNameLong() + " here.";
+            }
+        }
+        return retVal;
     }
 
-    private String doorsToString() {
-        String doorsString = "";
-        for (Door d : doors) {
-            doorsString += "\n" + d.getDescription();
-        }
-        return doorsString;
+    public SimpleMonster getMonster() {
+        return this.monster;
     }
     
     /******************
@@ -95,19 +93,7 @@ public class Library implements iRoom {
         return Shared.appendDescriptionToItemsString(
                     RoomDescriptions.defaultSearchDescription, itemsInRoom);
     }
-    
-    /*************************
-     * RoomInventory Methods *
-     *************************/
-    public void removeItemFromItems(iItem item) {
-        this.items.remove(item);
-    }
-    
-    public void addItemToItems(iItem item) {
-        this.items.add(item);
-    }
-    
-    
+
     /******************
      * Custom methods *
      ******************/
@@ -137,8 +123,9 @@ public class Library implements iRoom {
         switch (direction) {
             case "ahead":
             case "forward":
+            case "forwards":
             case "straight":
-                return this.doors[0].getRoomId();
+                return this.neighbor;
             default:
                 return -1;
         }
@@ -147,14 +134,27 @@ public class Library implements iRoom {
     /******************
      *    Attacking   *
      ******************/
-    public void attack() {
-        output(GameStrings.NothingToAttackHereString);
-    }
-
-
-    /******************
-     *      Other     *
-     ******************/
-
+//    public void attack() {
+//        // First, check if there is a monster to fight
+//        if (monster == null) {
+//            output(GameStrings.NothingToAttackHereString);
+//            return;
+//        } else if (monster.isDead()) {
+//            output("The " + monster.getName() + " is dead.");
+//        } else {
+//            // If a monster exists, attack it
+//            Shared.attack(monster);
+//            if (monster.isDead()) {
+//                output("You have slain the " + monster.getName() + ".");
+//            } else {
+//                // If the monster is still alive, defend against its attack:
+//                Shared.defend(monster);
+//                if (Game.player.isDead()) {
+//                    Game.state = false;
+//                    output(Game.player.death);
+//                }
+//            }
+//        }
+//    }
 
 }

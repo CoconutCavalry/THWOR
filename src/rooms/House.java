@@ -20,6 +20,9 @@ public final class House {
         this.corridor.add(new Hall());
         this.corridor.add(new DiningRoom());
         this.corridor.add(new ComputerRoom());
+        this.corridor.add(new Kitchen());
+        this.corridor.add(new Pantry());
+        this.corridor.add(new UpstairsHallway());
     }
     
     public LinkedList<iRoom> getCorridor() {

@@ -6,6 +6,7 @@
 package housewithoneroom;
 
 import characters.Player;
+import characters.SimpleMonster;
 import items.iItem;
 import java.util.ArrayList;
 import static services.ConsoleLogger.*;
@@ -19,8 +20,9 @@ import titles.GameStrings;
  */
 public class Start {
 
-    public static boolean admin = true;
-    
+    public static boolean admin = false;
+//    public static boolean admin = true;
+
     /**
      * @param args the command line arguments
      */
@@ -29,15 +31,16 @@ public class Start {
         Game.NewGame();
 
         ///////
-        output("XXXXX XXXXXXX XX XXXXX XXXXXX XXX \nNewLineXXX XXXXX XX XXX XX XXXXXXX XXXX\nNewLineXXX XX X XXXXX XXXXXX XXX\nNewLineXX XXX XXXXXXX X XXXXX XXXXX XXXXXX XX XXXXX\nNewLine XXXXXXX X");
+        //output("XXXXX XXXXXXX XX XXXXX XXXXXX XXX \nNewLineXXX XXXXX XX XXX XX XXXXXXX XXXX\nNewLineXXX XX X XXXXX XXXXXX XXX\nNewLineXX XXX XXXXXXX X XXXXX XXXXX XXXXXX XX XXXXX\nNewLine XXXXXXX X");
         ///////
 
         // Print welcome dialogues.
-        outputLn(GameStrings.getTitleInBigWords());
-        outputLn(GameStrings.getWelcome());
-        outputLn(GameStrings.getHouse());
+//        output(GameStrings.getTitleInBigWords());
+//        outputLn();
+        output(GameStrings.getHouse());
+        output(GameStrings.getWelcome());
         outputLn();
-        
+
         // Initialize the player.
         initializePlayer();
 
@@ -48,24 +51,26 @@ public class Start {
                 roomNum = 0;
             }
             Game.currentRoom = Game.house.getCorridor().get(roomNum);
+            output("You are starting in the "
+                    + Game.currentRoom.getName() + ".");
+            outputLn();
         } else {
             Game.currentRoom = Game.house.getCorridor().getFirst();
         }
 
-        outputLn("You are starting in the "
-                + Game.currentRoom.getName() + ".\n");
-        
         // Show starting stats
-        outputLn(Game.player.showCharacterReport());
+        output(Game.player.showCharacterReport());
         outputLn();
 
         Game.visitedRooms.add(Game.currentRoom);
         output(Game.currentRoom.getDescription());
+        outputLn();
+
         
         // Herein lies the major flow of the game
         while (Game.state) {
             // Instruct the user
-            output("> ");
+            outputForInput("> ");
             
             // Collect and filter user commands
             String info = IOService.getNextLine();
@@ -86,14 +91,15 @@ public class Start {
         //in order to make startup easier for myself:
         if (admin) {
             Game.player = new Player("CoconutCavalry", "male");
+            outputLn("Welcome, " + Game.player.getName() + ".\n");
         } else {
-            output("Enter name: ");
+            outputForInput("Enter name: ");
             String name = IOService.getNextLine();
-            output("Male or female? ");
+            outputForInput("Male or female? ");
             String gender = IOService.getNextLine();
             Game.player = new Player(name, gender);
+            outputLn("\nWelcome, " + Game.player.getPronouns()[0] + " " + Game.player.getName() + ".\n");
         }
-        outputLn("Welcome, " + Game.player.getName() + ".\n");
     }
     /**
      * Gets the starting room number from the user
@@ -205,14 +211,14 @@ public class Start {
 //            case "ra":
 //                Game.currentRoom.roomActions();
 //                break;
-            case "stats":
-                if (!validateNoun(commands)) {
-                    output("Try including an item from your inventory \n"
-                            + "after 'stats'.");
-                } else {
-                    showItemStats(commands[1]);
-                }
-                break;
+//            case "stats":
+//                if (!validateNoun(commands)) {
+//                    output("Try including an item from your inventory \n"
+//                            + "after 'stats'.");
+//                } else {
+//                    showItemStats(commands[1]);
+//                }
+//                break;
             case "t":
             case "get":
             case "take":
@@ -283,6 +289,14 @@ public class Start {
     }
     
     private static void tryGoing(String direction) {
+        if (Game.currentRoom.getMonster() != null) {
+            SimpleMonster monster = Game.currentRoom.getMonster();
+            if (!monster.isDead()) {
+                output("The " + monster.getName() + " blocks your path.\n" +
+                        "You cannot leave while the " + monster.getName() + " is alive.");
+                return;
+            }
+        }
         int roomId = Game.currentRoom.go(direction);
         if (roomId > -1) {
             Game.currentRoom =
@@ -294,8 +308,13 @@ public class Start {
                 Game.visitedRooms.add(Game.currentRoom);
                 output(Game.currentRoom.getDescription());
             }
+
         } else if (roomId == -1) {
             output(GameStrings.GoInvalidDirection);
+        } else if (roomId == -99) {
+            // roomId -99 is endGameWin
+            // Do nothing; necessary actions have already taken place.
+            // Here, it just needs to fall through back to the main loop so that it can exit.
         }
     }
 
@@ -345,15 +364,16 @@ public class Start {
         return false;
     }
 
-    private static void showItemStats(String command) {
-        iItem item = Shared.searchForItemInListByName(
-                command, Game.player.getInventory());
-        if (item != null) {
-            output(item.getStats());
-        } else {
-            output(GameStrings.NotInInventory);
-        }
-    }
+    // TODO: this method needs some work before implementing
+//    private static void showItemStats(String command) {
+//        iItem item = Shared.searchForItemInListByName(
+//                command, Game.player.getInventory());
+//        if (item != null) {
+//            output(item.getStats());
+//        } else {
+//            output(GameStrings.NotInInventory);
+//        }
+//    }
 
     /**
      * Displays an informative dialogue about possible actions

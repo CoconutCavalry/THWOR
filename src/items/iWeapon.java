@@ -10,6 +10,12 @@ public interface iWeapon extends iItem {
 
     /**
      *
+     * @return type of damage
+     */
+    String getDamageType();
+
+    /**
+     *
      * @return the item's attack verb
      */
 //    String getAttackVerb();

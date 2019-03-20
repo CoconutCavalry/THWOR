@@ -6,7 +6,10 @@ public enum RoomId {
     STUDY(1),
     HALL(2),
     DININGROOM(3),
-    COMPUTERROOM(4);
+    COMPUTERROOM(4),
+    KITCHEN(5),
+    PANTRY(6),
+    UPSTAIRSHALLWAY(7);
 
     RoomId(int id) {
         this.id = id;

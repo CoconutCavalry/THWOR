@@ -20,9 +20,9 @@ public class Message implements iItem {
     }
 
       
-    public String getStats() {
-        return null;
-    }
+//    public String getStats() {
+//        return null;
+//    }
 
       
     public String toStringShort() {

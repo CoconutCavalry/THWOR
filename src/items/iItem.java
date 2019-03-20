@@ -24,7 +24,7 @@ public interface iItem {
      *
      * @return the item's stats
      */
-    String getStats();
+//    String getStats();
 
     /**
      *

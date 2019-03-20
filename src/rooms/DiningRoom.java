@@ -8,7 +8,6 @@ package rooms;
 import java.util.ArrayList;
 
 import items.iItem;
-import services.IOService;
 import shared.Shared;
 import titles.GameStrings;
 
@@ -18,16 +17,15 @@ import static services.ConsoleLogger.output;
  *
  * @author esose
  */
-public class DiningRoom implements iRoom {
+public class DiningRoom extends RoomBase {
 
     private static final int id = RoomId.DININGROOM.getId();
-    private boolean hasBeenSearched = false;
-    private final int[] neighbors = {RoomId.HALL.getId()};
-    public ArrayList<iItem> items;
+    private final int[] neighbors = {RoomId.HALL.getId(), RoomId.KITCHEN.getId()};
     private static final String name = "Dining Room";
     private final String description = RoomDescriptions.dining;
-    private final String firstSearchDescription =
-            RoomDescriptions.diningFirstSearch;
+    private ArrayList<iItem> items;
+
+    private boolean hasBeenSearched = false;
 
     /**
      * Constructor for the DiningRoom
@@ -70,10 +68,8 @@ public class DiningRoom implements iRoom {
         }
         if (!this.hasBeenSearched) {
             this.hasBeenSearched = true;
-            return Shared.appendDescriptionToItemsString(
-                    this.firstSearchDescription, itemsInRoom);
         }
-        
+
         return Shared.appendDescriptionToItemsString(
                     RoomDescriptions.defaultSearchDescription, itemsInRoom);
     }
@@ -114,25 +110,18 @@ public class DiningRoom implements iRoom {
         switch (direction) {
             case "back":
                 return this.neighbors[0];
+            case "forward":
+            case "ahead":
+            case "forwards":
+                return this.neighbors[1];
             default:
                 return -1;
         }
     }
 
-      
-    public void attack() {
-        output(GameStrings.NothingToAttackHereString);
-    }
-
-
     /******************
      *      Other     *
      ******************/
-      
-    public void roomActions() {
-        String input = IOService.getNextLine();
-        output("You entered " + input);
-    }
 
 
 }

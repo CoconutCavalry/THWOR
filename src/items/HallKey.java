@@ -22,9 +22,9 @@ public class HallKey implements iKey {
     }
 
       
-    public String getStats() {
-        return null;
-    }
+//    public String getStats() {
+//        return null;
+//    }
 
       
     public String toStringShort() {
