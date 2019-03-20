@@ -11,8 +11,7 @@ public class Flashlight implements iItem {
 
       
     public String getDescription() {
-        return "A large flashlight with a cracked and faded \n" +
-                "blue plastic casing.";
+        return "A large flashlight with a cracked and faded blue plastic casing.";
     }
 
       
@@ -21,9 +20,9 @@ public class Flashlight implements iItem {
     }
 
       
-    public String getStats() {
-        return null;
-    }
+//    public String getStats() {
+//        return null;
+//    }
 
       
     public String toStringShort() {

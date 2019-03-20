@@ -5,11 +5,16 @@
  */
 package services;
 
+import static housewithoneroom.Start.admin;
+
 /**
  *
  * @author esose
  */
 public class ConsoleLogger {
+
+    private static boolean noLineWrap = false;
+    private static boolean delay = true;
 
     private static int MAX_CHAR_LENGTH = 50;
 
@@ -19,6 +24,34 @@ public class ConsoleLogger {
      * @param content the content to be outputted
      */
     public static void output(String content) {
+        if (noLineWrap) {
+            showLong(content);
+        } else if (admin) {
+            System.out.println(content);
+        } else if (delay) {
+            showWithDelay(content);
+        } else {
+            System.out.println(content);
+        }
+    }
+
+    private static void showWithDelay(String content) {
+        if (admin) {
+            System.out.println(content);
+            return;
+        }
+        String[] contentArr = content.split("\n");
+        for (String c : contentArr) {
+            System.out.println(c);
+            try {
+                Thread.sleep(300);
+            } catch (InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
+        }
+    }
+
+    public static void outputForInput(String content) {
         System.out.print(content);
     }
     
@@ -33,7 +66,7 @@ public class ConsoleLogger {
 //        System.out.printf(content);
 //    }
 
-    public static void showLong(String content) {
+    private static void showLong(String content) {
         String[] contentArr = content.split("\n");
         for (String c : contentArr) {
             int origin = 0;
@@ -51,15 +84,11 @@ public class ConsoleLogger {
                 }
             }
             System.out.println(remaining);
-
         }
-
-
     }
 
     private static void printEachArrayElementOnNewLine(String[] stringArr) {
-        for (String s :
-                stringArr) {
+        for (String s : stringArr) {
             System.out.println(s);
         }
     }

@@ -46,9 +46,15 @@ public class Game {
             output(GameStrings.getEOGUser());
         } else {
             outputLn();
-            output("Good");
+            output("Good.");
         }
     }
-    
+
+    public static int endGame() {
+        state = false;
+        output(GameStrings.endGameWin);
+        return -99;
+    }
+
     //public save(){}
 }

@@ -4,7 +4,34 @@ import items.iItem;
 
 import java.util.ArrayList;
 
-public class NPC {
+public class MonsterComplex implements iCharacter {
+
+    /*
+     *
+     * Private Properties
+     */
+    private String name;
+    private NpcTypes type;
+    private String gender;
+    private int health = 10;
+    private ArrayList<iItem> inventory;
+    private iItem lHand = null;
+    private iItem rHand = null;
+    public String death = "You are dead.";
+    private boolean dead;
+
+    /**
+     * Constructor
+     */
+    public MonsterComplex(String name, NpcTypes type, int health, iItem rHand) {
+        this.name = name;
+        this.type = type;
+        this.health = health;
+        this.rHand = rHand;
+        this.gender = "male";
+        this.dead = false;
+    }
+
     public String getName() {
         return null;
     }
@@ -23,6 +50,10 @@ public class NPC {
 
     public void setHealth(int newHealth) {
 
+    }
+
+    public boolean isDead() {
+        return this.dead;
     }
 
     public ArrayList<iItem> getItemsInHands() {

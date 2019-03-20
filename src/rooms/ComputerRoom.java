@@ -7,19 +7,19 @@ package rooms;
 
 import java.util.ArrayList;
 
+import characters.SimpleMonster;
 import items.iItem;
 import services.IOService;
 import titles.GameStrings;
 
 import static services.ConsoleLogger.output;
-import static services.ConsoleLogger.showLong;
 import static shared.Shared.validateNoun;
 
 /**
  *
  * @author esose
  */
-public class ComputerRoom implements iRoom {
+public class ComputerRoom extends RoomFull {
     
     private static final int id = RoomId.COMPUTERROOM.getId();
     private static final String name = "Computer Room";
@@ -27,7 +27,6 @@ public class ComputerRoom implements iRoom {
     private boolean computerIsLocked = true;
     private boolean lightIsOn = false;
     private final int[] neighbors = {RoomId.HALL.getId()};
-    private ArrayList<iItem> items;
     
     private static final String description = RoomDescriptions.compRoom;
     private static final String firstSearchNoLight = 
@@ -40,9 +39,7 @@ public class ComputerRoom implements iRoom {
     /**
      * Constructor for the Minesweeper Simulation room
      */
-    ComputerRoom() {
-        this.items = new ArrayList<>();
-    }
+    ComputerRoom() {}
     
     /***********************
      * Getters and setters *
@@ -90,15 +87,6 @@ public class ComputerRoom implements iRoom {
             return true;
         }
     }
-    
-      
-    public ArrayList<iItem> getItems() {
-        if (this.items ==  null) {
-            this.items = new ArrayList<>();
-            return this.items;
-        }
-        return this.items;
-    }
 
     /******************
      * Search methods *
@@ -118,18 +106,6 @@ public class ComputerRoom implements iRoom {
             return firstSearchNoLight;
         }
     }
-    
-    /*************************
-     * RoomInventory Methods *
-     *************************/
-      
-    public void removeItemFromItems(iItem item) {
-        this.items.remove(item);
-    }
-      
-    public void addItemToItems(iItem item) {
-        this.items.add(item);
-    }
 
     /******************
      * Custom methods *
@@ -145,7 +121,7 @@ public class ComputerRoom implements iRoom {
                 break;
             case "s":
             case "search":
-                showLong(this.search());
+                output(this.search());
                 break;
             default:
                 output(GameStrings.PerformCustomMethodsBadInput);
@@ -167,17 +143,6 @@ public class ComputerRoom implements iRoom {
         }
     }
 
-    /******************
-     *    Attacking   *
-     ******************/
-      
-    public void attack() {
-        output(GameStrings.NothingToAttackHereString);
-    }
-
-    
-    
-    
     /************************
      *  CUSTOM TRY METHODS  *
      ************************/
@@ -204,16 +169,5 @@ public class ComputerRoom implements iRoom {
         return "Try including an object to interact with after the verb.";
             
     }
-
-
-    /******************
-     *      Other     *
-     ******************/
-      
-    public void roomActions() {
-        String input = IOService.getNextLine();
-        showLong("You entered " + input);
-    }
-
 
 }

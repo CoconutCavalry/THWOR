@@ -6,33 +6,36 @@
 package rooms;
 
 import characters.Player;
+import characters.SimpleMonster;
 import housewithoneroom.Game;
 import java.util.ArrayList;
 
+import items.Torch;
 import items.iItem;
 import services.IOService;
 import shared.Shared;
 import titles.GameStrings;
 
 import static services.ConsoleLogger.output;
+import static services.ConsoleLogger.outputForInput;
 import static services.ConsoleLogger.outputLn;
-import static services.ConsoleLogger.showLong;
 
 /**
  *
  * @author esose
  */
-public class Hall implements iRoom {
+public class Hall extends RoomFull {
     
     private static final int id = RoomId.HALL.getId();
     private static final String name = "Hall";
     private boolean hasBeenSearched = false;
     private boolean guardianIsAngry = false;
     private boolean guardianIsDead = false;
+    private boolean computerRoomIsLocked = true;
+    private final String computerRoomPassword = "CoconutCavalry";
     private int guardianHealth;
-    private final int[] neighbors = {RoomId.STUDY.getId(),
-        RoomId.DININGROOM.getId(), RoomId.COMPUTERROOM.getId()};
-    private ArrayList<iItem> items;
+    private final int[] neighbors = {RoomId.STUDY.getId(), RoomId.DININGROOM.getId(),
+            RoomId.COMPUTERROOM.getId(), RoomId.UPSTAIRSHALLWAY.getId()};
     
     private final String description = RoomDescriptions.hall;
     private final String guardianAliveSearch = 
@@ -46,13 +49,10 @@ public class Hall implements iRoom {
      * Constructor for the Hall
      */
     public Hall() {
-        this.items = new ArrayList<>();
-        for(int i = 0; i < 3; i++) {
-//            this.items.add();
-        }
         this.guardianHealth = 1;
         this.guardian = new Player("The Guardian", 100,
                 "The dark form dissolves in a cloud of mist.");
+        this.addItemToItems(new Torch());
     }
 
     /***********************
@@ -70,14 +70,7 @@ public class Hall implements iRoom {
     public String getDescription() {
         return this.description;
     }
-      
-    public ArrayList<iItem> getItems() {
-        if (this.items ==  null) {
-            this.items = new ArrayList<>();
-            return this.items;
-        }
-        return this.items;
-    }
+
     private boolean getHasBeenSearched() {
         return this.hasBeenSearched;
     }
@@ -118,18 +111,6 @@ public class Hall implements iRoom {
         return this.guardianDeadSearch;
     }
 
-    /*************************
-     * RoomInventory Methods *
-     *************************/
-      
-    public void removeItemFromItems(iItem item) {
-        this.items.remove(item);
-    }
-      
-    public void addItemToItems(iItem item) {
-        this.items.add(item);
-    }
-
     /******************
      * Custom methods *
      ******************/
@@ -137,9 +118,12 @@ public class Hall implements iRoom {
     public void performCustomMethods(
             String[] inputs) {
         switch (inputs[0]) {
+            case "keypad":
+                this.viewKeypad();
+                break;
             case "s":
             case "search":
-                showLong(this.search());
+                output(this.search());
                 break;
             default:
                 output(GameStrings.PerformCustomMethodsBadInput);
@@ -149,23 +133,40 @@ public class Hall implements iRoom {
     /*****************
      *    MOVEMENT   *
      *****************/
-      
+
     public int go(String direction) {
         if (this.getGuardianIsAngry()) {
             output(RoomDescriptions.guardianIsAngryCannotLeave);
             return -2;
         }
         switch (direction) {
+            case "ahead":
+            case "forward":
+            case "forwards":
+            case "straight":
+                return Game.endGame();
             case "back":
             case "backwards":
                 return this.neighbors[0];
             case "left":
                 return this.neighbors[1];
             case "right":
-                return this.neighbors[2];
+                return tryComputerRoomDoor();
+            case "up":
+            case "upstairs":
+            case "upwards":
+                return this.neighbors[3];
             default:
                 return -1;
         }
+    }
+
+    private int tryComputerRoomDoor() {
+        if (!this.computerRoomIsLocked) {
+            return this.neighbors[2];
+        }
+        output("The door is locked.");
+        return -2;
     }
 
     /******************
@@ -195,10 +196,19 @@ public class Hall implements iRoom {
     /******************
      *      Other     *
      ******************/
-      
-    public void roomActions() {
-        String input = IOService.getNextLine();
-        showLong("You entered " + input);
+
+    private void viewKeypad() {
+        output("There is a simple touch-screen 'QWERTY' keyboard set into the wall. " +
+                "The screen below it says:");
+        outputForInput("> ENTER PASSWORD: ");
+
+        String password = IOService.getNextLine();
+        if (password.equals(this.computerRoomPassword)) {
+            this.computerRoomIsLocked = false;
+            output("You hear a soft click from the wall behind the keypad.");
+        } else {
+            output("> INCORRECT PASSWORD");
+        }
     }
 
 }

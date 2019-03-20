@@ -13,27 +13,30 @@ public class RoomDescriptions {
     
     public static final String defaultSearchDescription = "You see ";
     
-    /*******************
-     *     LIBRARY     *
-     *******************/
+    /*****************
+     *    LIBRARY    *
+     *****************/
     public static final String library = "" +
             "You are in a large room, surrounded by a labyrinth of " +
             "tall bookshelves made of a magnificent dark wood. " +
             "Golden autumnal light floods the place from high " +
-            "windows somewhere outside of your field of vision.";
+            "windows somewhere outside of your field of vision." +
+            "\nStraight ahead in the distance, you see a wooden door.";
     public static final String libraryFirstSearch = "" +
             "You wander about the room for a minute, glancing at " +
             "the titles of the old, worn books. Lying about on the " +
             "shelves and between the novels, you see ";
     
-    /*******************
-     *      STUDY      *
-     *******************/
+    /***************
+     *    STUDY    *
+     ***************/
     public static final String study = "" +
             "You are in a small, dimly lit room. A high-backed " +
             "armchair sits behind a large oak desk on one side. " +
             "The other side has a fireplace, in which some struggling" +
-            " embers fight to produce a meager source of heat.";
+            " embers fight to produce a meager source of heat." +
+            "\nOn your left, beside the desk, is a dark-colored door." +
+            "\nBehind you is the door to the library.";
     public static final String studyFirstSearch = "" +
             "You see ";
     public static final String studyDeskFirstSearch = "" +
@@ -51,17 +54,18 @@ public class RoomDescriptions {
     public static final String studyFireplaceOtherSearch = "" +
             "It is an old stone fireplace, with some coals burning on the grate.";
     
-    /******************
-     *      HALL      *
-     ******************/
+    /**************
+     *    HALL    *
+     **************/
     public static final String hall = "" +
             "You are in a long hall lit by flickering torches placed along " +
-            "the walls. There are stairs going upward to the railing of a " +
-            "second floor above you." +
-            "\nOn your left is a plain-looking door. On your right is a " +
-            "metallic door with a keypad set into the wall beside it. In front " +
-            "of you is a high, ornately carved arched doorway. The door to the " +
-            "Study is behind you.";
+            "the walls." +
+            "\nThere are stairs going upward to the railing of a second floor " +
+            "above you." +
+            "\nOn your left is a plain-looking door." +
+            "\nOn your right is a metallic door with a keypad set into the wall beside it." +
+            "\nIn front of you is a high, ornately carved arched doorway." +
+            "\nThe door to the Study is behind you.";
     public static final String hallFirstSearch = "" +
             "A shadowy figure steps towards you out of the dark corner. The " +
             "face is obscured by a dark cowl and bony hands reach up as if to " +
@@ -74,18 +78,19 @@ public class RoomDescriptions {
             "\n'You have angered the Guardian,' it says." +
             "\n'You shall not leave.'";
     
-    /******************
-     *  DINING ROOM   *
-     ******************/
+    /*********************
+     *    DINING ROOM    *
+     *********************/
     public static final String dining = "" +
             "You are in a dim, candle-lit dining room. A table in front of you " +
             "is set for seven, but the seventh set of dishes and utensils, at " +
             "the far end of the table, is old, cracked, and covered in a thick " +
             "layer of dust." +
             "\n'Who could live here?' you ask yourself." +
+            "\nThere is a swinging door in the far wall ahead of you." +
             "\nThe door to the Hall is behind you.";
-    public static final String diningFirstSearch = "" +
-            "There is nothing here.";
+//    public static final String diningFirstSearch = "" +
+//            "There is nothing here.";
     
     /***********************
      *    COMPUTER ROOM    *
@@ -111,4 +116,33 @@ public class RoomDescriptions {
             "sticky-note in the middle reads 'RAG??'. Four beds are spread across " +
             "the room." +
             "\n" + compSearchNoLight;
+
+    /*****************
+     *    KITCHEN    *
+     *****************/
+    public static final String kitchen = "" +
+            "You are in a large, old fashioned kitchen with a black-and-white " +
+            "checkerboard floor." +
+            "\nTo your right is a plain wooden door." +
+            "\nBehind you is the door to the dining room.";
+
+    /****************
+     *    PANTRY    *
+     ****************/
+    public static final String pantry = "" +
+            "You are in a long pantry room with floor-to-ceiling wooden shelves " +
+            "running the length of the room." +
+            "\nBehind you is the door to the kitchen.";
+
+    /**************************
+     *    UPSTAIRS HALLWAY    *
+     **************************/
+    public static final String upstairsHallway = "" +
+            "You are in a long hallway. To your right is a railing, beyond which " +
+            "you can see the torchlit hall below. There are two doors on your left." +
+            "\nThe first door on your left is black." +
+            "\nThe second door on your left is grey." +
+            "\nAhead, you see a third door, which is red." +
+            "\nBehind you is the staircase leading down to the hall.";
+
 }

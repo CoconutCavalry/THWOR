@@ -78,7 +78,7 @@ public enum eItem {
      * @param description of item
      * @param size  - inventory space necessary
      */
-    private eItem(int id, String nameWithArticle,
+    eItem(int id, String nameWithArticle,
                   String idName, String description, double size) {
         this._id = id;
         this._idName = idName;

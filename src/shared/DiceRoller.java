@@ -17,8 +17,12 @@ public class DiceRoller {
     public static int getValue1to10() {
         return rand.nextInt(10);
     }
-    
+
+    public static int getValue1to5() {
+        return rand.nextInt(5);
+    }
+
     public static int getDamage() {
-        return getValue1to10();
+        return getValue1to5();
     }
 }
