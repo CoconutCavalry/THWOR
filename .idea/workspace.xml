@@ -6,45 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a3b9fbd6-3c57-42a7-8339-eeb301eadee6" name="Default Changelist" comment="Cleaned IRoom">
-      <change afterPath="$PROJECT_DIR$/src/characters/MonsterComplex.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/characters/NpcTypes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/characters/SimpleMonster.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/items/Torch.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/rooms/Kitchen.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/rooms/Pantry.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/rooms/RoomBase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/rooms/RoomFull.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/rooms/UpstairsHallway.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/rooms/doors/DoorList.java" afterDir="false" />
+    <list default="true" id="a3b9fbd6-3c57-42a7-8339-eeb301eadee6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/characters/NPC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/characters/NPC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/characters/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/characters/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/characters/iCharacter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/characters/iCharacter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/housewithoneroom/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/housewithoneroom/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/housewithoneroom/Start.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/housewithoneroom/Start.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/items/Excalibur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/items/Excalibur.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/items/Flashlight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/items/Flashlight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/items/HallKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/items/HallKey.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/items/Knife.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/items/Knife.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/items/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/items/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/items/eItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/items/eItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/items/iItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/items/iItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/items/iWeapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/items/iWeapon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rooms/ComputerRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rooms/ComputerRoom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rooms/DiningRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rooms/DiningRoom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rooms/Door.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rooms/doors/Door.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rooms/Hall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rooms/Hall.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rooms/House.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rooms/House.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rooms/Library.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rooms/Library.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rooms/RoomDescriptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rooms/RoomDescriptions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rooms/RoomId.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rooms/RoomId.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rooms/Study.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rooms/Study.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rooms/iRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rooms/iRoom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/ConsoleLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/ConsoleLogger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/DiceRoller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/DiceRoller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/Shared.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/Shared.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/titles/GameStrings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/titles/GameStrings.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -69,12 +32,13 @@
         <counts>
           <entry key="dummy" value="18" />
           <entry key="java" value="12970" />
+          <entry key="txt" value="27" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JAVA" value="12970" />
-          <entry key="PLAIN_TEXT" value="18" />
+          <entry key="PLAIN_TEXT" value="45" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
@@ -109,7 +73,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/titles/GameStrings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
+            <state relative-caret-position="249">
               <caret line="120" column="68" selection-start-line="120" selection-start-column="68" selection-end-line="120" selection-end-column="68" />
             </state>
           </provider>
@@ -320,12 +284,12 @@
       <option name="project" value="LOCAL" />
       <updated>1542392404209</updated>
     </task>
-    <task id="LOCAL-00002" summary="static input, iCharacter, NPC, no override, etc">
-      <created>1541948424066</created>
+    <task id="LOCAL-00002" summary="too many changes to note...">
+      <created>1553101012511</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1541948424066</updated>
+      <updated>1553101012511</updated>
     </task>
     <task id="LOCAL-00003" summary="Doors">
       <created>1542064412231</created>
@@ -383,7 +347,7 @@
       <option name="project" value="LOCAL" />
       <updated>1541544788584</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -402,7 +366,7 @@
       <window_info anchor="bottom" id="Debug" order="3" weight="0.40425533" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32917318" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32903227" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32917318" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5013357" side_tool="true" weight="0.23240589" />
       <window_info active="true" anchor="bottom" id="Version Control" order="9" sideWeight="0.4986643" visible="true" weight="0.41129032" />
@@ -419,6 +383,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="too many changes to note..." />
+    <option name="LAST_COMMIT_MESSAGE" value="too many changes to note..." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/characters/NpcTypes.java">
@@ -768,7 +736,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/titles/GameStrings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
+        <state relative-caret-position="249">
           <caret line="120" column="68" selection-start-line="120" selection-start-column="68" selection-end-line="120" selection-end-column="68" />
         </state>
       </provider>
