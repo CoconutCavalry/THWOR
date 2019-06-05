@@ -2,7 +2,6 @@ package rooms;
 
 import adventures.LibraryBookshelfAdventure;
 import characters.SimpleMonster;
-import housewithoneroom.Game;
 import items.*;
 import shared.Shared;
 
@@ -11,7 +10,7 @@ import java.util.ArrayList;
 import titles.GameStrings;
 
 import static housewithoneroom.Start.admin;
-import static services.ConsoleLogger.output;
+import static core.services.ConsoleLogger.output;
 
 /**
  *

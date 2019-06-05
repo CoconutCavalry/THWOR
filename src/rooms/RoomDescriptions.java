@@ -58,8 +58,7 @@ public class RoomDescriptions {
      *    HALL    *
      **************/
     public static final String hall = "" +
-            "You are in a long hall lit by flickering torches placed along " +
-            "the walls." +
+            "You are in a long hall lit by flickering torchlight." +
             "\nThere are stairs going upward to the railing of a second floor " +
             "above you." +
             "\nOn your left is a plain-looking door." +
@@ -71,7 +70,7 @@ public class RoomDescriptions {
             "face is obscured by a dark cowl and bony hands reach up as if to " +
             "grab you.";
     public static final String hallOtherSearch = "" +
-            "Several torches are placed along the walls.";
+            "One of the torches on the wall looks loose.";
     public static final String guardianIsAngryCannotLeave = "" +
             "The shadowy form laughs an eerie, haunting laugh that sends chills " +
             "down your spine." +
@@ -138,11 +137,8 @@ public class RoomDescriptions {
      *    UPSTAIRS HALLWAY    *
      **************************/
     public static final String upstairsHallway = "" +
-            "You are in a long hallway. To your right is a railing, beyond which " +
-            "you can see the torchlit hall below. There are two doors on your left." +
-            "\nThe first door on your left is black." +
-            "\nThe second door on your left is grey." +
-            "\nAhead, you see a third door, which is red." +
+            "You are in a long, empty hallway. To your right is a railing, beyond which " +
+            "you can see the torchlit hall below." +
             "\nBehind you is the staircase leading down to the hall.";
 
 }

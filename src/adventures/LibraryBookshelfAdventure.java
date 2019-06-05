@@ -3,8 +3,8 @@ package adventures;
 import java.util.Arrays;
 
 import titles.Excerpts;
-import services.IOService;
-import static services.ConsoleLogger.output;
+import core.services.IOService;
+import static core.services.ConsoleLogger.output;
 
 public class LibraryBookshelfAdventure {
 

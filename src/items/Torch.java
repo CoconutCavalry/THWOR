@@ -7,7 +7,7 @@ public class Torch implements iWeapon {
             "with a cloth wrapped around one end. The cloth is " +
             "burning slowly but brightly.";
     private int size = 1;
-    private int damage = 2;
+    private int damage = 10;
     private String damageType = "fire";
 
     public Torch() {}

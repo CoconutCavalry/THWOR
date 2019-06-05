@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import items.iItem;
 import shared.Shared;
-import static services.ConsoleLogger.output;
+import static core.services.ConsoleLogger.output;
 
 /**
  *

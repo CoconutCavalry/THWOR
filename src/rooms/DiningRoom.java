@@ -11,7 +11,7 @@ import items.iItem;
 import shared.Shared;
 import titles.GameStrings;
 
-import static services.ConsoleLogger.output;
+import static core.services.ConsoleLogger.output;
 
 /**
  *

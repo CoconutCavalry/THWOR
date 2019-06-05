@@ -8,10 +8,13 @@ package housewithoneroom;
 import characters.Player;
 import characters.SimpleMonster;
 import items.iItem;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
-import static services.ConsoleLogger.*;
+import static core.services.ConsoleLogger.*;
 import shared.*;
-import services.*;
+import core.services.*;
 import titles.GameStrings;
 
 /**
@@ -20,19 +23,26 @@ import titles.GameStrings;
  */
 public class Start {
 
-    public static boolean admin = false;
-//    public static boolean admin = true;
+//    public static boolean admin = false;
+    public static boolean admin = true;
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        // ES TEST: create test file
+        try {
+            if (FileWriterExperimental.createFile()) {
+                output("Test File Created.");
+            } else {
+                output("Test File Already Exists");
+            }
+        } catch (IOException e) {
+            output("Error creating Test File: " + e);
+        }
+
         // Initialize a new game
         Game.NewGame();
-
-        ///////
-        //output("XXXXX XXXXXXX XX XXXXX XXXXXX XXX \nNewLineXXX XXXXX XX XXX XX XXXXXXX XXXX\nNewLineXXX XX X XXXXX XXXXXX XXX\nNewLineXX XXX XXXXXXX X XXXXX XXXXX XXXXXX XX XXXXX\nNewLine XXXXXXX X");
-        ///////
 
         // Print welcome dialogues.
 //        output(GameStrings.getTitleInBigWords());
@@ -198,6 +208,9 @@ public class Start {
             case "inventory":
                 output(Game.player.showInventory());
                 break;
+            case "load":
+                tryLoadingPlayer();
+                break;
             case "pocket":
                 if (!validateNoun(commands)) {
                     output("Try including an equipped item after 'pocket'.");
@@ -219,6 +232,9 @@ public class Start {
 //                    showItemStats(commands[1]);
 //                }
 //                break;
+            case "save":
+                trySavingPlayer();
+                break;
             case "t":
             case "get":
             case "take":
@@ -347,6 +363,33 @@ public class Start {
 
     private static void tryPocketingItem(String itemName) {
         Game.player.pocket(itemName);
+    }
+
+    /**
+     * ES TEST: write player object
+     */
+    private static void trySavingPlayer() {
+        try {
+            FileWriterExperimental.writePlayerJson();
+            output("Save successful (no exceptions thrown).");
+        } catch (IOException e) {
+            output("Error creating Test File: " + e);
+        }
+    }
+
+    /**
+     * ES TEST: read saved player & assign to current player
+     */
+    private static void tryLoadingPlayer() {
+        try {
+            boolean success = FileWriterExperimental.readPlayerJson();
+
+            if (success) {
+                output("Well, look at that.");
+            }
+        } catch (FileNotFoundException e) {
+            output("Error reading/loading saved player data: " + e);
+        }
     }
 
 

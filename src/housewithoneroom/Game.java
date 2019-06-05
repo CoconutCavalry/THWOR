@@ -10,10 +10,10 @@ import java.util.LinkedList;
 import rooms.House;
 import rooms.iRoom;
 import titles.GameStrings;
-import static services.ConsoleLogger.*;
-import services.IOService;
+import static core.services.ConsoleLogger.*;
+import core.services.IOService;
 
-import static services.ConsoleLogger.output;
+import static core.services.ConsoleLogger.output;
 
 /**
  *

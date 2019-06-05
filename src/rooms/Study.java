@@ -10,14 +10,13 @@ import items.HallKey;
 import items.Message;
 import items.iItem;
 import items.iKey;
-import rooms.doors.Door;
 import shared.Shared;
 
 import java.util.ArrayList;
 
 import titles.GameStrings;
 
-import static services.ConsoleLogger.output;
+import static core.services.ConsoleLogger.output;
 
 /**
  *
