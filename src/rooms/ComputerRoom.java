@@ -5,14 +5,9 @@
  */
 package rooms;
 
-import java.util.ArrayList;
-
-import characters.SimpleMonster;
-import items.iItem;
-import services.IOService;
 import titles.GameStrings;
 
-import static services.ConsoleLogger.output;
+import static core.services.ConsoleLogger.output;
 import static shared.Shared.validateNoun;
 
 /**

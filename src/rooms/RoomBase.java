@@ -9,7 +9,7 @@ import titles.GameStrings;
 
 import java.util.ArrayList;
 
-import static services.ConsoleLogger.output;
+import static core.services.ConsoleLogger.output;
 
 public class RoomBase implements iRoom{
 

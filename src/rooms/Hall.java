@@ -6,19 +6,18 @@
 package rooms;
 
 import characters.Player;
-import characters.SimpleMonster;
 import housewithoneroom.Game;
 import java.util.ArrayList;
 
 import items.Torch;
 import items.iItem;
-import services.IOService;
+import core.services.IOService;
 import shared.Shared;
 import titles.GameStrings;
 
-import static services.ConsoleLogger.output;
-import static services.ConsoleLogger.outputForInput;
-import static services.ConsoleLogger.outputLn;
+import static core.services.ConsoleLogger.output;
+import static core.services.ConsoleLogger.outputForInput;
+import static core.services.ConsoleLogger.outputLn;
 
 /**
  *
@@ -40,7 +39,7 @@ public class Hall extends RoomFull {
     private final String description = RoomDescriptions.hall;
     private final String guardianAliveSearch = 
             RoomDescriptions.hallFirstSearch;
-    private final String guardianDeadSearch = 
+    private final String roomSearch =
             RoomDescriptions.hallOtherSearch;
 
     public Player guardian;
@@ -96,19 +95,18 @@ public class Hall extends RoomFull {
             this.setHasBeenSearched();
             if (!this.guardianIsDead) {
                 this.setGuardianIsAngry();
-                return this.guardianDeadSearch + "\n" 
-                        + this.guardianAliveSearch;
+                return this.guardianAliveSearch;
             }
         }
-        if (!this.guardianIsDead) {
-            this.setGuardianIsAngry();
-            return this.guardianAliveSearch;
-        }
+        // ES TEST: I think this clause is unnecessary
+//        if (!this.guardianIsDead) {
+//            return this.roomSearch;
+//        }
         ArrayList<iItem> itemsInRoom = this.getItems();
         if (itemsInRoom.isEmpty()) {
             return "There are no items to be found here.";
         }
-        return this.guardianDeadSearch;
+        return this.roomSearch;
     }
 
     /******************

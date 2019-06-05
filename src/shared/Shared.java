@@ -10,7 +10,7 @@ import characters.SimpleMonster;
 import housewithoneroom.Game;
 import items.iItem;
 import items.iWeapon;
-import static services.ConsoleLogger.outputLn;
+import static core.services.ConsoleLogger.outputLn;
 
 import java.util.ArrayList;
 

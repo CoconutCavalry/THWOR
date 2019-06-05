@@ -7,7 +7,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a3b9fbd6-3c57-42a7-8339-eeb301eadee6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/com_google_code_gson_gson_2_8_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/services/FileWriterExperimental.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/adventures/LibraryBookshelfAdventure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/adventures/LibraryBookshelfAdventure.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/characters/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/characters/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/housewithoneroom/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/housewithoneroom/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/housewithoneroom/Start.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/housewithoneroom/Start.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/items/Torch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/items/Torch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rooms/ComputerRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rooms/ComputerRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rooms/DiningRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rooms/DiningRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rooms/Hall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rooms/Hall.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rooms/Library.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rooms/Library.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rooms/RoomBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rooms/RoomBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rooms/RoomDescriptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rooms/RoomDescriptions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rooms/RoomFull.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rooms/RoomFull.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rooms/Study.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rooms/Study.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/ConsoleLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/services/ConsoleLogger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/IOService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/services/IOService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/Shared.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/Shared.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,49 +38,90 @@
     <session id="-1565249810">
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="122" />
+          <entry key="class" value="1" />
+          <entry key="java" value="132" />
+          <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="122" />
+          <entry key="CLASS" value="1" />
+          <entry key="JAVA" value="132" />
+          <entry key="XML" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="18" />
-          <entry key="java" value="12970" />
-          <entry key="txt" value="27" />
+          <entry key="java" value="16038" />
+          <entry key="txt" value="56" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="12970" />
-          <entry key="PLAIN_TEXT" value="45" />
+          <entry key="JAVA" value="16038" />
+          <entry key="PLAIN_TEXT" value="74" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
+          <entry key="project.closed" value="5" />
           <entry key="project.open.time.20" value="1" />
           <entry key="project.open.time.25" value="1" />
           <entry key="project.open.time.26" value="1" />
-          <entry key="project.open.time.27" value="1" />
+          <entry key="project.open.time.27" value="2" />
           <entry key="project.open.time.33" value="1" />
           <entry key="project.open.time.35" value="1" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="7" />
+          <entry key="project.opened" value="8" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.vcs.git.usages">
+        <counts>
+          <entry key="git.branch.checkout.remote" value="1" />
+          <entry key="git.branch.checkout.revision" value="1" />
+          <entry key="git.branch.delete.remote" value="1" />
+          <entry key="git.branch.rebase" value="1" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/housewithoneroom/Start.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3502">
-              <caret line="217" column="26" selection-start-line="217" selection-start-column="26" selection-end-line="217" selection-end-column="26" />
+            <state relative-caret-position="391">
+              <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#8538#8539#0" expanded="true" />
+                <element signature="e#8599#8600#0" expanded="true" />
+                <element signature="e#11552#11553#0" expanded="true" />
+                <element signature="e#11593#11594#0" expanded="true" />
+                <element signature="e#11983#11984#0" expanded="true" />
+                <element signature="e#12027#12028#0" expanded="true" />
+                <element signature="e#13012#13013#0" expanded="true" />
+                <element signature="e#13060#13061#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/services/ConsoleLogger.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-102">
+              <caret line="7" selection-start-line="7" selection-end-line="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/services/FileWriterExperimental.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="385">
+              <caret line="84" column="38" lean-forward="true" selection-start-line="84" selection-start-column="38" selection-end-line="84" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -70,11 +129,29 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/titles/GameStrings.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rooms/Hall.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
-              <caret line="120" column="68" selection-start-line="120" selection-start-column="68" selection-end-line="120" selection-end-column="68" />
+            <state relative-caret-position="147">
+              <caret line="98" column="13" selection-start-line="98" selection-start-column="13" selection-end-line="98" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rooms/RoomDescriptions.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="453">
+              <caret line="143" column="1" lean-forward="true" selection-start-line="143" selection-start-column="1" selection-end-line="143" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/items/Torch.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" column="28" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -116,6 +193,11 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="working_intellij" />
+      </map>
+    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -146,7 +228,6 @@
         <option value="$PROJECT_DIR$/src/rooms/RoomId.java" />
         <option value="$PROJECT_DIR$/src/rooms/House.java" />
         <option value="$PROJECT_DIR$/src/rooms/UpstairsHallway.java" />
-        <option value="$PROJECT_DIR$/src/services/ConsoleLogger.java" />
         <option value="$PROJECT_DIR$/src/rooms/Kitchen.java" />
         <option value="$PROJECT_DIR$/src/rooms/Pantry.java" />
         <option value="$PROJECT_DIR$/src/rooms/Room.java" />
@@ -154,28 +235,45 @@
         <option value="$PROJECT_DIR$/src/rooms/RoomBase.java" />
         <option value="$PROJECT_DIR$/src/rooms/Library.java" />
         <option value="$PROJECT_DIR$/src/rooms/RoomFull.java" />
-        <option value="$PROJECT_DIR$/src/rooms/Hall.java" />
         <option value="$PROJECT_DIR$/src/housewithoneroom/Game.java" />
         <option value="$PROJECT_DIR$/src/rooms/ComputerRoom.java" />
         <option value="$PROJECT_DIR$/src/rooms/DiningRoom.java" />
-        <option value="$PROJECT_DIR$/src/rooms/RoomDescriptions.java" />
         <option value="$PROJECT_DIR$/src/items/HallKey.java" />
         <option value="$PROJECT_DIR$/src/items/iItem.java" />
         <option value="$PROJECT_DIR$/src/items/Flashlight.java" />
-        <option value="$PROJECT_DIR$/src/items/Torch.java" />
         <option value="$PROJECT_DIR$/src/items/Excalibur.java" />
         <option value="$PROJECT_DIR$/src/items/Knife.java" />
         <option value="$PROJECT_DIR$/src/items/Message.java" />
-        <option value="$PROJECT_DIR$/src/housewithoneroom/Start.java" />
         <option value="$PROJECT_DIR$/src/titles/GameStrings.java" />
+        <option value="$PROJECT_DIR$/src/rooms/Hall.java" />
+        <option value="$PROJECT_DIR$/src/items/Torch.java" />
+        <option value="$PROJECT_DIR$/src/services/ConsoleLogger.java" />
+        <option value="$PROJECT_DIR$/src/services/FileWriterExperimental.java" />
+        <option value="$PROJECT_DIR$/src/core/services/FileWriterExperimental.java" />
+        <option value="$PROJECT_DIR$/src/rooms/RoomDescriptions.java" />
+        <option value="$PROJECT_DIR$/src/housewithoneroom/Start.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="74" />
-    <option name="y" value="28" />
+    <option name="x" value="203" />
+    <option name="y" value="25" />
     <option name="width" value="1159" />
-    <option name="height" value="745" />
+    <option name="height" value="704" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State />
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>Android</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -192,6 +290,11 @@
             <path>
               <item name="THWOR" type="b2602c69:ProjectViewProjectNode" />
               <item name="THWOR" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="THWOR" type="b2602c69:ProjectViewProjectNode" />
+              <item name="THWOR" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -204,7 +307,7 @@
               <item name="THWOR" type="b2602c69:ProjectViewProjectNode" />
               <item name="THWOR" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
+              <item name="items" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="THWOR" type="b2602c69:ProjectViewProjectNode" />
@@ -222,14 +325,27 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="true" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="SearchEverywhereHistoryKey" value="RoomFull&#9;FILE&#9;file://C:/_Playground/Joe/Caretaker/CC/THWOR/src/rooms/RoomFull.java" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552930040980" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559755419020" />
     <property name="extract.method.default.visibility" value="private" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/json-simple-3.1.0.jar!/" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="core" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -291,12 +407,12 @@
       <option name="project" value="LOCAL" />
       <updated>1553101012511</updated>
     </task>
-    <task id="LOCAL-00003" summary="Doors">
-      <created>1542064412231</created>
+    <task id="LOCAL-00003" summary="xml workspace commit attempt">
+      <created>1553101172803</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1542064412232</updated>
+      <updated>1553101172803</updated>
     </task>
     <task id="LOCAL-00004" summary="Factored out TakeArgs and GoArgs">
       <created>1540351605010</created>
@@ -347,13 +463,23 @@
       <option name="project" value="LOCAL" />
       <updated>1541544788584</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <option name="localTasksCounter" value="4" />
     <servers />
+  </component>
+  <component name="TodoView" selected-index="4">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1603631" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1633888" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -361,15 +487,15 @@
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.5080645" />
-      <window_info anchor="bottom" x="763" y="31" width="602" height="706" id="Run" order="2" type="WINDOWED" weight="0.3900156" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.4080645" />
+      <window_info active="true" anchor="bottom" x="763" y="31" width="602" height="706" id="Run" order="2" type="WINDOWED" visible="true" weight="0.3900156" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.40425533" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32903227" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32917318" />
-      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5013357" side_tool="true" weight="0.23240589" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="9" sideWeight="0.4986643" visible="true" weight="0.41129032" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50226927" side_tool="true" weight="0.41129032" />
+      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.4977307" weight="0.28387097" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -386,16 +512,14 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="too many changes to note..." />
-    <option name="LAST_COMMIT_MESSAGE" value="too many changes to note..." />
+    <MESSAGE value="xml workspace commit attempt" />
+    <option name="LAST_COMMIT_MESSAGE" value="xml workspace commit attempt" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/characters/NpcTypes.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -417,11 +541,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
           <caret line="55" column="25" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1046#1047#0" expanded="true" />
-            <element signature="e#1072#1073#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -429,14 +548,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
-          <folding>
-            <element signature="e#364#365#0" expanded="true" />
-            <element signature="e#403#404#0" expanded="true" />
-            <element signature="e#448#449#0" expanded="true" />
-            <element signature="e#487#488#0" expanded="true" />
-            <element signature="e#444#445#0" expanded="true" />
-            <element signature="e#482#483#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -454,17 +565,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1247#1248#0" expanded="true" />
-            <element signature="e#1279#1280#0" expanded="true" />
-            <element signature="e#1311#1312#0" expanded="true" />
-            <element signature="e#1347#1348#0" expanded="true" />
-            <element signature="e#1378#1379#0" expanded="true" />
-            <element signature="e#1410#1411#0" expanded="true" />
-            <element signature="e#1519#1520#0" expanded="true" />
-            <element signature="e#1572#1573#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -479,9 +579,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="419">
           <caret line="70" column="9" selection-start-line="70" selection-start-column="9" selection-end-line="70" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -518,21 +615,6 @@
             <element signature="e#541#542#0" expanded="true" />
             <element signature="e#477#478#0" expanded="true" />
             <element signature="e#510#511#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/services/ConsoleLogger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="26" column="25" lean-forward="true" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="25" />
-          <folding>
-            <element signature="e#1375#1376#0" expanded="true" />
-            <element signature="e#1416#1417#0" expanded="true" />
-            <element signature="e#1471#1472#0" expanded="true" />
-            <element signature="e#1514#1515#0" expanded="true" />
-            <element signature="e#1550#1551#0" expanded="true" />
-            <element signature="e#1586#1587#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -616,20 +698,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rooms/Hall.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="146" column="38" lean-forward="true" selection-start-line="146" selection-start-column="38" selection-end-line="146" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rooms/RoomDescriptions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-85">
-          <caret line="29" column="20" lean-forward="true" selection-start-line="29" selection-start-column="20" selection-end-line="29" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/rooms/Study.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -670,25 +738,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/items/Excalibur.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="25" column="32" lean-forward="true" selection-start-line="25" selection-start-column="32" selection-end-line="30" selection-end-column="7" />
-          <folding>
-            <element signature="e#876#877#0" expanded="true" />
-            <element signature="e#906#907#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/items/Flashlight.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
-          <folding>
-            <element signature="e#203#204#0" expanded="true" />
-            <element signature="e#292#293#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -703,10 +756,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="27" lean-forward="true" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
-          <folding>
-            <element signature="e#422#423#0" expanded="true" />
-            <element signature="e#456#457#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -717,29 +766,172 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/housewithoneroom/Start.java">
+    <entry file="file://$PROJECT_DIR$/src/titles/GameStrings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3502">
-          <caret line="217" column="26" selection-start-line="217" selection-start-column="26" selection-end-line="217" selection-end-column="26" />
+        <state relative-caret-position="124">
+          <caret line="123" column="42" selection-start-line="123" selection-start-column="42" selection-end-line="123" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#5424#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_181/src.zip!/java/io/File.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="343">
+          <caret line="1005" column="19" selection-start-line="1005" selection-start-column="19" selection-end-line="1005" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rooms/Hall.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="98" column="13" selection-start-line="98" selection-start-column="13" selection-end-line="98" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/items/Excalibur.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="25" column="32" lean-forward="true" selection-start-line="25" selection-start-column="32" selection-end-line="30" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/items/Torch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="28" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/libraries/com_google_code_gson_gson_2_8_5.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/gson-2.8.5.jar!/com/google/gson/Gson.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="104" column="17" selection-start-line="104" selection-start-column="17" selection-end-line="104" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/services/ConsoleLogger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-102">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/services/FileWriterExperimental.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="385">
+          <caret line="84" column="38" lean-forward="true" selection-start-line="84" selection-start-column="38" selection-end-line="84" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/items/Torch.java">
+    <entry file="file://$PROJECT_DIR$/src/rooms/RoomDescriptions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
+        <state relative-caret-position="453">
+          <caret line="143" column="1" lean-forward="true" selection-start-line="143" selection-start-column="1" selection-end-line="143" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/titles/GameStrings.java">
+    <entry file="file://$PROJECT_DIR$/src/housewithoneroom/Start.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="120" column="68" selection-start-line="120" selection-start-column="68" selection-end-line="120" selection-end-column="68" />
+        <state relative-caret-position="391">
+          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#8538#8539#0" expanded="true" />
+            <element signature="e#8599#8600#0" expanded="true" />
+            <element signature="e#11552#11553#0" expanded="true" />
+            <element signature="e#11593#11594#0" expanded="true" />
+            <element signature="e#11983#11984#0" expanded="true" />
+            <element signature="e#12027#12028#0" expanded="true" />
+            <element signature="e#13012#13013#0" expanded="true" />
+            <element signature="e#13060#13061#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <last-edited>THWOR:jar</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>THWOR</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>com.google.code.gson:gson:2.8.5</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package services;
+package core.services;
 
 import static housewithoneroom.Start.admin;
 
@@ -14,7 +14,7 @@ import static housewithoneroom.Start.admin;
 public class ConsoleLogger {
 
     private static boolean noLineWrap = false;
-    private static boolean delay = true;
+    private static boolean delay = false;
 
     private static int MAX_CHAR_LENGTH = 50;
 
@@ -24,6 +24,17 @@ public class ConsoleLogger {
      * @param content the content to be outputted
      */
     public static void output(String content) {
+//        // ES TEST: game logging experimental code
+//        try {
+//            if (FileWriterExperimental.getIsPlayerFileCreated()) {
+//                FileWriterExperimental.writeToFile(content);
+//            } else {
+//                System.out.println("Test File does not exist.");
+//            }
+//        } catch (IOException e) {
+//            System.out.println("Error creating Test File: " + e);
+//        }
+
         if (noLineWrap) {
             showLong(content);
         } else if (admin) {
